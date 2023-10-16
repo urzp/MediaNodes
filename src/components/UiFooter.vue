@@ -41,7 +41,7 @@ footer{
     color: #FFFFFF;
     flex-direction: row;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
     font-family: 'Intro-Book';
     font-size: 15px;
 }
@@ -56,6 +56,7 @@ footer{
 }
 .copy-right, .privacy-policy{
     opacity: 0.7;
+    margin: auto 40px;
 }
 
 a{

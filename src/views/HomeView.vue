@@ -1,21 +1,34 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/icons/Logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <UiHeader/>
+  <div class="main">
+    <UiLoginForm/>
   </div>
   <UiFooter/>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
 import UiFooter from '@/components/UiFooter.vue'
+import UiLoginForm from '@/components/UiLoginForm.vue'
+import UiHeader from '@/components/UiHeader.vue'
+
 
 export default {
   name: 'HomeView',
   components: {
-    HelloWorld,
-    UiFooter
+    UiHeader,
+    UiLoginForm,
+    UiFooter,
   }
 }
 </script>
+
+<style scoped>
+  .main{
+    height: 100vh;
+    background-color: #1F1F1F;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+</style>
