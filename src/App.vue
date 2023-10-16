@@ -7,10 +7,33 @@
 </template>
 
 <style lang="scss">
+*{
+  margin: 0;padding: 0;
+}
+
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+
+  @font-face {
+    font-family: 'Intro-Book';
+    src: local('Intro-Book'),
+      url(assets/fonts/Intro-Book.ttf);
+  }
+
+  @font-face {
+    font-family: 'Intro-Bold-Alt';
+    src: local('Intro-Bold-Alt'),
+      url(assets/fonts/Intro-Bold-Alt.ttf);
+  }
+
+  @font-face {
+    font-family: 'Intro-Black-Alt';
+    src: local('Intro-Black-Alt'),
+      url(assets/fonts/Intro-Black-Alt.ttf);
+  }
+
+  font-family: Intro-Book, Arial, sans-serif;
+  -webkit-font-smoothing: Intro-Book;
+  -moz-osx-font-smoothing: Intro-Book;
   text-align: center;
   color: #2c3e50;
 }
