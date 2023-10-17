@@ -2,9 +2,9 @@
     <div class="login-form">
         <div class="title">Прежде чем начать,<br>зарегистрируйтесь в системе</div>
         <form>
-            <UiInput class="input"/>
-            <UiInput/>
-            <UiInput/>
+            <UiInput modelTape='text' class="input" v-model="firstName"/>
+            <UiInput modelTape='text' v-model="email"/>
+            <UiInput modelTape='password' v-model="password"/>
             <div class="submit-row">
                 <UiButton text="Создать аккаунт" bg_color="#F93492" text_color="#fff"/>
                 <div class="login-ref">
@@ -13,16 +13,27 @@
             </div>
         </form>
     </div>
+    <div class="terms-of-use">
+        Создавая учетную запись, я принимаю
+        <a href="#">Пользовательское соглашение</a>
+    </div>
 </template>
 
 <script>
 import UiInput from '@/components/UiInput.vue'
 import UiButton from '@/components/UiButton.vue'
 export default {
-  name: 'UiLoginForm',
+  name: 'UiRegForm',
   components:{
     UiInput,
     UiButton
+  },
+  data(){
+    return{
+        firstName: 'Укажите ваше Имя',
+        email: 'Введите ваш email',
+        password: 'Придумайте пароль',
+    }
   }
 }
 </script>
@@ -71,7 +82,17 @@ export default {
         font-family: 'Intro-Book';
         font-size: 15px;
     }
-    .login-ref a{
+
+    .terms-of-use{
+        color:#FFF;
+        font-family: 'Intro-Book';
+        font-size: 15px;
+        display: flex;
+        flex-direction: column;
+        margin-top: 10px;
+    }
+
+    a{
         color: #F93492
     }
 </style>

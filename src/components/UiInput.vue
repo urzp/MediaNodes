@@ -1,12 +1,39 @@
 <template>
-    <input>
+    <input ref="input" :type="type" 
+    :value="modelValue" @input="$emit('update:modelValue', $event.target.value)" 
+    @focus="$emit('focus', handfocus($event.target.value))" @blur="('blur',handBlur($event.target.value))">
 </template>
 
 <script>
 export default {
   name: 'UiInput',
+  mounted(){
+    this.beginValue = this.modelValue;
+  },
+  data(){
+    return{
+      beginValue: '',
+      type: 'text',
+    }
+  },
   props:{
-    text:String
+    modelValue:String,
+    modelTape:String,
+  },
+  emits: ['update:modelValue', 'focus', 'blur'],
+  methods:{
+    handfocus(value){
+      if(this.beginValue == value){
+        this.type = this.modelTape;
+        setTimeout(()=>{this.$refs.input.value = ''},100)
+      }
+    },
+    handBlur(value){
+      if(value == ''){ 
+        this.type = 'text'
+        setTimeout(()=>{this.$refs.input.value = this.beginValue},100)
+      }
+    }
   }
 }
 </script>

@@ -1,7 +1,7 @@
 <template>
   <UiHeader/>
   <div class="main">
-    <UiLoginForm/>
+    <UiRegForm/>
   </div>
   <UiFooter/>
 </template>
@@ -9,7 +9,7 @@
 <script>
 // @ is an alias to /src
 import UiFooter from '@/components/UiFooter.vue'
-import UiLoginForm from '@/components/UiLoginForm.vue'
+import UiRegForm from '@/components/UiRegForm.vue'
 import UiHeader from '@/components/UiHeader.vue'
 
 
@@ -17,7 +17,7 @@ export default {
   name: 'HomeView',
   components: {
     UiHeader,
-    UiLoginForm,
+    UiRegForm,
     UiFooter,
   }
 }
@@ -30,5 +30,6 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
   }
 </style>
