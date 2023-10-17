@@ -1,7 +1,7 @@
 <template>
     <header>
-        <div class="logo"><img src="../assets/icons/Logo.png" alt="logo"></div>
-        <UiButton class="button-contact-us" text="Связаться с нами"/>
+        <RouterLink to="/" class="logo"><img src="../assets/icons/Logo.png" alt="logo"></RouterLink>
+        <UiButton class="button-contact-us" text="Связаться с нами" @click="$router.push('/support')"/>
     </header>
 </template>
 

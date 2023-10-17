@@ -8,7 +8,7 @@
             <div class="submit-row">
                 <UiButton text="Создать аккаунт" bg_color="#F93492" text_color="#fff"/>
                 <div class="login-ref">
-                    Уже есть аккаунт? <a href="#">Войти</a>
+                    Уже есть аккаунт? <RouterLink to="login">Войти</RouterLink>
                 </div>
             </div>
         </form>

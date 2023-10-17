@@ -7,14 +7,14 @@
             <div class="submit-row">
                 <UiButton class="login-button" text="Войти" bg_color="#F93492" text_color="#fff"/>
                 <div class="reset">
-                    <a href="#">Забыли пароль?</a>
+                    <RouterLink to="reset-password">Забыли пароль?</RouterLink>
                 </div>
             </div>
         </form>
     </div>
     <div class="registration">
         Необходимо создать учетную запись? 
-        <a href="#">Зарегистрироваться</a>
+        <RouterLink to="register">Зарегистрироваться</RouterLink>
     </div>
 </template>
 
