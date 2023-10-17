@@ -1,7 +1,9 @@
 <template>
   <UiHeader/>
   <div class="main">
-    <UiRegForm/>
+    <UiRegForm v-if="true"/>
+    <UiLoginForm v-if="false"/>
+    <UiRequestResetPasswordForm v-if="false"/>
   </div>
   <UiFooter/>
 </template>
@@ -11,7 +13,8 @@
 import UiFooter from '@/components/UiFooter.vue'
 import UiRegForm from '@/components/UiRegForm.vue'
 import UiHeader from '@/components/UiHeader.vue'
-
+import UiLoginForm from '@/components/UiLoginForm.vue'
+import UiRequestResetPasswordForm from '@/components/UiRequestResetPasswordForm.vue'
 
 export default {
   name: 'HomeView',
@@ -19,6 +22,8 @@ export default {
     UiHeader,
     UiRegForm,
     UiFooter,
+    UiLoginForm,
+    UiRequestResetPasswordForm,
   }
 }
 </script>

@@ -10,7 +10,7 @@ export default {
   props:{
     text:String,
     bg_color: String,
-    text_color: String
+    text_color: String,
   }
 }
 </script>
@@ -26,6 +26,7 @@ export default {
         align-items: center;
         cursor: pointer;
         background-color: v-bind(bg_color);
+        justify-content: center;
     }
     .text{
         color: v-bind(text_color);
