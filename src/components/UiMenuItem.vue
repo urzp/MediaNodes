@@ -29,6 +29,8 @@ export default {
 .icon{
     margin-left: 40px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
 }
 .name-menu-item{
     margin-left: 10px;

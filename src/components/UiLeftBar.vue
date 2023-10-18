@@ -28,6 +28,9 @@ export default {
         width: 270px;
         height: 100vh;
         background-color: #2F2F2F;
+        top: 0;
+        left: 0;
+        z-index: 10;
     }
 
     .left-bar .logo{

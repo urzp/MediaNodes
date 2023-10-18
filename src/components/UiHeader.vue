@@ -1,0 +1,67 @@
+<template>
+    <header>
+        <div class="search">
+            <img src="@/assets/icons/search.svg" alt="search">
+            <input type="text" placeholder="Поиск плеера">
+        </div>
+        <div class="avatar">
+            <div class="userName">Альфа Банк</div>
+            <div class="avatar_img"><img src="@/assets/icons/avatar.svg" alt="avatar"></div>
+        </div>
+    </header>
+</template>
+
+<script>
+
+export default {
+name: 'UiHeader',
+
+}
+</script>
+
+<style scoped>
+    header{
+        position: fixed;
+        width: 100%;
+        height: 80px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #1F1F1F;
+        z-index: 5;
+    }
+    .search{
+        margin-left: 300px;
+    }
+
+    .search img{
+        position: relative;
+        left: 45px;
+        top: 8px;
+    }
+    input{
+        width: 625px;
+        height: 45px;
+        border-radius: 25px;
+        background-color: transparent;
+        border: 1px solid #B8B8B8;
+        color: #B8B8B8;
+        font-family: 'Intro-Book';
+        font-size: 15px;
+        padding-left: 65px;
+
+    }
+    .userName{
+        font-family: 'Intro-Book';
+        font-size: 15px;
+        color:#fff;
+        margin-right: 15px;
+    }
+    .avatar{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-end;
+        margin-right: 40px;
+    }
+</style>

@@ -11,6 +11,10 @@
   margin: 0;padding: 0;
 }
 
+body{
+  background-color: #1F1F1F;
+}
+
 #app {
 
   @font-face {
