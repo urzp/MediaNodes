@@ -9,7 +9,7 @@
     </div>
     <div class="registration">
         Если вам нужна помощь, обратитесь в
-        <a href="#">службу поддержки LS Media</a>
+        <RouterLink to="/support">службу поддержки LS Media</RouterLink>
     </div>
 </template>
 
