@@ -8,9 +8,9 @@
 
 <script>
 // @ is an alias to /src
-import UiFooter from '@/components/UiFooter.vue'
-import UiHeader from '@/components/UiHeader.vue'
-import UiSupportForm from '@/components/UiSupportForm.vue'
+import UiFooter from '@/components/Login/UiFooter.vue'
+import UiHeader from '@/components/Login/UiHeader.vue'
+import UiSupportForm from '@/components/Login/UiSupportForm.vue'
 
 export default {
   name: 'HomeView',

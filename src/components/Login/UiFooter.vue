@@ -6,12 +6,12 @@
         <div class="contacts-social-network">
             <div class="whatsapp">
                 <a href="#">
-                    <img src="../assets/icons/whatsapp.svg" alt="whatsapp">
+                    <img src="@/assets/icons/whatsapp.svg" alt="whatsapp">
                 </a>
             </div>
             <div class="telegram">
                 <a href="#">
-                    <img src="../assets/icons/telegram.svg" alt="whatsapp">
+                    <img src="@/assets/icons/telegram.svg" alt="whatsapp">
                 </a>
             </div>
         </div>
