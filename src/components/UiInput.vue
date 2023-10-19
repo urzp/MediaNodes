@@ -49,6 +49,7 @@ export default {
         font-family: 'Intro-Book';
         font-size: 16px;
         color: #858585;
+        background-color: transparent;
     }
 
 </style>

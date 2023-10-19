@@ -4,6 +4,7 @@ import PageLogin from '../views/PageLogin.vue'
 import PageRegiste from '../views/PageRegiste.vue'
 import PageResetPassword from '../views/PageResetPassword.vue'
 import PageSupport from '../views/PageSupport.vue'
+import PageSupportUser from '../views/PageSupportUser.vue'
 
 const routes = [
   {
@@ -25,10 +26,16 @@ const routes = [
     path: '/reset-password',
     name: 'reset-password',
     component: PageResetPassword
-  },{
+  },
+  {
     path: '/support',
     name: 'support',
     component: PageSupport,
+  },
+  {
+    path: '/support-user',
+    name: 'supportUser',
+    component: PageSupportUser,
   }
   
 ]

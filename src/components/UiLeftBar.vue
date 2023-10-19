@@ -2,10 +2,10 @@
     <div class="left-bar">
         <RouterLink to="/" class="logo"><img src="../assets/icons/Logo.png" alt="logo"></RouterLink>
         <div class="menu-list">
-            <UiMenuItem text="Главная" :selected="true"><img src="../assets/icons/home.svg" alt="home"></UiMenuItem>
-            <UiMenuItem text="Профиль"><img src="../assets/icons/user.svg" alt="home"></UiMenuItem>
-            <UiMenuItem text="Техподержка"><img src="../assets/icons/support.svg" alt="home"></UiMenuItem>
-            <UiMenuItem text="Выйти"><img src="../assets/icons/logout.svg" alt="home"></UiMenuItem>
+            <UiMenuItem text="Главная" @click="$router.push('/')" :selected="selectedItem.home"><img src="../assets/icons/home.svg" alt="home"></UiMenuItem>
+            <UiMenuItem text="Профиль" :selected="selectedItem.user"><img src="../assets/icons/user.svg" alt="user"></UiMenuItem>
+            <UiMenuItem text="Техподержка" @click="$router.push('/support-user')" :selected="selectedItem.support"><img src="../assets/icons/support.svg" alt="home"></UiMenuItem>
+            <UiMenuItem text="Выйти" @click="$router.push('/login')" :selected="selectedItem.out"><img src="../assets/icons/logout.svg" alt="home"></UiMenuItem>
         </div>
     </div>
 </template>
@@ -17,7 +17,22 @@ export default {
   name: 'UiLeftBar',
   components: {
     UiMenuItem,
-  }
+  },
+  props:{
+        selcted: String,
+    },
+    computed:{
+        selectedItem(){
+            let out ={
+                home: false,
+                user: false,
+                support: false,
+                out:false
+            }
+            out[this.selcted] = true
+            return out
+        }
+    },
 }
 
 </script>

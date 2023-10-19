@@ -1,8 +1,8 @@
 <template>
   <UiHeader/>
-  <UiLeftBar selcted="home"/>
+  <UiLeftBar selcted="support"/>
   <div class="content">
-    <UiTablePlayers/>
+    <UiSupportForm/>
   </div>
 </template>
 
@@ -10,14 +10,14 @@
 // @ is an alias to /src
 import UiLeftBar from '@/components/UiLeftBar.vue'
 import UiHeader from '@/components/UiHeader.vue'
-import UiTablePlayers from '@/components/UiTablePlayers.vue'
+import UiSupportForm from '@/components/UiSupportForm.vue'
 
 export default {
   name: 'HomeView',
   components: {
     UiLeftBar,
     UiHeader,
-    UiTablePlayers
+    UiSupportForm,
   }
 }
 </script>
@@ -31,8 +31,8 @@ export default {
     align-items: flex-start;
     justify-content: flex-start;
     flex-direction: column;
-    padding-left: 330px;
-    width: calc(100% - 300px - 70px);
+    padding-left: 390px;
+    width: calc(100% - 390px - 70px);
   }
 
 </style>
