@@ -25,7 +25,7 @@ export default {
 <style scoped>
   .content{
     position: absolute;
-    height: 150vh;
+    
     margin-top: 105px;
     display: flex;
     align-items: flex-start;

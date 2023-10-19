@@ -12,14 +12,24 @@
         <div :style="{'width': header[4].width}">{{ item.ip }}</div>
         <div :style="{'width': header[5].width}" :class="{'online':item.online}">{{ item.online?'ONLINE':item.last_online.toLocaleString() }}</div>
         <div :style="{'width': header[6].width}" >{{ item.updated.toLocaleString() }}</div>
-        <div :style="{'width': header[7].width}" >{{ item.volme }}</div>
-        <div :style="{'width': header[8].width}" >{{ item.dislike }}</div>
+        <div :style="{'width': header[7].width}" >
+          <div class="panel">
+            <UiPlayPuseButton :play="item.plaing"/>
+            <UiVolume :value="item.volme + '%'"/>
+          </div>
+        </div>
+        <div :style="{'width': header[8].width}" >
+            <div v-if="item.dislike" class="dislike"><img src="@/assets/icons/disLike.svg" alt="dislike"></div>
+        </div>
       </div>
     </div>
 </template>
 
 <script>
 import getPlayers from '@/servis/testPlayers.js'
+import UiPlayPuseButton from '@/components/UiPlayPuseButton.vue'
+import UiVolume from '@/components/UiVolume.vue'
+
 export default {
   name: 'UiTablePlayers',
   data(){
@@ -39,7 +49,8 @@ export default {
     }
   },
   components: {
-
+    UiPlayPuseButton,
+    UiVolume,
   }
 }
 </script>
@@ -95,5 +106,16 @@ export default {
   }
   .row .online{
     background-color: #449C4A;
+  }
+  .panel{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  .dislike{
+    display: flex;
+    align-items: center;
   }
 </style>
