@@ -7,6 +7,8 @@ import PageSupport from '../views/PageSupport.vue'
 import PageSupportUser from '../views/PageSupportUser.vue'
 import PagePlayers from '../views/PagePlayers'
 import PagePlayer from '../views/PagePlayer'
+import PageEditPlayer from '../views/PageEditPlayer'
+import PageUser from '../views/PageUser'
 
 const routes = [
   {
@@ -30,6 +32,11 @@ const routes = [
     component: PageResetPassword
   },
   {
+    path: '/user',
+    name: 'user',
+    component: PageUser,
+  },
+  {
     path: '/support',
     name: 'support',
     component: PageSupport,
@@ -48,6 +55,11 @@ const routes = [
     path: '/players/:playerId([0-9]+)',
     name: 'player',
     component: PagePlayer,
+  },
+  {
+    path: '/players/edit/:playerId([0-9]+)',
+    name: 'editPlayer',
+    component: PageEditPlayer,
   }
 
   

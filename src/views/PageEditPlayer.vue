@@ -1,28 +1,24 @@
 <template>
-  <UiHeader/>
-  <UiLeftBar selcted="players"/>
-  <div class="content">
-    <UiPlayer :playerId="playerId"/>
-  </div>
+    <UiHeader/>
+    <UiLeftBar selcted="players"/>
+    <div class="content">
+      <UiSupportForm/>
+    </div>
 </template>
+
 
 <script>
 // @ is an alias to /src
 import UiLeftBar from '@/components/UiLeftBar.vue'
 import UiHeader from '@/components/UiHeader.vue'
-import UiPlayer from '@/components/UiPlayer.vue'
+import UiSupportForm from '@/components/UiSupportForm.vue'
 
 export default {
-  name: 'PagePlayer',
+  name: 'HomeView',
   components: {
     UiLeftBar,
     UiHeader,
-    UiPlayer,
-  },
-  computed:{
-    playerId(){
-      return this.$route.params.playerId;
-    },
+    UiSupportForm,
   }
 }
 </script>
@@ -30,14 +26,14 @@ export default {
 <style scoped>
   .content{
     position: absolute;
+    
     margin-top: 105px;
-    margin-bottom: 100px;
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
     flex-direction: column;
-    padding-left: 330px;
-    width: calc(100% - 300px - 70px);
+    padding-left: 390px;
+    width: calc(100% - 390px - 70px);
   }
 
 </style>
