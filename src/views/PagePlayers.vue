@@ -1,8 +1,8 @@
 <template>
   <UiHeader/>
-  <UiLeftBar selcted="home"/>
+  <UiLeftBar selcted="players"/>
   <div class="content">
-    
+    <UiTablePlayers/>
   </div>
 </template>
 
@@ -10,12 +10,14 @@
 // @ is an alias to /src
 import UiLeftBar from '@/components/UiLeftBar.vue'
 import UiHeader from '@/components/UiHeader.vue'
+import UiTablePlayers from '@/components/UiTablePlayers.vue'
 
 export default {
-  name: 'HomeView',
+  name: 'PagePlayers',
   components: {
     UiLeftBar,
     UiHeader,
+    UiTablePlayers
   }
 }
 </script>

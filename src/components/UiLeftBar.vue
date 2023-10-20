@@ -4,6 +4,7 @@
         <div class="menu-list">
             <UiMenuItem text="Главная" @click="$router.push('/')" :selected="selectedItem.home"><img src="../assets/icons/home.svg" alt="home"></UiMenuItem>
             <UiMenuItem text="Профиль" :selected="selectedItem.user"><img src="../assets/icons/user.svg" alt="user"></UiMenuItem>
+            <UiMenuItem text="Плееры" :selected="selectedItem.players" @click="$router.push('/players')"><img src="../assets/icons/pleer.svg" alt="user"></UiMenuItem>
             <UiMenuItem text="Техподержка" @click="$router.push('/support-user')" :selected="selectedItem.support"><img src="../assets/icons/support.svg" alt="home"></UiMenuItem>
             <UiMenuItem text="Выйти" @click="$router.push('/login')" :selected="selectedItem.out"><img src="../assets/icons/logout.svg" alt="home"></UiMenuItem>
         </div>
@@ -27,6 +28,7 @@ export default {
                 home: false,
                 user: false,
                 support: false,
+                players: false,
                 out:false
             }
             out[this.selcted] = true

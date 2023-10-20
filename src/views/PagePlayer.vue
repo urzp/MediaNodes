@@ -1,8 +1,8 @@
 <template>
   <UiHeader/>
-  <UiLeftBar selcted="home"/>
+  <UiLeftBar selcted="players"/>
   <div class="content">
-    
+    <UiPlayer :playerId="playerId"/>
   </div>
 </template>
 
@@ -10,12 +10,19 @@
 // @ is an alias to /src
 import UiLeftBar from '@/components/UiLeftBar.vue'
 import UiHeader from '@/components/UiHeader.vue'
+import UiPlayer from '@/components/UiPlayer.vue'
 
 export default {
-  name: 'HomeView',
+  name: 'PagePlayer',
   components: {
     UiLeftBar,
     UiHeader,
+    UiPlayer,
+  },
+  computed:{
+    playerId(){
+      return this.$route.params.playerId;
+    },
   }
 }
 </script>

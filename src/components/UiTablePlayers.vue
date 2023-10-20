@@ -4,15 +4,15 @@
       <div class="header">
           <div v-for="item in header" :key="item.key" :style="{'width': item.width}">{{ item.name }}</div>
       </div>
-      <div v-for="item in players" :key="item.name" class="row">
-        <div :style="{'width': header[0].width}">{{ item.name }}</div>
-        <div :style="{'width': header[1].width}">{{ item.city }}</div>
-        <div :style="{'width': header[2].width}">{{ item.address }}</div>
-        <div :style="{'width': header[3].width}">{{ item.act_track }}</div>
-        <div :style="{'width': header[4].width}">{{ item.ip }}</div>
-        <div :style="{'width': header[5].width}" :class="{'online':item.online}">{{ item.online?'ONLINE':item.last_online.toLocaleString() }}</div>
-        <div :style="{'width': header[6].width}" >{{ item.updated.toLocaleString() }}</div>
-        <div :style="{'width': header[7].width}" >
+      <div v-for="item in players" :key="item.id" class="row" >
+        <div :style="{'width': header[0].width}" @click="goToPlayer(item.id)">{{ item.name }}</div>
+        <div :style="{'width': header[1].width}" @click="goToPlayer(item.id)">{{ item.city }}</div>
+        <div :style="{'width': header[2].width}" @click="goToPlayer(item.id)">{{ item.address }}</div>
+        <div :style="{'width': header[3].width}" @click="goToPlayer(item.id)">{{ item.act_track }}</div>
+        <div :style="{'width': header[4].width}" @click="goToPlayer(item.id)">{{ item.ip }}</div>
+        <div :style="{'width': header[5].width}" @click="goToPlayer(item.id)" :class="{'online':item.online}">{{ item.online?'ONLINE':item.last_online.toLocaleString() }}</div>
+        <div :style="{'width': header[6].width}" @click="goToPlayer(item.id)" >{{ item.updated.toLocaleString() }}</div>
+        <div :style="{'width': header[7].width}"  >
           <div class="panel">
             <UiPlayPuseButton :play="item.plaing"/>
             <UiVolume :value="item.volme + '%'"/>
@@ -51,6 +51,11 @@ export default {
   components: {
     UiPlayPuseButton,
     UiVolume,
+  },
+  methods:{
+    goToPlayer(id){
+      this.$router.push(`/players/${id}`)
+    }
   }
 }
 </script>
@@ -106,6 +111,9 @@ export default {
   }
   .row .online{
     background-color: #449C4A;
+  }
+  .row{
+    cursor: pointer;
   }
   .panel{
     width: 100%;
