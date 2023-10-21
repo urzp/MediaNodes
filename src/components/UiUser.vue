@@ -10,7 +10,15 @@
         <div class="title">Изображение</div>
         <label for="files" class="btnGetFile" onclick="document.getElementById('getFile').click()">Загрузить изображение</label>
         <input type="file" id="getFile" style="display:none" name="img" accept="image/png, image/jpeg" />
-        <RouterLink class="link" to="/">Изменить пароль</RouterLink>
+        <div class="link" @click="editPassword = !editPassword">{{editPassword?'Не изменять пароль':'Изменить пароль'}}</div>
+        <div v-if="editPassword" class="changePassword">
+            <div class="title">Старый пароль</div>
+            <input type="password" name="" />
+            <div class="title">Новый пароль</div>
+            <input type="password" name="" />
+            <div class="title">Проверить новый пароль</div>
+            <input type="password" name="" />
+        </div>
         <div class="buttons">
             <div class="canselButton">Отмена</div>
             <input type="submit" class="submitButton" value="Отправить" />
@@ -22,7 +30,11 @@
 
 export default{
     name: 'UiUser',
-
+    data(){
+        return{
+            editPassword: false,
+        }
+    }
 }
 
 </script>
@@ -79,21 +91,24 @@ form input{
 .link{
     display: block;
     margin-top: 30px;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
     text-align: left;
     font-family: 'Intro-Book';
     font-size: 16px;  
     color: #ffffffaf; 
+    text-decoration: underline;
+    cursor: pointer;
 }
 
 .buttons{
+    margin-bottom: 100px;
     display: flex;
     justify-content: flex-start;
 }
 
 .submitButton, .canselButton{
     display: block;
-    margin-top: 30px;
+    margin-top: 40px;
     margin-right: 10px;
     height: 55px;
     width: 190px;
