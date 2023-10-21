@@ -1,16 +1,15 @@
 <template>
-    <div class="title">Профиль</div>
+    <UiButtonBack :to="`/players/${player.id}`" label="Назад к плееру"/>
+    <div class="title">Плеер: {{ player.name }}</div>
     <form action="">
-        <div class="title">Название компании</div>
-        <input name="" placeholder="Альфа банк"/>
-        <div class="title">Email</div>
-        <input name="" placeholder="info@alfabank.ru"/>
-        <div class="title">Телефон</div>
-        <input name="" placeholder="+7 (495) 999 99 99"/>
-        <div class="title">Изображение</div>
-        <label for="files" class="btnGetFile" onclick="document.getElementById('getFile').click()">Загрузить изображение</label>
-        <input type="file" id="getFile" style="display:none" name="img" accept="image/png, image/jpeg" />
-        <RouterLink class="link" to="/">Изменить пароль</RouterLink>
+        <div class="title">Название</div>
+        <input name="" :value="player.name"/>
+        <div class="title">Город</div>
+        <input name="" :value="player.city"/>
+        <div class="title">Адрес</div>
+        <input name="" :value="player.address"/>
+        <div class="title">IP</div>
+        <input name="" :value="player.ip"/>
         <div class="buttons">
             <div class="canselButton">Отмена</div>
             <input type="submit" class="submitButton" value="Отправить" />
@@ -19,10 +18,15 @@
 </template>
 
 <script>
-
+import UiButtonBack from '@/components/UiButtonBack.vue'
 export default{
-    name: 'UiUser',
-
+    name: 'UiPlayerEdit',
+    props:{
+        player: Object
+    },
+    components:{
+        UiButtonBack
+    }
 }
 
 </script>
@@ -60,32 +64,6 @@ form input{
     padding: 20px;
 }
 
-.btnGetFile{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 10px;
-    width: 220px;
-    height: 45px;
-    font-family: 'Intro-Book';
-    font-size: 16px;
-    color: #fff;
-    background-color:#2F2F2F ;
-    border-radius: 5px;
-    cursor: pointer;
-
-}
-
-.link{
-    display: block;
-    margin-top: 30px;
-    margin-bottom: 40px;
-    text-align: left;
-    font-family: 'Intro-Book';
-    font-size: 16px;  
-    color: #ffffffaf; 
-}
-
 .buttons{
     display: flex;
     justify-content: flex-start;
@@ -93,7 +71,7 @@ form input{
 
 .submitButton, .canselButton{
     display: block;
-    margin-top: 30px;
+    margin-top: 40px;
     margin-right: 10px;
     height: 55px;
     width: 190px;

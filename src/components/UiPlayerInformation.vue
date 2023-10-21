@@ -2,8 +2,8 @@
 <div class="title">
     <div class="text">Плеер: {{ player.name }}, {{ player.city }}, {{ player.address }}</div>
     <div class="edit">
-        <div class="editButton"><img src="@/assets/icons/pen.svg" alt="pen"></div>
-        <RouterLink to="/players" class="label">Редактировать плеер</RouterLink>
+        <RouterLink :to="`/players/edit/${player.id}`" class="editButton"><img src="@/assets/icons/pen.svg" alt="pen"></RouterLink>
+        <RouterLink :to="`/players/edit/${player.id}`" class="label">Редактировать плеер</RouterLink>
     </div>
 </div>
 <div class="inf">
