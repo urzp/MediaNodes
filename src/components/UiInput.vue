@@ -1,15 +1,11 @@
 <template>
-    <component :is="tag?tag:'input'" ref="input" :type="type" class="input" 
-    :value="modelValue" @input="$emit('update:modelValue', $event.target.value)" 
-    @focus="$emit('focus', handfocus($event.target.value))" @blur="('blur',handBlur($event.target.value))"/>
+    <component :is="tag?tag:'input'" ref="input" :type="modelTape" class="input" v-bind="$attrs"
+    :value="modelValue" @input="$emit('update:modelValue', $event.target.value)" />
 </template>
 
 <script>
 export default {
   name: 'UiInput',
-  mounted(){
-    this.beginValue = this.modelValue;
-  },
   data(){
     return{
       beginValue: '',
@@ -21,21 +17,7 @@ export default {
     modelTape:String,
     tag: String,
   },
-  emits: ['update:modelValue', 'focus', 'blur'],
-  methods:{
-    handfocus(value){
-      if(this.beginValue == value){
-        this.type = this.modelTape;
-        setTimeout(()=>{this.$refs.input.value = ''},100)
-      }
-    },
-    handBlur(value){
-      if(value == ''){ 
-        this.type = 'text'
-        setTimeout(()=>{this.$refs.input.value = this.beginValue},100)
-      }
-    }
-  }
+  emits: ['update:modelValue'],
 }
 </script>
 
@@ -51,5 +33,11 @@ export default {
         color: #858585;
         background-color: transparent;
     }
+
+    .error{
+      background-color:#f934922b;
+      border-color: #f93493
+    };
+    
 
 </style>

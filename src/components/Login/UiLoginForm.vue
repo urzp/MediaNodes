@@ -2,10 +2,12 @@
     <div class="login-form">
         <div class="title">Войти в личный кабинет</div>
         <form>
-            <UiInput modelTape='text' v-model="email"/>
-            <UiInput modelTape='password' v-model="password"/>
+            <UiInput modelTape='text' v-model="email" placeholder="Введите ваш email" :class="{'error':v$.email.$error}"/>
+            <div v-if="v$.email.$error" class="error-message">Введите корректный email</div>
+            <UiInput modelTape='password' v-model="password" placeholder="Введите пароль" :class="{'error':v$.password.$error}"/>
+            <div v-if="v$.password.$error" class="error-message">Введите пароль</div>
             <div class="submit-row">
-                <UiButton class="login-button" text="Войти" bg_color="#F93492" text_color="#fff" @click="clickButton()"/>
+                <UiButton class="login-button" text="Войти" bg_color="#F93492" text_color="#fff" @click="submit()"/>
                 <div class="reset">
                     <RouterLink to="reset-password">Забыли пароль?</RouterLink>
                 </div>
@@ -19,6 +21,8 @@
 </template>
 
 <script>
+import useVuelidate from '@vuelidate/core'
+import { required, email, minLength } from '@vuelidate/validators'
 import UiInput from '@/components/UiInput.vue'
 import UiButton from '@/components/UiButton.vue'
 export default {
@@ -27,15 +31,30 @@ export default {
     UiInput,
     UiButton
   },
+  setup () {
+    return { v$: useVuelidate() }
+  },
   data(){
     return{
-        email: 'Введите ваш email',
-        password: 'Введите пароль',
+        email: '',
+        password: '',
     }
   }, 
+  validations(){
+    return{
+        email:{ required, email },
+        password: { required },
+    }
+  },
   methods:{
-    clickButton(){
-        localStorage.setItem('token', "userToken")
+    submit(){
+        this.v$.$validate()
+        if(!this.v$.$error){
+            this.v$.$touch()
+            console.log('submit')
+        }else{
+
+        }
     }
   }
 }
@@ -43,7 +62,7 @@ export default {
 
 <style scoped>
     .login-form{
-        height: 365px;
+        min-height: 365px;
         width: 560px;
         position: relative;
         top: -20px;
@@ -102,5 +121,12 @@ export default {
     a{
         color: #F93492;
         margin-left: 10px;   
+    }
+
+    .error-message{
+        color: #F93492;
+        margin-top: 10px;
+        font-family: 'Intro-Bold-Alt';
+        font-size: 16px;
     }
 </style>

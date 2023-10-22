@@ -2,11 +2,14 @@
     <div class="login-form">
         <div class="title">Прежде чем начать,<br>зарегистрируйтесь в системе</div>
         <form>
-            <UiInput modelTape='text' class="input" v-model="firstName"/>
-            <UiInput modelTape='text' v-model="email"/>
-            <UiInput modelTape='password' v-model="password"/>
+            <UiInput modelTape='text' class="input" v-model="firstName" placeholder="Укажите ваше Имя" :class="{'error':v$.firstName.$error}"/>
+            <div v-if="v$.firstName.$error" class="error-message">Введите имя</div>
+            <UiInput modelTape='text' v-model="email" placeholder="Введите ваш email" :class="{'error':v$.email.$error}"/>
+            <div v-if="v$.email.$error" class="error-message">Введите корректный email</div>
+            <UiInput modelTape='password' v-model="password" placeholder="Придумайте пароль" :class="{'error':v$.password.$error}" />
+            <div v-if="v$.password.$error" class="error-message">пароль должен быть минимум 6 символов</div>
             <div class="submit-row">
-                <UiButton text="Создать аккаунт" bg_color="#F93492" text_color="#fff"/>
+                <UiButton text="Создать аккаунт" bg_color="#F93492" text_color="#fff" @click="submit"/>
                 <div class="login-ref">
                     Уже есть аккаунт? <RouterLink to="login">Войти</RouterLink>
                 </div>
@@ -20,6 +23,8 @@
 </template>
 
 <script>
+import useVuelidate from '@vuelidate/core'
+import { required, email, minLength } from '@vuelidate/validators'
 import UiInput from '@/components/UiInput.vue'
 import UiButton from '@/components/UiButton.vue'
 export default {
@@ -28,11 +33,35 @@ export default {
     UiInput,
     UiButton
   },
+  setup () {
+    return { v$: useVuelidate() }
+  },
   data(){
     return{
-        firstName: 'Укажите ваше Имя',
-        email: 'Введите ваш email',
-        password: 'Придумайте пароль',
+        firstName: '',
+        email: '',
+        password: '',
+    }
+  },
+  validations(){
+    return{
+        firstName: { required },
+        email:{ required, email },
+        password: { required, minLength:minLength(6) },
+    }
+  },
+  methods:{
+    submit(){
+        this.v$.$validate()
+        if(!this.v$.$error){
+            this.v$.$touch()
+            console.log('submit')
+        }else{
+            console.log('first name',this.v$.firstName.$error)
+            console.log('mail',this.v$.email.$property)
+            console.log(this.v$.email.required)
+        }
+        
     }
   }
 }
@@ -40,7 +69,7 @@ export default {
 
 <style scoped>
     .login-form{
-        height: 460px;
+        min-height: 460px;
         width: 560px;
         position: relative;
         top: -20px;
@@ -94,5 +123,12 @@ export default {
 
     a{
         color: #F93492
+    }
+
+    .error-message{
+        color: #F93492;
+        margin-top: 10px;
+        font-family: 'Intro-Bold-Alt';
+        font-size: 16px;
     }
 </style>
