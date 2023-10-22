@@ -5,7 +5,7 @@
             <UiInput modelTape='text' v-model="email"/>
             <UiInput modelTape='password' v-model="password"/>
             <div class="submit-row">
-                <UiButton class="login-button" text="Войти" bg_color="#F93492" text_color="#fff"/>
+                <UiButton class="login-button" text="Войти" bg_color="#F93492" text_color="#fff" @click="clickButton()"/>
                 <div class="reset">
                     <RouterLink to="reset-password">Забыли пароль?</RouterLink>
                 </div>
@@ -31,6 +31,11 @@ export default {
     return{
         email: 'Введите ваш email',
         password: 'Введите пароль',
+    }
+  }, 
+  methods:{
+    clickButton(){
+        localStorage.setItem('token', "userToken")
     }
   }
 }
