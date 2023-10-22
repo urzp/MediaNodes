@@ -2,10 +2,12 @@
     <div class="login-form">
         <div class="title">Войти в личный кабинет</div>
         <form>
-            <UiInput modelTape='text' v-model="email" placeholder="Введите ваш email" :class="{'error':v$.email.$error}"/>
-            <div v-if="v$.email.$error" class="error-message">Введите корректный email</div>
-            <UiInput modelTape='password' v-model="password" placeholder="Введите пароль" :class="{'error':v$.password.$error}"/>
-            <div v-if="v$.password.$error" class="error-message">Введите пароль</div>
+            <UiInput modelTape='text' v-model="email" placeholder="Введите ваш email" :class="{'error':v$.email.$error}">
+                <div v-if="v$.email.$error">Введите корректный email</div>
+            </UiInput>
+            <UiInput modelTape='password' v-model="password" placeholder="Введите пароль" :class="{'error':v$.password.$error}">
+                <div v-if="v$.password.$error">Введите пароль</div>
+            </UiInput>
             <div class="submit-row">
                 <UiButton class="login-button" text="Войти" bg_color="#F93492" text_color="#fff" @click="submit()"/>
                 <div class="reset">
@@ -84,9 +86,7 @@ export default {
         margin-top:  40px;
     }
 
-    form input{
-        margin-top: 20px;
-    }
+
 
     form :first-child{
         margin-top: 0px;
@@ -122,11 +122,5 @@ export default {
         color: #F93492;
         margin-left: 10px;   
     }
-
-    .error-message{
-        color: #F93492;
-        margin-top: 10px;
-        font-family: 'Intro-Bold-Alt';
-        font-size: 16px;
-    }
+    
 </style>

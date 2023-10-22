@@ -2,12 +2,15 @@
     <div class="login-form">
         <div class="title">Прежде чем начать,<br>зарегистрируйтесь в системе</div>
         <form>
-            <UiInput modelTape='text' class="input" v-model="firstName" placeholder="Укажите ваше Имя" :class="{'error':v$.firstName.$error}"/>
-            <div v-if="v$.firstName.$error" class="error-message">Введите имя</div>
-            <UiInput modelTape='text' v-model="email" placeholder="Введите ваш email" :class="{'error':v$.email.$error}"/>
-            <div v-if="v$.email.$error" class="error-message">Введите корректный email</div>
-            <UiInput modelTape='password' v-model="password" placeholder="Придумайте пароль" :class="{'error':v$.password.$error}" />
-            <div v-if="v$.password.$error" class="error-message">пароль должен быть минимум 6 символов</div>
+            <UiInput modelTape='text' class="input" v-model="firstName" placeholder="Укажите ваше Имя" :class="{'error':v$.firstName.$error}">
+                <div v-if="v$.firstName.$error" >Введите имя</div>
+            </UiInput>
+            <UiInput modelTape='text' v-model="email" placeholder="Введите ваш email" :class="{'error':v$.email.$error}">
+                <div v-if="v$.email.$error">Введите корректный email</div>
+            </UiInput>
+            <UiInput modelTape='password' v-model="password" placeholder="Придумайте пароль" :class="{'error':v$.password.$error}">
+                <div v-if="v$.password.$error">пароль должен быть минимум 6 символов</div>
+            </UiInput>
             <div class="submit-row">
                 <UiButton text="Создать аккаунт" bg_color="#F93492" text_color="#fff" @click="submit"/>
                 <div class="login-ref">
@@ -123,12 +126,5 @@ export default {
 
     a{
         color: #F93492
-    }
-
-    .error-message{
-        color: #F93492;
-        margin-top: 10px;
-        font-family: 'Intro-Bold-Alt';
-        font-size: 16px;
     }
 </style>
