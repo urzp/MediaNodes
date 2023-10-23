@@ -7,6 +7,7 @@
             </UiInput>
             <UiInput modelTape='text' v-model="email" placeholder="Введите ваш email" :class="{'error':v$.email.$error}">
                 <div v-if="v$.email.$error">Введите корректный email</div>
+                <div v-if="emailBusy">Email уже занят</div>
             </UiInput>
             <UiInput modelTape='password' v-model="password" placeholder="Придумайте пароль" :class="{'error':v$.password.$error}">
                 <div v-if="v$.password.$error">пароль должен быть минимум 6 символов</div>
@@ -26,6 +27,7 @@
 </template>
 
 <script>
+import  regUser  from '@/servis/regUserFetch.js'
 import useVuelidate from '@vuelidate/core'
 import { required, email, minLength } from '@vuelidate/validators'
 import UiInput from '@/components/UiInput.vue'
@@ -42,8 +44,9 @@ export default {
   data(){
     return{
         firstName: 'Павел',
-        email: 'ermak80_pass@mila.ru',
+        email: 'ermak80_pass@mail.ru',
         password: '123456',
+        emailBusy: false,
     }
   },
   validations(){
@@ -54,35 +57,26 @@ export default {
     }
   },
   methods:{
-    async submit(){
+    submit(){
         this.v$.$validate()
-        if(!this.v$.$error){
-            this.v$.$touch()
-            console.log('submit')
-            this.request()
-        }else{
-
-        }
-        
-    },
-    async request(){
-        let url = 'https://ermakpass.ru/media_node/check.php'
-            let user = {
+        if(!this.v$.$error){ 
+            this.register({
                 name: this.firstName,
                 email: this.email,
-                password: this.password,
-            };
+                password: this.password
+            })
 
-            let response = await fetch(url, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json;charset=utf-8'
-            },
-            body: JSON.stringify(user)
-            });
-
-            //let result = await response.json();
-            console.log(response)
+            
+        }  
+    },
+    async register(user){
+        let result = await regUser(user)
+        if(result.success){
+            this.$router.push('/login')
+        }else if(result.error == 'email'){
+            this.emailBusy = true 
+            setTimeout(()=>{this.emailBusy = false }, 2000)
+        }
     }
   }
 }

@@ -1,6 +1,7 @@
 <template>
     <div class="login-form">
         <div class="title">Войти в личный кабинет</div>
+        <div v-if="wrongLogin" class="wrongLogin">Пользователь не найден</div>
         <form>
             <UiInput modelTape='text' v-model="email" placeholder="Введите ваш email" :class="{'error':v$.email.$error}">
                 <div v-if="v$.email.$error">Введите корректный email</div>
@@ -23,6 +24,7 @@
 </template>
 
 <script>
+import  loginRequest  from '@/servis/loginFetch.js'
 import useVuelidate from '@vuelidate/core'
 import { required, email, minLength } from '@vuelidate/validators'
 import UiInput from '@/components/UiInput.vue'
@@ -38,8 +40,9 @@ export default {
   },
   data(){
     return{
-        email: '',
-        password: '',
+        email: 'ermak80_pass@mail.ru',
+        password: '123456',
+        wrongLogin:false,
     }
   }, 
   validations(){
@@ -52,10 +55,22 @@ export default {
     submit(){
         this.v$.$validate()
         if(!this.v$.$error){
-            this.v$.$touch()
-            console.log('submit')
+            let data = {
+                'email':this.email,
+                'password':this.password
+            }
+            this.login(data)  
+        }
+    },
+    async login(data){
+        let result = await loginRequest(data)
+        if(result.success){
+            sessionStorage.setItem('user', JSON.stringify(result.user));
+            sessionStorage.setItem('session', result.session);
+            this.$router.push('/')
         }else{
-
+            this.wrongLogin = true 
+            setTimeout(()=>{this.wrongLogin = false }, 3000)
         }
     }
   }
@@ -122,5 +137,8 @@ export default {
         color: #F93492;
         margin-left: 10px;   
     }
-    
+    .wrongLogin{
+        color: #F93492;
+        margin-top: 10px;
+    }
 </style>
