@@ -3,8 +3,8 @@
         <div class="title">Техподдержка</div>
         <p>У Вас появились проблемы? Или есть вопросы по управлению устройствами? Пожалуйста, заполните форму, и наш специалист свяжется с Вами в течение 24 часов.</p>
         <form>
-            <UiInput modelTape='text' v-model="email"/>
-            <UiInput tag="textarea" class="textarea" modelTape='text' v-model="message"/>
+            <UiInput modelTape='text' v-model="email" placeholder="Введите ваш email"/>
+            <UiInput tag="textarea" class="textarea" modelTape='text' v-model="message"  placeholder="Введите ваше сообщение" />
             <UiButton class="submit-button" text="Отправить" bg_color="#F93492" text_color="#fff"/>
         </form>
     </div>
@@ -25,8 +25,8 @@ export default {
   },
   data(){
     return{
-        email: 'Введите ваш email',
-        message: 'Введите ваше сообщение',
+        email: '',
+        message: '',
     }
   }
 }
@@ -71,14 +71,7 @@ export default {
     form input{
         margin-top: 20px;
     }
-
-    .textarea{
-        margin-top: 20px;
-        padding-top: 15px;
-        height: 160px;
-        resize: none;
-    }
-
+    
     form :first-child{
         margin-top: 0px;
     }

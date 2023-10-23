@@ -12,7 +12,7 @@ export default {
   name: 'UiHeader',
   components:{
     UiButton
-  }
+  },
 }
 </script>
 

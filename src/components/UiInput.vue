@@ -35,6 +35,13 @@ export default {
         color: #858585;
         background-color: transparent;
     }
+    .textarea{
+        margin-top: 20px;
+        padding-top: 15px;
+        height: 160px;
+        resize: none;
+    }
+
     .error{
       background-color:#f934922b;
       border-color: #f93493

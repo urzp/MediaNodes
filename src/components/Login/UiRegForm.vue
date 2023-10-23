@@ -43,9 +43,9 @@ export default {
   },
   data(){
     return{
-        firstName: 'Павел',
-        email: 'ermak80_pass@mail.ru',
-        password: '123456',
+        firstName: '',
+        email: '',
+        password: '',
         emailBusy: false,
     }
   },

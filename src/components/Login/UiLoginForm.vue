@@ -6,7 +6,7 @@
             <UiInput modelTape='text' v-model="email" placeholder="Введите ваш email" :class="{'error':v$.email.$error}">
                 <div v-if="v$.email.$error">Введите корректный email</div>
             </UiInput>
-            <UiInput modelTape='password' v-model="password" placeholder="Введите пароль" :class="{'error':v$.password.$error}">
+            <UiInput modelTape='password' v-model="password" placeholder="Введите пароль" :class="{'error':v$.password.$error}" v-on:keyup.enter="submit()">
                 <div v-if="v$.password.$error">Введите пароль</div>
             </UiInput>
             <div class="submit-row">
@@ -40,8 +40,8 @@ export default {
   },
   data(){
     return{
-        email: 'ermak80_pass@mail.ru',
-        password: '123456',
+        email: '',
+        password: '',
         wrongLogin:false,
     }
   }, 

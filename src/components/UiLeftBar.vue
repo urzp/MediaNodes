@@ -6,7 +6,7 @@
             <UiMenuItem text="Профиль" :selected="selectedItem.user" @click="$router.push('/user')"><img src="../assets/icons/user.svg" alt="user"></UiMenuItem>
             <UiMenuItem text="Плееры" :selected="selectedItem.players" @click="$router.push('/players')"><img src="../assets/icons/pleer.svg" alt="user"></UiMenuItem>
             <UiMenuItem text="Техподержка" @click="$router.push('/support-user')" :selected="selectedItem.support"><img src="../assets/icons/support.svg" alt="home"></UiMenuItem>
-            <UiMenuItem text="Выйти" @click="$router.push('/login')" :selected="selectedItem.out"><img src="../assets/icons/logout.svg" alt="home"></UiMenuItem>
+            <UiMenuItem text="Выйти" @click="logout()" :selected="selectedItem.out"><img src="../assets/icons/logout.svg" alt="home"></UiMenuItem>
         </div>
     </div>
 </template>
@@ -35,6 +35,12 @@ export default {
             return out
         }
     },
+    methods:{
+        logout(){
+            sessionStorage.clear();
+            this.$router.push('/login')
+        }
+    }
 }
 
 </script>

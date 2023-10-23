@@ -1,5 +1,4 @@
-export default 
- async () =>{
+export  async function isLogget(){
     let url = 'https://ermakpass.ru/media_node/php/islogget.php'
     let user = JSON.parse(sessionStorage.getItem('user'))
     let session = sessionStorage.getItem('session')
