@@ -1,5 +1,5 @@
 <template>
-  <UiHeader/>
+  <UiHeader login/>
   <div class="main">
     <UiSupportForm />
   </div>

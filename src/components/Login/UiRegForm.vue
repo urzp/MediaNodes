@@ -31,7 +31,7 @@ import  regUser  from '@/servis/regUserFetch.js'
 import useVuelidate from '@vuelidate/core'
 import { required, email, minLength } from '@vuelidate/validators'
 import UiInput from '@/components/UiInput.vue'
-import UiButton from '@/components/UiButton.vue'
+import UiButton from '@/components/Login/UiButton.vue'
 export default {
   name: 'UiRegForm',
   components:{

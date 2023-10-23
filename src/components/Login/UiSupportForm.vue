@@ -16,7 +16,7 @@
 
 <script>
 import UiInput from '@/components/UiInput.vue'
-import UiButton from '@/components/UiButton.vue'
+import UiButton from '@/components/Login/UiButton.vue'
 export default {
   name: 'UiSupportForm',
   components:{

@@ -1,5 +1,5 @@
 <template>
-  <UiHeader/>
+  <UiHeader support/>
   <div class="main">
     <UiRegForm/>
   </div>

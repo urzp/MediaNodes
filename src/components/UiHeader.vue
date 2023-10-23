@@ -5,7 +5,7 @@
             <input type="text" placeholder="Поиск плеера">
         </div>
         <div class="avatar">
-            <div class="userName">Альфа Банк</div>
+            <div class="userName">{{ user.name }}</div>
             <div class="avatar_img"><img src="@/assets/icons/avatar.svg" alt="avatar"></div>
         </div>
     </header>
@@ -15,7 +15,11 @@
 
 export default {
 name: 'UiHeader',
-
+    data(){
+        return{
+            user:JSON.parse(sessionStorage.getItem('user'))
+        }
+    }
 }
 </script>
 
