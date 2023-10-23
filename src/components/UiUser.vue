@@ -2,22 +2,25 @@
     <div class="title">Профиль</div>
     <form action="">
         <div class="title">Название компании</div>
-        <input name="" placeholder="Альфа банк"/>
+        <input name="id" type="hidden" :value="user.id">
+        <input name="session" type="hidden" :value="session">
+        <input name="name" placeholder="Альфа банк" :value ="user.name"/>
         <div class="title">Email</div>
-        <input name="" placeholder="info@alfabank.ru"/>
+        <input name="email" placeholder="info@alfabank.ru" :value = "user.email"/>
         <div class="title">Телефон</div>
-        <input name="" placeholder="+7 (495) 999 99 99"/>
+        <input name="tel" placeholder="+7 (495) 999 99 99"  :value ="user.telephon"/>
         <div class="title">Изображение</div>
         <label for="files" class="btnGetFile" onclick="document.getElementById('getFile').click()">Загрузить изображение</label>
         <input type="file" id="getFile" style="display:none" name="img" accept="image/png, image/jpeg" />
         <div class="link" @click="editPassword = !editPassword">{{editPassword?'Не изменять пароль':'Изменить пароль'}}</div>
         <div v-if="editPassword" class="changePassword">
+            <input name="editPassword" type="hidden" :value="editPassword">
             <div class="title">Старый пароль</div>
-            <input type="password" name="" />
+            <input type="password" name="oldPassword" />
             <div class="title">Новый пароль</div>
-            <input type="password" name="" />
+            <input type="password" name="newPassword" />
             <div class="title">Проверить новый пароль</div>
-            <input type="password" name="" />
+            <input type="password" name="newPassword" />
         </div>
         <div class="buttons">
             <div class="canselButton">Отмена</div>
@@ -33,6 +36,8 @@ export default{
     data(){
         return{
             editPassword: false,
+            user:JSON.parse(sessionStorage.getItem('user')),
+            session: sessionStorage.getItem('session')
         }
     }
 }
