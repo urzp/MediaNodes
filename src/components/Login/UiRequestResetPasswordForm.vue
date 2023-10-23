@@ -3,8 +3,10 @@
         <div class="title">Сброс пароля</div>
         <p>Введите адрес <span>электронной почты</span>,  который вы указали при регистрации. Мы отправим вам письмо с ссылкой для сброса пароля.</p>
         <form>
-            <UiInput modelTape='text' v-model="email"/>
-            <UiButton class="submit-button" text="Отправить" bg_color="#F93492" text_color="#fff"/>
+            <UiInput modelTape='text' placeholder="Введите ваш email" v-model="email">
+                <div v-if="v$.email.$error">Введите корректный email</div>
+            </UiInput>
+            <UiButton class="submit-button" text="Отправить"  @click="submit()" bg_color="#F93492" text_color="#fff"/>
         </form>
     </div>
     <div class="registration">
@@ -14,6 +16,8 @@
 </template>
 
 <script>
+import useVuelidate from '@vuelidate/core'
+import { required, email, minLength } from '@vuelidate/validators'
 import UiInput from '@/components/UiInput.vue'
 import UiButton from '@/components/UiButton.vue'
 export default {
@@ -22,9 +26,28 @@ export default {
     UiInput,
     UiButton
   },
+  setup () {
+    return { v$: useVuelidate() }
+  },
+  validations(){
+    return{
+        email:{ required, email },
+    }
+  },
   data(){
     return{
-        email: 'Введите ваш email',
+        email: '',
+    }
+  },
+  methods:{
+    submit(){
+        this.v$.$validate()
+        if(!this.v$.$error){
+            this.v$.$touch()
+            console.log('submit')
+        }else{
+
+        }
     }
   }
 }

@@ -41,9 +41,9 @@ export default {
   },
   data(){
     return{
-        firstName: '',
-        email: '',
-        password: '',
+        firstName: 'Павел',
+        email: 'ermak80_pass@mila.ru',
+        password: '123456',
     }
   },
   validations(){
@@ -54,17 +54,35 @@ export default {
     }
   },
   methods:{
-    submit(){
+    async submit(){
         this.v$.$validate()
         if(!this.v$.$error){
             this.v$.$touch()
             console.log('submit')
+            this.request()
         }else{
-            console.log('first name',this.v$.firstName.$error)
-            console.log('mail',this.v$.email.$property)
-            console.log(this.v$.email.required)
+
         }
         
+    },
+    async request(){
+        let url = 'https://ermakpass.ru/media_node/check.php'
+            let user = {
+                name: this.firstName,
+                email: this.email,
+                password: this.password,
+            };
+
+            let response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify(user)
+            });
+
+            //let result = await response.json();
+            console.log(response)
     }
   }
 }
