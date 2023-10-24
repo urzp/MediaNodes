@@ -8,7 +8,7 @@
         <div class="title">Email</div>
         <input name="email" placeholder="info@alfabank.ru" :value = "user.email"/>
         <div class="title">Телефон</div>
-        <input name="tel" placeholder="+7 (495) 999 99 99"  :value ="user.telephon"/>
+        <input name="tel" placeholder="+7 (495) 999 99 99"  :value ="user.telephon" data-phone-pattern/>
         <div class="title">Изображение</div>
         <label for="files" class="btnGetFile" onclick="document.getElementById('getFile').click()">Загрузить изображение</label>
         <input type="file" id="getFile" style="display:none" name="img" accept="image/png, image/jpeg" />
@@ -30,9 +30,14 @@
 </template>
 
 <script>
-
+import useVuelidate from '@vuelidate/core'
+import { required, email, minLength } from '@vuelidate/validators'
+import telMask from '@/scripts/tel_mask'
 export default{
     name: 'UiUser',
+    mounted(){
+        telMask()
+    },
     data(){
         return{
             editPassword: false,
