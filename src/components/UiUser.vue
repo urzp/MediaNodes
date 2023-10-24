@@ -1,6 +1,6 @@
 <template>
     <div class="title">Профиль</div>
-    <form action="">
+    <form action="https://ermakpass.ru/media_node/php/updateUser.php" method="post" ref="submit">
         <div class="title">Название компании</div>
 
         <input name="id" type="hidden" :value="id">
@@ -92,6 +92,7 @@ export default{
         submit(){
             this.v$.$validate()
             window.er = this.v$.confirmPassword.$errors
+            window.form = this.$refs.submit
         },
         isErrMinLengt(errors){
             if(!errors) return false
