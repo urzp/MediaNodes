@@ -114,6 +114,7 @@ export default{
             this.user = { ...await readUser() }
             sessionStorage.setItem('user', JSON.stringify(this.user));
             EventBus.emit('user:update');
+            EventBus.emit('toaster',{status:'success', message:'Данные обновлены'});
             
         },
         isErrMinLengt(errors){

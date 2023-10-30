@@ -4,6 +4,7 @@
   <div class="content">
     <UiUser/>
   </div>
+  <UiToaster/>
 </template>
 
 <script>
@@ -11,6 +12,7 @@
 import UiLeftBar from '@/components/UiLeftBar.vue'
 import UiHeader from '@/components/UiHeader.vue'
 import UiUser from '@/components/UiUser.vue'
+import UiToaster from '@/components/UiToaster.vue'
 
 export default {
   name: 'HomeView',
@@ -18,6 +20,7 @@ export default {
     UiLeftBar,
     UiHeader,
     UiUser,
+    UiToaster,
   },
 }
 </script>

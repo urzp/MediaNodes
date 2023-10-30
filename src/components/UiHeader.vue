@@ -20,13 +20,17 @@ name: 'UiHeader',
     mounted(){
         EventBus.on('user:update', this.setUser)
     },
-    created(){
-        this.user = JSON.parse(sessionStorage.getItem('user'))
+    // created(){
+    //     this.user = JSON.parse(sessionStorage.getItem('user'))
+    // },
+    data(){
+        return {
+            user: JSON.parse(sessionStorage.getItem('user'))
+        }
     },
     methods:{
         setUser(){
-            this.user = JSON.parse(sessionStorage.getItem('user'))
-            console.log(this.user)
+            this.user = { ...JSON.parse(sessionStorage.getItem('user')) }
         }
     },
     computed:{
