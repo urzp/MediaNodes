@@ -6,18 +6,34 @@
         </div>
         <div class="avatar">
             <div class="userName">{{ user.name }}</div>
-            <div class="avatar_img"><img src="@/assets/icons/avatar.svg" alt="avatar"></div>
+            <div class="avatar_img"><img :src="url_avatar" alt="avatar"></div>
         </div>
     </header>
 </template>
 
 <script>
 
+import { EventBus } from '@/servis/EventBus'
+
 export default {
 name: 'UiHeader',
-    data(){
-        return{
-            user:JSON.parse(sessionStorage.getItem('user'))
+    mounted(){
+        EventBus.on('user:update', this.setUser)
+    },
+    created(){
+        this.user = JSON.parse(sessionStorage.getItem('user'))
+    },
+    methods:{
+        setUser(){
+            this.user = JSON.parse(sessionStorage.getItem('user'))
+            console.log(this.user)
+        }
+    },
+    computed:{
+        url_avatar(){
+            let url = window.baseUrl + 'img/default/avatar.svg'
+            if(this.user.img) url = window.baseUrl + `img/user_${this.user.id}/${this.user.img}`
+            return url;
         }
     }
 }
@@ -67,5 +83,10 @@ name: 'UiHeader',
         align-items: center;
         justify-content: flex-end;
         margin-right: 40px;
+    }
+
+    .avatar img{
+        width: 45px;
+        height: 45px;
     }
 </style>

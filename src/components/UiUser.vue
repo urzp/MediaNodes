@@ -18,7 +18,7 @@
 
         <div class="title">Изображение</div>
         <label for="files" class="btnGetFile" onclick="document.getElementById('getFile').click()">Загрузить изображение</label>
-        <input type="file" id="getFile" style="display:none" name="img" accept="image/png, image/jpeg" />
+        <input type="file" id="getFile" style="display:none" name="img" accept="image/png, image/jpeg, image/svg+xml, image/webp" />
 
         <div class="link" @click="editPassword = !editPassword">{{editPassword?'Не изменять пароль':'Изменить пароль'}}</div>
         <div v-if="editPassword" class="changePassword">
@@ -47,20 +47,24 @@
 </template>
 
 <script>
+import { readUser } from '@/servis/readUser'
+import { sendForm } from '@/servis/sentForm'
 import useVuelidate from '@vuelidate/core'
 import { required, email, minLength, sameAs } from '@vuelidate/validators'
 import telMask from '@/scripts/tel_mask'
+import { EventBus } from '@/servis/EventBus'
+const url = "https://ermakpass.ru/media_node/php/updateUser.php"
 export default{
     name: 'UiUser',
     setup () {
         return { v$: useVuelidate() }
     },
-    created(){
-        let user = JSON.parse(sessionStorage.getItem('user'))
+    async created(){
+        let user = await readUser()
         this.id = user.id
         this.name = user.name
         this.email = user.email
-        this.telephon = user.telephon
+        this.tel_number = user.tel
     },
     mounted(){
         telMask()
@@ -89,10 +93,28 @@ export default{
         }
     },
     methods:{
-        submit(){
+        async submit(){
             this.v$.$validate()
             window.er = this.v$.confirmPassword.$errors
             window.form = this.$refs.submit
+            let nameCheck =!this.v$.name.$error
+            let emailCheck =!this.v$.email.$error
+            let usetInfCheck = nameCheck&&emailCheck
+
+            let oldPasswordCheck =!this.v$.oldPassword.$error
+            let newPasswordCheck =!this.v$.newPassword.$error
+            let confirmPassword =!this.v$.confirmPassword.$error
+            let passwordCheck = oldPasswordCheck&&newPasswordCheck&&confirmPassword
+
+            if(!this.editPassword){
+                if(usetInfCheck) await sendForm(url, this.$refs.submit)
+            }else{
+                if(usetInfCheck&&passwordCheck) await sendForm(url, this.$refs.submit)
+            }
+            this.user = { ...await readUser() }
+            sessionStorage.setItem('user', JSON.stringify(this.user));
+            EventBus.emit('user:update');
+            
         },
         isErrMinLengt(errors){
             if(!errors) return false

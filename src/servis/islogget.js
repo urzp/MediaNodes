@@ -1,8 +1,12 @@
 export  async function isLogget(){
     let url = 'https://ermakpass.ru/media_node/php/islogget.php'
-    let user = JSON.parse(sessionStorage.getItem('user'))
-    let session = sessionStorage.getItem('session')
-    if (!user||!session) return false
+    let storageUser = sessionStorage.getItem('user')
+    let storageSession  = sessionStorage.getItem('session')
+    if (notValid(storageUser)||notValid(storageSession)) return false 
+    let user = await JSON.parse(storageUser)
+    let session = storageSession
+
+
     let data = {
         user_id:user.id,
         session
@@ -17,4 +21,9 @@ export  async function isLogget(){
 
     let result = await response.json();
     return result
+}
+
+
+function notValid(value){
+    return !value||value == 'undefined'
 }
