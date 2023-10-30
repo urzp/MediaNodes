@@ -53,7 +53,7 @@ import useVuelidate from '@vuelidate/core'
 import { required, email, minLength, sameAs } from '@vuelidate/validators'
 import telMask from '@/scripts/tel_mask'
 import { EventBus } from '@/servis/EventBus'
-const url = "https://ermakpass.ru/media_node/php/updateUser.php"
+const url = window.baseUrl + "updateUser.php"
 export default{
     name: 'UiUser',
     setup () {

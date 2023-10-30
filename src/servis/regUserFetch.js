@@ -1,6 +1,6 @@
 export default 
  async (data) =>{
-    let url = 'https://ermakpass.ru/media_node/php/regUser.php'
+    let url = window.baseUrl + 'regUser.php'
     let response = await fetch(url, {
     method: 'POST',
     headers: {

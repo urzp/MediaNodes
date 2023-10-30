@@ -3,7 +3,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 
-let baseUrl = 'https://ermakpass.ru/media_node/php/';
+let baseUrl = 'https://ermakpass.ru/php/';
 window.baseUrl = baseUrl;
 
 const app = createApp(App)

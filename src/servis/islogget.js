@@ -1,5 +1,5 @@
 export  async function isLogget(){
-    let url = 'https://ermakpass.ru/media_node/php/islogget.php'
+    let url = window.baseUrl + 'islogget.php'
     let storageUser = sessionStorage.getItem('user')
     let storageSession  = sessionStorage.getItem('session')
     if (notValid(storageUser)||notValid(storageSession)) return false 

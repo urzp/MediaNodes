@@ -1,5 +1,5 @@
 export  async function readUser(){
-    let url = 'https://ermakpass.ru/media_node/php/readUser.php'
+    let url = window.baseUrl + 'readUser.php'
     let user = JSON.parse(sessionStorage.getItem('user'))
     let session = sessionStorage.getItem('session')
     if (!user||!session) return false
