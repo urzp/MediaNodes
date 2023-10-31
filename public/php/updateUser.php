@@ -5,17 +5,17 @@ header('Access-Control-Allow-Origin: *');
 include 'db_mysql.php';
 
 //print_r($_POST);
-$user_id = $_POST[id];
-$session = $_POST[session];
-$name = $_POST[name];
-$email = $_POST[email];
-$tel = $_POST[tel];
+$user_id = $_POST['id'];
+$session = $_POST['session'];
+$name = $_POST['name'];
+$email = $_POST['email'];
+$tel = $_POST['tel'];
 $img = basename( $_FILES['img']['name'] );
 
-$editPassword = $_POST[editPassword];
+$editPassword = $_POST['editPassword'];
 
-$oldPassword = $_POST[oldPassword];
-$newPassword = $_POST[newPassword];
+$oldPassword = $_POST['oldPassword'];
+$newPassword = $_POST['newPassword'];
 
 $oldPassword = md5($oldPassword."wqrtvfd");
 $newPassword = md5($newPassword."wqrtvfd");
