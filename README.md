@@ -19,6 +19,26 @@
 Для инсталяции и запуска на локальном сервере
 Необходим пакет node js и git   
 
+### Установка Node.js
+
+Node.js — это среда выполнения JavaScript. Установить Node.js можно, скачав установщик с официального сайта, или с помощью менеджера пакетов. Требуется версия 16 или 18 LTS.
+
+Windows:
+Установщик: https://nodejs.org/ru/download/
+winget: winget install OpenJS.NodeJS.LTS
+Chocolatey: choco install nodejs-lts
+Mac:
+Установщик: https://nodejs.org/ru/download/
+brew: brew install node@18
+Linux: https://nodejs.org/ru/download/package-manager/
+
+### Установка Git
+
+Git – это распределенная система контроля версий, инструмент, инструмент, без которого сложно представить современную разработку.
+
+Установить git
+https://git-scm.com/book/ru/v2/Введение-Установка-Git-Git
+
 ### Устанока для работы с фронтенд частью на vue 
 
 Для инсталяции и запуска на локальном сервере
