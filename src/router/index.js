@@ -8,6 +8,7 @@ import PageSupportUser from '../views/PageSupportUser.vue'
 import PagePlayers from '../views/PagePlayers'
 import PagePlayer from '../views/PagePlayer'
 import PageEditPlayer from '../views/PageEditPlayer'
+import PageNewPlayer from '../views/PageNewPlayer.vue'
 import PageUser from '../views/PageUser'
 import { isLogget } from '../servis/islogget.js';
 
@@ -71,6 +72,15 @@ const routes = [
       requireAuth: true,
     },
     component: PagePlayer,
+  },
+  {
+    path: '/players/new',
+    name: 'addPlayer',
+    meta: {
+      requireAuth: true,
+      requireAdmin: true,
+    },
+    component: PageNewPlayer,
   },
   {
     path: '/players/edit/:playerId([0-9]+)',

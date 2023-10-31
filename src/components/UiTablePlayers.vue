@@ -1,8 +1,13 @@
 <template>
-    <div class="title">Устройства</div>  
+      <div class="title">Устройства</div>
+      
+
     <div class="table-players">
       <div class="header">
-          <div v-for="item in header" :key="item.key" :style="{'width': item.width}">{{ item.name }}</div>
+          <div v-for="item, i in header" :key="item.key" :style="{'width': item.width}">
+            {{ item.name }}
+            <div v-if="i==0" class="add_player" @click="$router.push({ name: 'addPlayer' })"><img src="@/assets/icons/plus.svg" alt=""></div>
+          </div>
       </div>
       <div v-for="item in players" :key="item.id" class="row" >
         <div :style="{'width': header[0].width}" @click="goToPlayer(item.id)">{{ item.name }}</div>
@@ -66,6 +71,20 @@ export default {
     font-size: 20px;
     color: #fff;
     margin-top: 20px;
+  }
+
+  .add_player{
+    margin: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 15px;
+    background-color: #383838;
+    cursor: pointer;
+    
   }
 
   .table-players{

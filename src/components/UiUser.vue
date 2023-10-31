@@ -95,8 +95,6 @@ export default{
     methods:{
         async submit(){
             this.v$.$validate()
-            window.er = this.v$.confirmPassword.$errors
-            window.form = this.$refs.submit
             let nameCheck =!this.v$.name.$error
             let emailCheck =!this.v$.email.$error
             let usetInfCheck = nameCheck&&emailCheck
@@ -108,9 +106,9 @@ export default{
 
             if(!this.editPassword){
                 
-                if(usetInfCheck) await sendForm(php_script, this.$refs.submit)
+                if(usetInfCheck) { await sendForm(php_script, this.$refs.submit) } else return false
             }else{
-                if(usetInfCheck&&passwordCheck) await sendForm(php_script, this.$refs.submit)
+                if(usetInfCheck&&passwordCheck) { await sendForm(php_script, this.$refs.submit) } else return false
             }
             this.user = { ...await readUser() }
             sessionStorage.setItem('user', JSON.stringify(this.user));
