@@ -1,6 +1,6 @@
 <template>
     <div class="title">Профиль</div>
-    <form action="https://ermakpass.ru/media_node/php/updateUser.php" method="post" ref="submit">
+    <form  method="post" ref="submit">
         <div class="title">Название компании</div>
 
         <input name="id" type="hidden" :value="id">
@@ -53,7 +53,7 @@ import useVuelidate from '@vuelidate/core'
 import { required, email, minLength, sameAs } from '@vuelidate/validators'
 import telMask from '@/scripts/tel_mask'
 import { EventBus } from '@/servis/EventBus'
-const url = window.baseUrl + "updateUser.php"
+const php_script = "updateUser.php"
 export default{
     name: 'UiUser',
     setup () {
@@ -107,9 +107,10 @@ export default{
             let passwordCheck = oldPasswordCheck&&newPasswordCheck&&confirmPassword
 
             if(!this.editPassword){
-                if(usetInfCheck) await sendForm(url, this.$refs.submit)
+                
+                if(usetInfCheck) await sendForm(php_script, this.$refs.submit)
             }else{
-                if(usetInfCheck&&passwordCheck) await sendForm(url, this.$refs.submit)
+                if(usetInfCheck&&passwordCheck) await sendForm(php_script, this.$refs.submit)
             }
             this.user = { ...await readUser() }
             sessionStorage.setItem('user', JSON.stringify(this.user));

@@ -3,7 +3,7 @@
         <div class="top-marker">
         </div>
         <div class="title">
-                <h3>{{ message }}</h3>
+                <div>{{ message }}</div>
         </div>
     </div>
 </template>
@@ -54,7 +54,8 @@ export default {
         right: 10px;
         width: 360px;
         background-color: #363636;
-        border-radius: 8px ;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
         opacity: 0;
         transition: 1s;
         z-index: 999;
@@ -72,7 +73,7 @@ export default {
         margin-top: 30px;
         margin-bottom: 50px;
         font-family: 'Intro-Book';
-        font-size: 16px;
+        font-size: 18px;
         color: #fff;
 
     }
