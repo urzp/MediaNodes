@@ -32,8 +32,8 @@
 
 <script>
 import getPlayers from '@/servis/testPlayers.js'
-import UiPlayPuseButton from '@/components/UiPlayPuseButton.vue'
-import UiVolume from '@/components/UiVolume.vue'
+import UiPlayPuseButton from '@/components/Player/UiPlayPuseButton.vue'
+import UiVolume from '@/components/Player/UiVolume.vue'
 
 export default {
   name: 'UiTablePlayers',

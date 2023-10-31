@@ -18,7 +18,7 @@
 <script>
 import useVuelidate from '@vuelidate/core'
 import { required, email, minLength } from '@vuelidate/validators'
-import UiInput from '@/components/UiInput.vue'
+import UiInput from '@/components/UiComponents/UiInput.vue'
 import UiButton from '@/components/Login/UiButton.vue'
 export default {
   name: 'UiRequestResetPasswordForm',

@@ -15,7 +15,7 @@
 // @ is an alias to /src
 import UiLeftBar from '@/components/UiLeftBar.vue'
 import UiHeader from '@/components/UiHeader.vue'
-import UiMainButton from '@/components/UiMainButton.vue'
+import UiMainButton from '@/components/UiComponents/UiMainButton.vue'
 
 export default {
   name: 'HomeView',

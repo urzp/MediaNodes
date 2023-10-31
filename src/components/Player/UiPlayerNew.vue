@@ -27,7 +27,7 @@
 
 <script>
 import { sendForm } from '@/servis/sentForm'
-import UiButtonBack from '@/components/UiButtonBack.vue'
+import UiButtonBack from '@/components/UiComponents/UiButtonBack.vue'
 import InputMask from 'primevue/inputmask';
 import useVuelidate from '@vuelidate/core'
 import { required} from '@vuelidate/validators'

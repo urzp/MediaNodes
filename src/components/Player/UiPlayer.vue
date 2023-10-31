@@ -5,11 +5,11 @@
 </template>
 
 <script>
-import UiButtonBack from '@/components/UiButtonBack.vue';
+import UiButtonBack from '@/components/UiComponents/UiButtonBack.vue';
 import getPlayers from '@/servis/testPlayers.js'
 import PlayerList from '@/servis/testPlayList'
-import UiPlayerInf from '@/components/UiPlayerInformation.vue'
-import UiPlayList from '@/components/UiPlayList.vue'
+import UiPlayerInf from '@/components/Player/UiPlayerInformation.vue'
+import UiPlayList from '@/components/Player/UiPlayList.vue'
 
 export default {
     name: 'UiPlayer',

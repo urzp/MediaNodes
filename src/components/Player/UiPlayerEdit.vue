@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import UiButtonBack from '@/components/UiButtonBack.vue'
+import UiButtonBack from '@/components/UiComponents/UiButtonBack.vue'
 export default{
     name: 'UiPlayerEdit',
     props:{

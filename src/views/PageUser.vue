@@ -11,7 +11,7 @@
 // @ is an alias to /src
 import UiLeftBar from '@/components/UiLeftBar.vue'
 import UiHeader from '@/components/UiHeader.vue'
-import UiUser from '@/components/UiUser.vue'
+import UiUser from '@/components/User/UiUser.vue'
 import UiToaster from '@/components/UiToaster.vue'
 
 export default {

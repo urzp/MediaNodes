@@ -10,7 +10,7 @@
 // @ is an alias to /src
 import UiLeftBar from '@/components/UiLeftBar.vue'
 import UiHeader from '@/components/UiHeader.vue'
-import UiPlayer from '@/components/UiPlayer.vue'
+import UiPlayer from '@/components/Player/UiPlayer.vue'
 
 export default {
   name: 'PagePlayer',

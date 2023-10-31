@@ -11,7 +11,7 @@
 // @ is an alias to /src
 import UiLeftBar from '@/components/UiLeftBar.vue'
 import UiHeader from '@/components/UiHeader.vue'
-import UiPlayerNew from '@/components/UiPlayerNew.vue'
+import UiPlayerNew from '@/components/Player/UiPlayerNew.vue'
 
 export default {
   name: 'PageNewPlayer',

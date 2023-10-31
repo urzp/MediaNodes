@@ -12,7 +12,7 @@
 import getPlayers from '@/servis/testPlayers.js'
 import UiLeftBar from '@/components/UiLeftBar.vue'
 import UiHeader from '@/components/UiHeader.vue'
-import UiPlayerEdit from '@/components/UiPlayerEdit.vue'
+import UiPlayerEdit from '@/components/Player/UiPlayerEdit.vue'
 
 export default {
   name: 'HomeView',
