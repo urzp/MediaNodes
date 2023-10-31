@@ -16,7 +16,7 @@ $password = md5($password."wqrtvfd");
 $session = md5($email.rand(0,1000));
 
 
-$mysql = new mysqli('localhost','ermak8nk_users','5&lxD2Xt','ermak8nk_users');
+include 'db_mysql.php';
 
 $sql = "SELECT `id`, `name`, `email`, `tel`, `img` FROM `users` WHERE `email` = '$email' && `password`='$password'";
 $checkUser = $mysql -> query($sql);

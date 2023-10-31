@@ -2,7 +2,7 @@
 header('Access-Control-Allow-Origin: *');
 //header("Content-Type: application/json");
 
-$mysql = new mysqli('localhost','ermak8nk_users','5&lxD2Xt','ermak8nk_users');
+include 'db_mysql.php';
 
 //print_r($_POST);
 $user_id = $_POST[id];

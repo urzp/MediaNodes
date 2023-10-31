@@ -15,7 +15,7 @@ $password = $post -> password;
 $password = md5($password."wqrtvfd");
 
 
-$mysql = new mysqli('localhost','ermak8nk_users','5&lxD2Xt','ermak8nk_users');
+include 'db_mysql.php';
 
 $sql = "SELECT * FROM `users` WHERE `email` = '$email'";
 $checkUser = $mysql -> query($sql);

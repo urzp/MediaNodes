@@ -12,7 +12,7 @@ $post = json_decode($post);
 $user_id = $post-> user_id;
 $session = $post -> session;
 
-$mysql = new mysqli('localhost','ermak8nk_users','5&lxD2Xt','ermak8nk_users');
+include 'db_mysql.php';
 
 $sql = "SELECT `id`, `name`, `email` FROM `users` WHERE `id` = '$user_id' && `session`='$session'";
 $checkUser = $mysql -> query($sql);
