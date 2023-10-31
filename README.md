@@ -24,15 +24,30 @@
 Для инсталяции и запуска на локальном сервере
 Необходим пакет node js и git
 
-Можно скачать: $ git clone https://github.com/urzp/MediaNodes.git
+Можно скачать: 
+```
+git clone https://github.com/urzp/MediaNodes.git
+```
 
-Войти в папку проекта: $ cd media_node
+Войти в папку проекта: 
+```
+cd media_node
+```
 
-Установка зависимостей: $ npm ci
+Установка зависимостей: 
+```
+npm ci
+```
 
-Запуск на локальном сервере: $ npm run serve
+Запуск на локальном сервере: 
+```
+npm run serve
+```
 
-Генерация выхоных файлов: $ npm run build
+Генерация выхоных файлов: 
+```
+npm run build
+```
 
 
 
