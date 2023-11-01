@@ -13,7 +13,7 @@
         <div :style="{'width': header[0].width}" @click="goToPlayer(item.id)">{{ item.name }}</div>
         <div :style="{'width': header[1].width}" @click="goToPlayer(item.id)">{{ item.city }}</div>
         <div :style="{'width': header[2].width}" @click="goToPlayer(item.id)">{{ item.address }}</div>
-        <div :style="{'width': header[3].width}" @click="goToPlayer(item.id)">{{ item.cuttent_track/*  */ }}</div>
+        <div :style="{'width': header[3].width}" @click="goToPlayer(item.id)">{{ item.current_track/*  */ }}</div>
         <div :style="{'width': header[4].width}" @click="goToPlayer(item.id)">{{ item.ip }}</div>
         <div :style="{'width': header[5].width}" @click="goToPlayer(item.id)" :class="{'online':Number(item.online)}">{{ Number(item.online)?'ONLINE':item.last_online.toLocaleString() }}</div>
         <div :style="{'width': header[6].width}" @click="goToPlayer(item.id)" >{{ item.device_updated.toLocaleString() }}</div>

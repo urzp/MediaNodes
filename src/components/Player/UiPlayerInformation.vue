@@ -7,17 +7,17 @@
     </div>
 </div>
 <div class="inf">
-    <div class="net-status" style="width: 150px;" :class="{'online':player.online}">{{ player.online?'ONLINE':player.last_online.toLocaleString() }}</div>
+    <div class="net-status" style="width: 150px;" :class="{'online':player.online}">{{ player.online?'ONLINE':player.last_online }}</div>
     <div class="active-track" style="width: 100%;">
-        <div v-if="player.plaing" class="playstatus"><img src="@/assets/icons/play.gif" alt=""></div>
-        <div class="label">{{ player.act_track }}</div>
+        <div v-if="player.play_stop" class="playstatus"><img src="@/assets/icons/play.gif" alt=""></div>
+        <div class="label">{{ player.current_track }}</div>
     </div>
     <div class="playPanel" style="width: 220px;">
-        <UiPlayPuseButton :play="player.plaing"/>
-        <UiVolume :value="player.volme + '%'"/>            
+        <UiPlayPuseButton :play="player.play_stop"/>
+        <UiVolume :value="player.volume + '%'"/>            
     </div>
     <div class="ip" style="width: 220px;">IP: {{ player.ip }}</div>
-    <div class="updated" style="width: 220px;">Обновлен:<br> {{ player.updated.toLocaleString() }}</div>
+    <div class="updated" style="width: 220px;">Обновлен:<br> {{ player.updated }}</div>
 </div>
 </template>
 

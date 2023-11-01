@@ -1,4 +1,4 @@
-export  async function getData(php_script){
+export  async function getData(php_script, rq_data = {}){
     let url = window.baseUrl + php_script
     let storageUser = sessionStorage.getItem('user')
     let storageSession  = sessionStorage.getItem('session')
@@ -8,7 +8,8 @@ export  async function getData(php_script){
 
     let data = {
         user_id:user.id,
-        session
+        session,
+        rq_data
     }
     let response = await fetch(url, {
     method: 'POST',
