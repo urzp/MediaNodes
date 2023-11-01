@@ -47,8 +47,8 @@
 </template>
 
 <script>
-import { readUser } from '@/servis/readUser'
-import { sendForm } from '@/servis/sentForm'
+import { getData } from '@/servis/getData'
+import { sendForm } from '@/servis/sendForm'
 import useVuelidate from '@vuelidate/core'
 import { required, email, minLength, sameAs } from '@vuelidate/validators'
 import telMask from '@/scripts/tel_mask'
@@ -60,7 +60,8 @@ export default{
         return { v$: useVuelidate() }
     },
     async created(){
-        let user = await readUser()
+        let response = await getData('readUser.php')
+        let user = await response.user
         this.id = user.id
         this.name = user.name
         this.email = user.email
@@ -110,7 +111,8 @@ export default{
             }else{
                 if(usetInfCheck&&passwordCheck) { await sendForm(php_script, this.$refs.submit) } else return false
             }
-            this.user = { ...await readUser() }
+            let response = await getData('readUser.php')
+            this.user = { ...await response.user }
             sessionStorage.setItem('user', JSON.stringify(this.user));
             EventBus.emit('user:update');
             EventBus.emit('toaster',{status:'success', message:'Данные обновлены'});

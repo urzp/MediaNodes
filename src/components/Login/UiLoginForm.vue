@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import  loginRequest  from '@/servis/loginFetch.js'
+import  loginRequest  from '@/servis/login.js'
 import useVuelidate from '@vuelidate/core'
 import { required, email, minLength } from '@vuelidate/validators'
 import UiInput from '@/components/UiComponents/UiInput.vue'

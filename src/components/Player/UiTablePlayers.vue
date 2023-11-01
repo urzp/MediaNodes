@@ -31,14 +31,15 @@
 </template>
 
 <script>
-import { readPlayers } from '@/servis/readPlayers.js'
+import { getData } from '@/servis/getData.js'
 import UiPlayPuseButton from '@/components/Player/UiPlayPuseButton.vue'
 import UiVolume from '@/components/Player/UiVolume.vue'
 
 export default {
   name: 'UiTablePlayers',
   async created(){
-    this.players = await readPlayers()
+    let result = await getData('readPlayers.php')
+    this.players = await result.players 
   },
   data(){
     return{

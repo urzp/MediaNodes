@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import { sendForm } from '@/servis/sentForm'
+import { sendForm } from '@/servis/sendForm'
 import UiButtonBack from '@/components/UiComponents/UiButtonBack.vue'
 import InputMask from 'primevue/inputmask';
 import useVuelidate from '@vuelidate/core'

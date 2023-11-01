@@ -44,7 +44,6 @@ export default {
         this.v$.$validate()
         if(!this.v$.$error){
             this.v$.$touch()
-            console.log('submit')
         }else{
 
         }

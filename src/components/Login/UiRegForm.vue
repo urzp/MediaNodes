@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import  regUser  from '@/servis/regUserFetch.js'
+import  regUser  from '@/servis/regUser.js'
 import useVuelidate from '@vuelidate/core'
 import { required, email, minLength } from '@vuelidate/validators'
 import UiInput from '@/components/UiComponents/UiInput.vue'
