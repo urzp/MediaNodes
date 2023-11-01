@@ -4,6 +4,7 @@
     <div class="content">
       <UiPlayerNew/>
     </div>
+    <UiToaster/>
 </template>
 
 
@@ -12,6 +13,7 @@
 import UiLeftBar from '@/components/UiLeftBar.vue'
 import UiHeader from '@/components/UiHeader.vue'
 import UiPlayerNew from '@/components/Player/UiPlayerNew.vue'
+import UiToaster from '@/components/UiToaster.vue'
 
 export default {
   name: 'PageNewPlayer',
@@ -19,6 +21,7 @@ export default {
     UiLeftBar,
     UiHeader,
     UiPlayerNew,
+    UiToaster,
   },
 }
 </script>

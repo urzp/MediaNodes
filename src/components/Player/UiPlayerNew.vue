@@ -1,21 +1,25 @@
 <template>
     <UiButtonBack :to="`/players`" label="Назад к списку"/>
     <div class="title">Новый плеер</div>
-    <form action="">
+    <form action=""  ref="submit">
+
+        <input name="user_id" type="hidden" :value="user_id">
+        <input name="session" type="hidden" :value="session">
+
         <div class="title">Имя устройтсва</div>
-        <InputMask class="input" name="" placeholder="P10000900" mask="P999999999" v-model="name"/>
+        <InputMask class="input" name="name" placeholder="P10000900" mask="P999999999" v-model="name"/>
         <div v-if="v$.name.$error" class="error-message" >поле недолжно быть пустым</div>
 
         <div class="title">Город</div>
-        <input name="" placeholder="Москва" v-model="city"/>
+        <input name="city" placeholder="Москва" v-model="city"/>
         <div v-if="v$.city.$error" class="error-message" >поле недолжно быть пустым</div>
 
         <div class="title">Адрес</div>
-        <input name="" placeholder="ул. Ленина д.2" v-model="address"/>
+        <input name="address" placeholder="ул. Ленина д.2" v-model="address"/>
         <div v-if="v$.address.$error" class="error-message" >поле недолжно быть пустым</div>
 
         <div class="title" >IP</div>
-        <InputMask class="input" name="" placeholder="178 . 178 . 035 . 035" mask="999 . 999 . 999 . 999" v-model="ip"/>
+        <InputMask class="input" name="ip" placeholder="178 . 178 . 035 . 035" mask="999 . 999 . 999 . 999" v-model="ip"/>
         <div v-if="v$.ip.$error" class="error-message" >поле недолжно быть пустым</div>
 
         <div class="buttons">
@@ -31,6 +35,8 @@ import UiButtonBack from '@/components/UiComponents/UiButtonBack.vue'
 import InputMask from 'primevue/inputmask';
 import useVuelidate from '@vuelidate/core'
 import { required} from '@vuelidate/validators'
+import { EventBus } from '@/servis/EventBus'
+
 const php_script = "newPlayer.php"
 export default{
     name: 'UiPlayerNew',
@@ -39,6 +45,8 @@ export default{
     },
     data(){
         return{
+            user_id:JSON.parse(sessionStorage.getItem('user')).id,
+            session: sessionStorage.getItem('session'),
             name: '',
             city:'',
             address:'',
@@ -63,7 +71,8 @@ export default{
             let ipCheck =!this.v$.ip.$error
             let allCheck = nameCheck&&cityCheck&&addressCheck&&ipCheck
             if(allCheck) { await sendForm(php_script, this.$refs.submit) } else return false
-            EventBus.emit('toaster',{status:'success', message:'Данные обновлены'});
+            EventBus.emit('toaster',{status:'success', message:'Данные обновлены'})
+            setTimeout( ()=>{this.$router.push('/players')}, 3500)  ;
         }
     },
     components:{
