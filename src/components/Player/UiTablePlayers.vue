@@ -13,30 +13,33 @@
         <div :style="{'width': header[0].width}" @click="goToPlayer(item.id)">{{ item.name }}</div>
         <div :style="{'width': header[1].width}" @click="goToPlayer(item.id)">{{ item.city }}</div>
         <div :style="{'width': header[2].width}" @click="goToPlayer(item.id)">{{ item.address }}</div>
-        <div :style="{'width': header[3].width}" @click="goToPlayer(item.id)">{{ item.act_track }}</div>
+        <div :style="{'width': header[3].width}" @click="goToPlayer(item.id)">{{ item.cuttent_track }}</div>
         <div :style="{'width': header[4].width}" @click="goToPlayer(item.id)">{{ item.ip }}</div>
-        <div :style="{'width': header[5].width}" @click="goToPlayer(item.id)" :class="{'online':item.online}">{{ item.online?'ONLINE':item.last_online.toLocaleString() }}</div>
-        <div :style="{'width': header[6].width}" @click="goToPlayer(item.id)" >{{ item.updated.toLocaleString() }}</div>
+        <div :style="{'width': header[5].width}" @click="goToPlayer(item.id)" :class="{'online':Number(item.online)}">{{ Number(item.online)?'ONLINE':item.last_online.toLocaleString() }}</div>
+        <div :style="{'width': header[6].width}" @click="goToPlayer(item.id)" >{{ item.device_updated.toLocaleString() }}</div>
         <div :style="{'width': header[7].width}"  >
           <div class="panel">
-            <UiPlayPuseButton :play="item.plaing"/>
-            <UiVolume :value="item.volme + '%'"/>
+            <UiPlayPuseButton :play="!!Number(item.play_stop)"/>
+            <UiVolume :value="Number(item.volume) + '%'"/>
           </div>
         </div>
         <div :style="{'width': header[8].width}" >
-            <div v-if="item.dislike" class="dislike"><img src="@/assets/icons/disLike.svg" alt="dislike"></div>
+            <div v-if="Number(item.dislike)" class="dislike"><img src="@/assets/icons/disLike.svg" alt="dislike"></div>
         </div>
       </div>
     </div>
 </template>
 
 <script>
-import getPlayers from '@/servis/testPlayers.js'
+import { readPlayers } from '@/servis/readPlayers.js'
 import UiPlayPuseButton from '@/components/Player/UiPlayPuseButton.vue'
 import UiVolume from '@/components/Player/UiVolume.vue'
 
 export default {
   name: 'UiTablePlayers',
+  async created(){
+    this.players = await readPlayers()
+  },
   data(){
     return{
       header:[
@@ -50,7 +53,7 @@ export default {
         {key:8,name:'Элементы управления', width: '13.6%'},
         {key:9,name:'Дизлайки', width: '5.5%'},
       ],
-      players: getPlayers,
+      players:''
     }
   },
   components: {

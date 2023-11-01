@@ -4,7 +4,6 @@
   <div class="content">
     <UiTablePlayers/>
   </div>
-  <UiToaster/>
 </template>
 
 <script>
