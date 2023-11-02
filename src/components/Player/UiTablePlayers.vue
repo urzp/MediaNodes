@@ -1,6 +1,6 @@
 <template>
       <div class="title">Устройства</div>
-      
+      <div v-if="false" class="servis-button" @click="runScript('addRandomeTrakToPlayer.php')">addRandomeTrakToPlayer.php</div>
 
     <div class="table-players">
       <div class="header">
@@ -13,7 +13,7 @@
         <div :style="{'width': header[0].width}" @click="goToPlayer(item.id)">{{ item.name }}</div>
         <div :style="{'width': header[1].width}" @click="goToPlayer(item.id)">{{ item.city }}</div>
         <div :style="{'width': header[2].width}" @click="goToPlayer(item.id)">{{ item.address }}</div>
-        <div :style="{'width': header[3].width}" @click="goToPlayer(item.id)">{{ item.current_track/*  */ }}</div>
+        <div :style="{'width': header[3].width}" @click="goToPlayer(item.id)">{{ item.current_trak_title/*  */ }}</div>
         <div :style="{'width': header[4].width}" @click="goToPlayer(item.id)">{{ item.ip }}</div>
         <div :style="{'width': header[5].width}" @click="goToPlayer(item.id)" :class="{'online':Number(item.online)}">{{ Number(item.online)?'ONLINE':item.last_online.toLocaleString() }}</div>
         <div :style="{'width': header[6].width}" @click="goToPlayer(item.id)" >{{ item.device_updated.toLocaleString() }}</div>
@@ -64,6 +64,9 @@ export default {
   methods:{
     goToPlayer(id){
       this.$router.push(`/players/${id}`)
+    },
+    runScript(name){
+      getData(name)
     }
   }
 }
@@ -148,5 +151,13 @@ export default {
   .dislike{
     display: flex;
     align-items: center;
+  }
+  .servis-button{
+    color: #fff;
+    margin: 20px 0px;
+    padding: 20px 40px;
+    border: 1px solid #fff;
+    border-radius: 10px;
+    cursor: pointer;
   }
 </style>

@@ -1,7 +1,7 @@
 <template>
     <UiButtonBack :to="`/players`" label="Назад к списку плееров"/>
     <UiPlayerInf :player="player"/>
-    <UiPlayList :playerList="playerList"/>
+    <UiPlayList :playerList="playerList" :play_stop="player.play_stop"/>
 </template>
 
 <script>
@@ -16,6 +16,7 @@ export default {
     async created(){
         let result = await getData('readPlayer.php',{'player_id':this.playerId})
         this.player = await result.player
+        this.playerList = await result.playList
         this.player.online = !!Number(this.player.online)
         this.player.play_stop = !!Number(this.player.play_stop)
         this.player.dislike = !!Number(this.player.dislike)
@@ -26,12 +27,8 @@ export default {
     },
     data(){
         return{
-            player:''
-        }
-    },
-    computed: {
-        playerList(){
-            return PlayerList
+            player:'',
+            playerList:'',
         }
     },
     components: { 

@@ -6,11 +6,13 @@
         <div class="length" :style="{width:this.widths.length}" >Длина трека</div>
         <div class="dislike" :style="{width:this.widths.dislike}" >Дизлайк</div>
     </div>
-    <div class="row" v-for="item in playerList" :key="item.id" :class="{'active':item.active}">
-       <div class="number" :style="{width:this.widths.number}">{{ item.id }}</div>
-       <div class="name" :style="{width:this.widths.name}">{{ item.name }} <img v-if="item.active" class="plaing" src="@/assets/icons/play.gif" alt=""></div>
+    <div class="row" v-for="(item, i) in playerList" :key="item.id" :class="{'active':item.active}">
+       <div class="number" :style="{width:this.widths.number}">{{ i + 1 }}</div>
+       <div class="name" :style="{width:this.widths.name}">{{ item.title }} 
+            <img v-if="item.active&&play_stop" class="plaing" src="@/assets/icons/play.gif" alt="">
+        </div>
        <div class="length" :style="{width:this.widths.length}" >{{ item.time }}</div>
-       <div class="dislike" :style="{width:this.widths.dislike}" ><img v-if="item.dislike" src="@/assets/icons/disLike.svg" alt=""></div>
+       <div class="dislike" :style="{width:this.widths.dislike}" ><img v-if="Number(item.disLike)" src="@/assets/icons/disLike.svg" alt=""></div>
     </div>
 </template>
 
@@ -29,6 +31,7 @@ export default{
     },
     props:{
         playerList: Array,
+        play_stop: Boolean,
     }
 }
 </script>

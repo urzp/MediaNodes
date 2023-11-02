@@ -10,7 +10,7 @@
     <div class="net-status" style="width: 150px;" :class="{'online':player.online}">{{ player.online?'ONLINE':player.last_online }}</div>
     <div class="active-track" style="width: 100%;">
         <div v-if="player.play_stop" class="playstatus"><img src="@/assets/icons/play.gif" alt=""></div>
-        <div class="label">{{ player.current_track }}</div>
+        <div class="label">{{ player.current_trak_title }}</div>
     </div>
     <div class="playPanel" style="width: 220px;">
         <UiPlayPuseButton :play="player.play_stop"/>

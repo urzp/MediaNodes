@@ -32,6 +32,7 @@ $mysql->close();
 $result = (object) [
 	'success' => true,
 ];
+
 echo json_encode($result);
 
 
