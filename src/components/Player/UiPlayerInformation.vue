@@ -29,7 +29,7 @@ import UiVolume from '@/components/Player/UiVolume.vue'
 export default {
     name: 'UiPlayerInf',
     props: {
-        player: Object,
+        player: [Object, String],
     },
     components: { 
         UiPlayPuseButton,

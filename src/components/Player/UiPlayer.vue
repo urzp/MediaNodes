@@ -7,7 +7,6 @@
 <script>
 import UiButtonBack from '@/components/UiComponents/UiButtonBack.vue';
 import { getData } from '@/servis/getData.js'
-import PlayerList from '@/servis/testPlayList'
 import UiPlayerInf from '@/components/Player/UiPlayerInformation.vue'
 import UiPlayList from '@/components/Player/UiPlayList.vue'
 
@@ -15,12 +14,13 @@ export default {
     name: 'UiPlayer',
     async created(){
         let result = await getData('readPlayer.php',{'player_id':this.playerId})
-        this.player = await result.player
+        let player = await result.player     
+        player.online = !!Number(this.player.online)
+        player.play_stop = !!Number(this.player.play_stop)
+        player.dislike = !!Number(this.player.dislike)
+        player.last_online = !!this.player.last_online?this.player.last_online.toLocaleString():'-'
+        this.player = player
         this.playerList = await result.playList
-        this.player.online = !!Number(this.player.online)
-        this.player.play_stop = !!Number(this.player.play_stop)
-        this.player.dislike = !!Number(this.player.dislike)
-        this.player.last_online = !!this.player.last_online?this.player.last_online.toLocaleString():'-'
     },
     props: {
         playerId: String,

@@ -30,7 +30,7 @@ export default{
         }
     },
     props:{
-        playerList: Array,
+        playerList: [Array,String],
         play_stop: Boolean,
     }
 }
