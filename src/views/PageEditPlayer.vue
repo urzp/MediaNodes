@@ -2,31 +2,32 @@
     <UiHeader/>
     <UiLeftBar selcted="players"/>
     <div class="content">
-      <UiPlayerEdit :player="player"/>
+      <UiPlayerEdit :playerId="playerId"/>
     </div>
+    <UiToaster/>
 </template>
 
 
 <script>
 // @ is an alias to /src
-import getPlayers from '@/servis/testPlayers.js'
+
 import UiLeftBar from '@/components/UiLeftBar.vue'
 import UiHeader from '@/components/UiHeader.vue'
 import UiPlayerEdit from '@/components/Player/UiPlayerEdit.vue'
+import UiToaster from '@/components/UiToaster.vue'
 
 export default {
   name: 'HomeView',
+
   components: {
     UiLeftBar,
     UiHeader,
     UiPlayerEdit,
+    UiToaster,
   },
   computed:{
     playerId(){
       return this.$route.params.playerId;
-    },
-    player() {
-      return getPlayers.find(item => item.id == this.playerId);
     },
   }
 }
