@@ -16,7 +16,7 @@
         <UiPlayPuseButton :play="player.play_stop"/>
         <UiVolume :value="player.volume + '%'"/>            
     </div>
-    <div class="ip" style="width: 220px;">IP: {{ player.ip }}</div>
+    <div class="ip" style="width: 220px;">IP:<br> {{ player.ip }}</div>
     <div class="updated" style="width: 220px;">Обновлен:<br> {{ player.updated }}</div>
 </div>
 </template>

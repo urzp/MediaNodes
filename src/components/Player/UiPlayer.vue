@@ -12,24 +12,33 @@ import UiPlayList from '@/components/Player/UiPlayList.vue'
 
 export default {
     name: 'UiPlayer',
-    async created(){
-        let result = await getData('readPlayer.php',{'player_id':this.playerId})
-        let player = await result.player     
-        player.online = !!Number(this.player.online)
-        player.play_stop = !!Number(this.player.play_stop)
-        player.dislike = !!Number(this.player.dislike)
-        player.last_online = !!this.player.last_online?this.player.last_online.toLocaleString():'-'
-        this.player = player
-        this.playerList = await result.playList
+    async mounted(){
+       setInterval( this.udatePlayer, this.$settings.updateTime)
     },
     props: {
         playerId: String,
     },
     data(){
         return{
-            player:'',
+            player:{
+                online:false,
+                play_stop: false,
+            },
             playerList:'',
+            test:this.$settings.udateTime
         }
+    },
+    methods:{
+        async udatePlayer(){
+            let result = await getData('readPlayer.php',{'player_id':this.playerId})
+            let player = await result.player     
+            player.online = !!Number(player.online)
+            player.play_stop = !!Number(player.play_stop)
+            player.dislike = !!Number(player.dislike)
+            player.last_online = !!player.last_online?player.last_online.toLocaleString():'-'
+            this.player = player
+            this.playerList = await result.playList
+        },
     },
     components: { 
         UiPlayerInf,
