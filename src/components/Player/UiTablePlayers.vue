@@ -19,8 +19,8 @@
         <div :style="{'width': header[6].width}" @click="goToPlayer(item.id)" >{{ item.device_updated.toLocaleString() }}</div>
         <div :style="{'width': header[7].width}"  >
           <div class="panel">
-            <UiPlayPuseButton :play="!!Number(item.play_stop)"/>
-            <UiVolume :value="Number(item.volume) + '%'"/>
+            <UiPlayPuseButton :play="!!Number(item.play_stop)" :id_player="item.id"/>
+            <UiVolume :value="item.volume" :id_player="item.id"/>
           </div>
         </div>
         <div :style="{'width': header[8].width}" >
@@ -34,12 +34,13 @@
 import { getData } from '@/servis/getData.js'
 import UiPlayPuseButton from '@/components/Player/UiPlayPuseButton.vue'
 import UiVolume from '@/components/Player/UiVolume.vue'
+import { EventBus } from '@/servis/EventBus'
 
 export default {
   name: 'UiTablePlayers',
-  async created(){
-    let result = await getData('readPlayers.php')
-    this.players = await result.players 
+  async mounted(){
+    this.updateList()
+    EventBus.on('player:update', this.updateList)
   },
   data(){
     return{
@@ -67,6 +68,10 @@ export default {
     },
     runScript(name){
       getData(name)
+    },
+    async updateList(){
+      let result = await getData('readPlayers.php')
+      this.players = await result.players 
     }
   }
 }

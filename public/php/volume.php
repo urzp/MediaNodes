@@ -11,7 +11,7 @@ $user_id = $post-> user_id;
 $session = $post -> session;
 
 $id_player = $post -> rq_data -> id_player;
-$play_pause = $post -> rq_data  ->  play_pause;
+$volume = $post -> rq_data  ->  volume;
 
 
 if($play_pause=='true'){$play_pause = '1';}else{$play_pause = 0;}
@@ -31,7 +31,7 @@ if(!isset($user)){
 
 if($user['level']=='admin'){
     
-    $sql = "UPDATE `players` SET `play_stop` = '$play_pause' WHERE `id`='$id_player'";
+    $sql = "UPDATE `players` SET `volume` = '$volume' WHERE `id`='$id_player'";
     $mysql -> query($sql);
     $result = (object) [
         'success' => true,

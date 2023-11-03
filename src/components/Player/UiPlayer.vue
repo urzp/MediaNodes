@@ -9,11 +9,17 @@ import UiButtonBack from '@/components/UiComponents/UiButtonBack.vue';
 import { getData } from '@/servis/getData.js'
 import UiPlayerInf from '@/components/Player/UiPlayerInformation.vue'
 import UiPlayList from '@/components/Player/UiPlayList.vue'
+import { EventBus } from '@/servis/EventBus'
 
 export default {
     name: 'UiPlayer',
     async mounted(){
-       setInterval( this.udatePlayer, this.$settings.updateTime)
+       this.loopUpdate = setInterval( this.udatePlayer, this.$settings.updateTime)
+       EventBus.on('player:update', this.udatePlayer)
+    },
+    beforeUnmount(){
+        console.log('out')
+        clearInterval(this.loopUpdate)
     },
     props: {
         playerId: String,

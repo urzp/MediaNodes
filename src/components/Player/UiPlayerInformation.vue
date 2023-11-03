@@ -13,8 +13,8 @@
         <div class="label">{{ player.current_trak_title }}</div>
     </div>
     <div class="playPanel" style="width: 220px;">
-        <UiPlayPuseButton :play="player.play_stop"/>
-        <UiVolume :value="player.volume + '%'"/>            
+        <UiPlayPuseButton :play="player.play_stop" :id_player="player.id"/>
+        <UiVolume :value="player.volume" :id_player="player.id"/>            
     </div>
     <div class="ip" style="width: 220px;">IP:<br> {{ player.ip }}</div>
     <div class="updated" style="width: 220px;">Обновлен:<br> {{ player.updated }}</div>
