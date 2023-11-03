@@ -39,7 +39,7 @@
         </div>
 
         <div class="buttons">
-            <div class="canselButton">Отмена</div>
+            <div class="cancelButton" @click="cancel()">Отмена</div>
             <div class="submitButton" @click="submit()">Отправить</div>
             <input type="submit"  value="" style="display: none;" />
         </div>
@@ -60,12 +60,7 @@ export default{
         return { v$: useVuelidate() }
     },
     async created(){
-        let response = await getData('readUser.php')
-        let user = await response.user
-        this.id = user.id
-        this.name = user.name
-        this.email = user.email
-        this.tel_number = user.tel
+        this.update()
     },
     mounted(){
         telMask()
@@ -94,6 +89,9 @@ export default{
         }
     },
     methods:{
+        async cancel(){
+            this.update()
+        },
         async submit(){
             this.v$.$validate()
             let nameCheck =!this.v$.name.$error
@@ -125,6 +123,14 @@ export default{
         isErrSame(errors){
             if(!errors) return false
             return !!errors.find(item => item.$validator == 'sameAs')
+        },
+        async update(){
+            let response = await getData('readUser.php')
+            let user = await response.user
+            this.id = user.id
+            this.name = user.name
+            this.email = user.email
+            this.tel_number = user.tel
         }
     },
 
@@ -199,7 +205,7 @@ form input{
     justify-content: flex-start;
 }
 
-.submitButton, .canselButton{
+.submitButton, .cancelButton{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -216,7 +222,7 @@ form input{
     cursor: pointer;
 }
 
-.canselButton{
+.cancelButton{
     background-color: transparent;
     border: 1px solid #fff;
 }
