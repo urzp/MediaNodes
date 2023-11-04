@@ -46,6 +46,7 @@ if($user['level']=='admin'){
 		$trak =  $result_sql->fetch_assoc();
 		$trak['disLike'] = $ref['disLike'];
 		$trak['idInList'] = $ref['id_in_list'];
+		$trak['id_players_lists'] = $ref['id'];
 		if( $player['current_track'] == $ref['id_in_list'] ) { $trak['active'] = true; }//добовляем метку активного трека
 		$playList[] = $trak;
 	}

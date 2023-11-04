@@ -18,7 +18,6 @@ export default {
        EventBus.on('player:update', this.udatePlayer)
     },
     beforeUnmount(){
-        console.log('out')
         clearInterval(this.loopUpdate)
     },
     props: {

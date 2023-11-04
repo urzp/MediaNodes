@@ -12,11 +12,13 @@
             <img v-if="item.active&&play_stop" class="plaing" src="@/assets/icons/play.gif" alt="">
         </div>
        <div class="length" :style="{width:this.widths.length}" >{{ item.time }}</div>
-       <div class="dislike" :style="{width:this.widths.dislike}" ><img v-if="Number(item.disLike)" src="@/assets/icons/disLike.svg" alt=""></div>
+       <div class="dislike" :style="{width:this.widths.dislike}" @click="editDislike(item.id_players_lists, item.disLike)"><img v-if="Number(item.disLike)" src="@/assets/icons/disLike.svg" alt=""></div>
     </div>
 </template>
 
 <script>
+import { sendCommand } from '@/servis/sendCommand.js'
+import { EventBus } from '@/servis/EventBus'
 export default{
     name: 'UiPlayList',
     data(){
@@ -32,6 +34,12 @@ export default{
     props:{
         playerList: [Array,String],
         play_stop: Boolean,
+    },
+    methods:{
+        async editDislike(id, val){
+            await sendCommand('editDislike.php',{id_list: id, dislike:!Number(val)})
+            EventBus.emit('player:update');
+        }
     }
 }
 </script>
@@ -92,6 +100,10 @@ export default{
     .plaing{
         height: 30px;
         width: 30px;
+    }
+
+    .dislike{
+        cursor: pointer;
     }
 
 </style>
