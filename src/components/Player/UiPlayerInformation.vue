@@ -12,9 +12,9 @@
         <div v-if="player.play_stop" class="playstatus"><img src="@/assets/icons/play.gif" alt=""></div>
         <div class="label">{{ player.current_trak_title }}</div>
     </div>
-    <div class="playPanel" style="width: 220px;">
-        <UiPlayPuseButton :play="player.play_stop" :id_player="player.id"/>
-        <UiVolume :value="player.volume" :id_player="player.id"/>            
+    <div class="playPanel" :class="{'unavailable':!player.online}" style="width: 220px;">
+        <UiPlayPuseButton :play="player.play_stop" :id_player="player.id" :unavailable="!player.online"/>
+        <UiVolume :value="player.volume" :id_player="player.id" :unavailable="!player.online"/>            
     </div>
     <div class="ip" style="width: 220px;">IP:<br> {{ player.ip }}</div>
     <div class="updated" style="width: 220px;">Обновлен:<br> {{ player.updated }}</div>
@@ -152,5 +152,10 @@ export default {
     justify-content: space-around;
     padding: 0 10px;
 }
+
+.unavailable{
+    opacity: 0.3;
+    cursor: wait!important;
+  }
 
 </style>
