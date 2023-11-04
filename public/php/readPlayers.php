@@ -24,8 +24,9 @@ if(!$checkSession){
 	exit(); 
 }
 
-if($user['level']=='admin'){
-    $sql = "SELECT * FROM `players`";
+if($user['level']=='admin'||$user['level']=='user'){
+    if($user['level']=='admin'){ $sql = "SELECT * FROM `players`"; }
+    if($user['level']=='user'){ $sql = "SELECT * FROM `players` WHERE `id_user`='$user[id]' "; }
     $result_sql = $mysql -> query($sql);
     while ($player = $result_sql->fetch_assoc()) {
         $current_trak = $player['current_track'];

@@ -16,7 +16,7 @@ $play_pause = $post -> rq_data  ->  play_pause;
 
 if($play_pause=='true'){$play_pause = '1';}else{$play_pause = 0;}
 
-$sql = "SELECT `level` FROM `users` WHERE `id` = '$user_id' && `session`='$session'";
+$sql = "SELECT `id`,`level` FROM `users` WHERE `id` = '$user_id' && `session`='$session'";
 $user = $mysql -> query($sql);
 $user = $user -> fetch_assoc();
 
@@ -29,9 +29,9 @@ if(!isset($user)){
 	exit(); 
 }
 
-if($user['level']=='admin'){
-    
-    $sql = "UPDATE `players` SET `play_stop` = '$play_pause' WHERE `id`='$id_player'";
+if($user['level']=='admin'||$user['level']=='user'){
+    if($user['level']=='admin'){ $sql = "UPDATE `players` SET `play_stop` = '$play_pause' WHERE `id`='$id_player'"; }
+    if($user['level']=='user'){ $sql = "UPDATE `players` SET `play_stop` = '$play_pause' WHERE `id`='$id_player' AND `id_user`='$user[id]'"; }
     $mysql -> query($sql);
     $result = (object) [
         'success' => true,

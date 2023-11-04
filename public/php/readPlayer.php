@@ -25,13 +25,26 @@ if(!$checkSession){
 	exit(); 
 }
 
-if($user['level']=='admin'){
-    $sql = "SELECT * FROM `players` WHERE `id`= '$player_id'";
+if($user['level']=='admin'||$user['level']=='user'){
+    if($user['level']=='admin'){ $sql = "SELECT * FROM `players` WHERE `id`= '$player_id'"; }
+	if($user['level']=='user'){ $sql = "SELECT * FROM `players` WHERE `id`= '$player_id' AND `id_user`='$user[id]'"; }
     $result_sql = $mysql -> query($sql);
-    $player = $result_sql->fetch_assoc();
+	$player = $result_sql->fetch_assoc();
+
+	if(!isset($player)){
+		$result = (object) [
+			'success' => false,
+			'error' => 'null',
+		];
+		echo json_encode($result);
+		exit(); 		
+	}
+
+    
 
 	$sql = "SELECT * FROM `players_lists` WHERE `id_player`= '$player_id'";
 	$result_sql = $mysql -> query($sql);
+
 	while ($row = $result_sql->fetch_assoc()) {
 		$playListRef[] = $row;
 	}
