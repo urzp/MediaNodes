@@ -1,8 +1,9 @@
 <template>
-      <div class="title">Устройства</div>
-      <div v-if="false" class="servis-button" @click="runScript('addRandomeTrakToPlayer.php')">addRandomeTrakToPlayer.php</div>
-
-    <div class="table-players">
+    <div class="title">Устройства</div>
+    <div v-if="false" class="servis-button" @click="runScript('addRandomeTrakToPlayer.php')">addRandomeTrakToPlayer.php</div>
+    <UiLoader v-if="lading"/>
+    <UiNotFound v-if="notFound"/>    
+    <div v-if="!lading&&!notFound" class="table-players">
       <div class="header">
           <div v-for="item, i in header" :key="item.key" :style="{'width': item.width}">
             {{ item.name }}
@@ -17,10 +18,10 @@
         <div :style="{'width': header[4].width}" @click="goToPlayer(item.id)">{{ item.ip }}</div>
         <div :style="{'width': header[5].width}" @click="goToPlayer(item.id)" :class="{'online':Number(item.online)}">{{ Number(item.online)?'ONLINE':item.last_online.toLocaleString() }}</div>
         <div :style="{'width': header[6].width}" @click="goToPlayer(item.id)" >{{ item.device_updated.toLocaleString() }}</div>
-        <div :style="{'width': header[7].width}"  >
-          <div class="panel">
-            <UiPlayPuseButton :play="!!Number(item.play_stop)" :id_player="item.id"/>
-            <UiVolume :value="item.volume" :id_player="item.id"/>
+        <div :style="{'width': header[7].width}" :class="{'unavailable':!Number(item.online)}" >
+          <div class="panel" >
+            <UiPlayPuseButton :unavailable="!Number(item.online)" :play="!!Number(item.play_stop)" :id_player="item.id"/>
+            <UiVolume :unavailable="!Number(item.online)" :value="item.volume" :id_player="item.id"/>
           </div>
         </div>
         <div :style="{'width': header[8].width}" >
@@ -35,6 +36,8 @@ import { getData } from '@/servis/getData.js'
 import UiPlayPuseButton from '@/components/Player/UiPlayPuseButton.vue'
 import UiVolume from '@/components/Player/UiVolume.vue'
 import { EventBus } from '@/servis/EventBus'
+import UiLoader from '@/components/UiLoader.vue'
+import UiNotFound from '@/components/UiNotFound.vue'
 
 export default {
   name: 'UiTablePlayers',
@@ -44,6 +47,8 @@ export default {
   },
   data(){
     return{
+      lading:true,
+      notFound:false,
       header:[
         {key:1,name:'Плеер', width: '8.9%'},
         {key:2,name:'Город', width: '10%'},
@@ -61,6 +66,8 @@ export default {
   components: {
     UiPlayPuseButton,
     UiVolume,
+    UiLoader,
+    UiNotFound
   },
   methods:{
     goToPlayer(id){
@@ -71,8 +78,15 @@ export default {
     },
     async updateList(){
       let result = await getData('readPlayers.php')
+      if(!this.checkResult(result)) return false
       this.players = await result.players 
-    }
+    },
+    checkResult(result){
+            this.lading = false
+            if (result.success) return true
+            this.notFound = true
+            return false
+    },
   }
 }
 </script>
@@ -164,5 +178,10 @@ export default {
     border: 1px solid #fff;
     border-radius: 10px;
     cursor: pointer;
+  }
+
+  .unavailable{
+    opacity: 0.3;
+    cursor: wait;
   }
 </style>

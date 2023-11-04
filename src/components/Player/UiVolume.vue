@@ -4,7 +4,7 @@
         <div v-if="false"  class="background"></div>
         <div v-if="false"  class="active"></div>
         <div v-if="false"  class="tuning"></div>
-        <input type="range" :value="value" @change="event => send(event.target.value)">
+        <input :disabled="unavailable" :class="{'unavailable':unavailable}" type="range" :value="value" @change="event => send(event.target.value)">
     </div>
 </template>
 
@@ -17,6 +17,7 @@ export default {
     props:{
         value:String,
         id_player: String,
+        unavailable: Boolean,
     },
     methods:{
       async send(val){
@@ -24,6 +25,7 @@ export default {
         EventBus.emit('player:update');
       }
     }
+
 }
 </script>
 
@@ -63,6 +65,7 @@ export default {
         background-color: #F93492;
         border-radius: 3px;       
     }
+
 
     input{
         width: 100%;
@@ -110,5 +113,11 @@ input[type="range"]::-ms-fill-lower {
 }
 input[type="range"]::-ms-fill-upper {  
   background-color: #9a905d;
+}
+.unavailable::-webkit-slider-thumb{
+  cursor: wait!important;
+}
+.unavailable::-webkit-slider-runnable-track {
+  cursor: wait!important;
 }
 </style>
