@@ -16,18 +16,7 @@ $play_pause = $post -> rq_data  ->  play_pause;
 
 if($play_pause=='true'){$play_pause = '1';}else{$play_pause = 0;}
 
-$sql = "SELECT `id`,`level` FROM `users` WHERE `id` = '$user_id' && `session`='$session'";
-$user = $mysql -> query($sql);
-$user = $user -> fetch_assoc();
-
-if(!isset($user)){ 
-	$result = (object) [
-		'success' => false,
-		'error' => 'session',
-	];
-	echo json_encode($result);
-	exit(); 
-}
+include 'checkAccess.php';
 
 if($user['level']=='admin'||$user['level']=='user'){
     if($user['level']=='admin'){ $sql = "UPDATE `players` SET `play_stop` = '$play_pause' WHERE `id`='$id_player'"; }

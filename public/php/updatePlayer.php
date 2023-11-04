@@ -13,21 +13,12 @@ $address = $_POST['address'];
 $ip = $_POST['ip'];
 
 
+include 'checkAccess.php';
 
-$sql = "SELECT `level` FROM `users` WHERE `id` = '$user_id' && `session`='$session'";
-$userLevel = $mysql -> query($sql);
-$userLevel = $userLevel -> fetch_assoc()['level'];
 
-if($userLevel != 'admin') { 
-	$result = (object) [
-		'success' => false,
-		'error' => 'access',
-	];
-	echo json_encode($result);
-	exit(); 
-}
+if($user['level'] != 'admin'){ $sql = "UPDATE `players` SET `name` = '$name', `city` = '$city', `address` = '$address', `ip` = '$ip'  WHERE `id` = '$player_id'"; }
+if($user['level'] != 'user'){ $sql = "UPDATE `players` SET `name` = '$name', `city` = '$city', `address` = '$address', `ip` = '$ip'  WHERE `id` = '$player_id'  AND `id_user`='$user[id]' "; }
 
-$sql = "UPDATE `players` SET `name` = '$name', `city` = '$city', `address` = '$address', `ip` = '$ip'  WHERE `id` = '$player_id'";
 $mysql -> query($sql);
 $mysql->close();
 $result = (object) [

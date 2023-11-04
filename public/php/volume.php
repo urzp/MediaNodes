@@ -16,28 +16,17 @@ $volume = $post -> rq_data  ->  volume;
 
 if($play_pause=='true'){$play_pause = '1';}else{$play_pause = 0;}
 
-$sql = "SELECT `id`, `level` FROM `users` WHERE `id` = '$user_id' && `session`='$session'";
-$user = $mysql -> query($sql);
-$user = $user -> fetch_assoc();
+include 'checkAccess.php';
 
-if(!isset($user)){ 
-	$result = (object) [
-		'success' => false,
-		'error' => 'session',
-	];
-	echo json_encode($result);
-	exit(); 
-}
 
-if($user['level']=='admin'||$user['level']=='user'){
-    if($user['level']=='admin'){$sql = "UPDATE `players` SET `volume` = '$volume' WHERE `id`='$id_player'";}
-    if($user['level']=='user'){$sql = "UPDATE `players` SET `volume` = '$volume' WHERE `id`='$id_player' AND `id_user`='$user[id]'";}
-    $mysql -> query($sql);
-    $result = (object) [
-        'success' => true,
-    ];
-    echo json_encode($result);
-}
+if($user['level']=='admin'){$sql = "UPDATE `players` SET `volume` = '$volume' WHERE `id`='$id_player'";}
+if($user['level']=='user'){$sql = "UPDATE `players` SET `volume` = '$volume' WHERE `id`='$id_player' AND `id_user`='$user[id]'";}
+$mysql -> query($sql);
+$result = (object) [
+    'success' => true,
+];
+echo json_encode($result);
+
 
 
 

@@ -11,22 +11,9 @@ $city = $_POST['city'];
 $address = $_POST['address'];
 $ip = $_POST['ip'];
 
+include 'checkAccess.php';
 
-
-$sql = "SELECT `level` FROM `users` WHERE `id` = '$user_id' && `session`='$session'";
-$userLevel = $mysql -> query($sql);
-$userLevel = $userLevel -> fetch_assoc()['level'];
-
-if($userLevel != 'admin') { 
-	$result = (object) [
-		'success' => false,
-		'error' => 'access',
-	];
-	echo json_encode($result);
-	exit(); 
-}
-
-$sql = "INSERT INTO `players` ( `name`, `city`, `address`, `ip`  ) VALUES( '$name', '$city', '$address', '$ip')";
+$sql = "INSERT INTO `players` ( `id_user`, `name`, `city`, `address`, `ip`  ) VALUES( '$user[id]', '$name', '$city', '$address', '$ip')";
 $mysql -> query($sql);
 $mysql->close();
 $result = (object) [
