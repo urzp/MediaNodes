@@ -10,6 +10,7 @@ $post = json_decode($post);
 $user_id = $post-> user_id;
 $session = $post -> session;
 $player_id = $post -> rq_data -> player_id;
+$full_load = $post -> rq_data ->  full_load;
 
 include 'checkAccess.php';
 
@@ -54,11 +55,12 @@ foreach ($playListRef as $ref) {
 $player['current_trak_title'] = $playList[ (int)$player['current_track'] - 1 ]['title'];
 
 
-
+if(!$full_load){$playList='';}
 
 $result = (object) [
     'success' => true,
     'player' => $player,
+	'playListRef' => $playListRef,
 	'playList' => $playList,
 ];
 echo json_encode($result);

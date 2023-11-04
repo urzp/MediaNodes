@@ -34,6 +34,7 @@ export default {
         return{
             lading:true,
             notFound:false,
+            playersListsTable:'',
             player:{
                 online:false,
                 play_stop: false,
@@ -44,7 +45,7 @@ export default {
     },
     methods:{
         async udatePlayer(){
-            let result = await getData('readPlayer.php',{'player_id':this.playerId})
+            let result = await getData('readPlayer.php',{'player_id':this.playerId, full_load: false})
             if(!this.checkResult(result)) return false
             let player = await result.player     
             player.online = !!Number(player.online)
@@ -52,12 +53,24 @@ export default {
             player.dislike = !!Number(player.dislike)
             player.last_online = !!player.last_online?player.last_online.toLocaleString():'-'
             this.player = player
+            if(!await this.isChangeList(this.playersListsTable, result.playListRef) ) return true
+            result = await getData('readPlayer.php',{'player_id':this.playerId, full_load: true})
+            this.playersListsTable = result.playListRef
             this.playerList = await result.playList
         },
         checkResult(result){
             this.lading = false
             if (result.success) return true
             this.notFound = true
+            return false
+        },
+        async isChangeList(old_val, new_val){
+            if(!old_val.length||!new_val.length) return true
+            if(old_val.length != new_val.length) return true
+            for(let i=0; i < old_val.length - 1; i++ ){
+                if(old_val[i].id_track != new_val[i].id_track) return true
+                if(old_val[i].disLike != new_val[i].disLike) return true
+            }
             return false
         }
     },

@@ -20,24 +20,16 @@ $sql = "SELECT `level` FROM `users` WHERE `id` = '$user_id' && `session`='$sessi
 $user = $mysql -> query($sql);
 $user = $user -> fetch_assoc();
 
-if(!isset($user)){ 
-	$result = (object) [
-		'success' => false,
-		'error' => 'session',
-	];
-	echo json_encode($result);
-	exit(); 
-}
 
-if($user['level']=='admin'){
-    
-    $sql = "UPDATE `players_lists` SET `disLike` = '$dislike' WHERE `id`='$id_list'";
-    $mysql -> query($sql);
-    $result = (object) [
-        'success' => true,
-    ];
-    echo json_encode($result);
-}
+include 'checkAccess.php';
+
+$sql = "UPDATE `players_lists` SET `disLike` = '$dislike' WHERE `id`='$id_list'";
+$mysql -> query($sql);
+$result = (object) [
+    'success' => true,
+];
+echo json_encode($result);
+
 
 
 
