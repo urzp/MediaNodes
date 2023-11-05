@@ -13,7 +13,7 @@ $ip = $_POST['ip'];
 
 include 'checkAccess.php';
 
-$sql = "INSERT INTO `players` ( `id_user`, `name`, `city`, `address`, `ip`  ) VALUES( '$user[id]', '$name', '$city', '$address', '$ip')";
+$sql = "INSERT INTO `players` ( `id_user`, `name`, `city`, `address`, `ip`, `level`  ) VALUES( '$user[id]', '$name', '$city', '$address', '$ip', 'admin')";
 $mysql -> query($sql);
 $mysql->close();
 $result = (object) [
