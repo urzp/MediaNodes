@@ -10,6 +10,7 @@ import PagePlayer from '../views/PagePlayer'
 import PageEditPlayer from '../views/PageEditPlayer'
 import PageNewPlayer from '../views/PageNewPlayer.vue'
 import PageUser from '../views/PageUser'
+import PageUsers from '../views/PageUsers'
 import { isLogget } from '../servis/islogget.js';
 
 const routes = [
@@ -43,6 +44,15 @@ const routes = [
       requireAuth: true,
     },
     component: PageUser,
+  },
+  {
+    path: '/users',
+    name: 'users',
+    meta: {
+      requireAuth: true,
+      requireAdmin: true,
+    },
+    component: PageUsers,
   },
   {
     path: '/support',

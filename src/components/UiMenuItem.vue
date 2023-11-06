@@ -21,13 +21,13 @@ export default {
 <style scoped>
 .menu-item{
     height: 45px;
-    width: 100%;
     display: flex;
     flex-direction: row;
     align-items: center;
 }
 .icon{
     margin-left: 40px;
+    width: 30px;
     cursor: pointer;
     display: flex;
     align-items: center;

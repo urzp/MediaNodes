@@ -4,7 +4,7 @@
     <UiNotFound v-if="notFound"/>
     <template v-if='!lading&&!notFound'>
         <UiPlayerInf :player="player"/>
-        <UiPlayList :playerList="playerList" :play_stop="player.play_stop"/>
+        <UiPlayList v-if="!!this.playerList" :playerList="playerList" :play_stop="player.play_stop"/>
     </template>
 </template>
 
@@ -65,6 +65,7 @@ export default {
             return false
         },
         async isChangeList(old_val, new_val){
+            if(!old_val||!new_val) return true
             if(!old_val.length||!new_val.length) return true
             if(old_val.length != new_val.length) return true
             for(let i=0; i < old_val.length - 1; i++ ){

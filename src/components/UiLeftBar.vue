@@ -5,6 +5,7 @@
             <UiMenuItem text="Главная" @click="$router.push('/')" :selected="selectedItem.home"><img src="../assets/icons/home.svg" alt="home"></UiMenuItem>
             <UiMenuItem text="Профиль" :selected="selectedItem.user" @click="$router.push('/user')"><img src="../assets/icons/user.svg" alt="user"></UiMenuItem>
             <UiMenuItem text="Плееры" :selected="selectedItem.players" @click="$router.push('/players')"><img src="../assets/icons/pleer.svg" alt="user"></UiMenuItem>
+            <UiMenuItem text="Пользователи" :selected="selectedItem.users" @click="$router.push('/users')"><img src="../assets/icons/group.svg" alt="users" v-if="user.level=='admin'"></UiMenuItem>
             <UiMenuItem text="Техподержка" @click="$router.push('/support-user')" :selected="selectedItem.support"><img src="../assets/icons/support.svg" alt="home"></UiMenuItem>
             <UiMenuItem text="Выйти" @click="logout()" :selected="selectedItem.out"><img src="../assets/icons/logout.svg" alt="home"></UiMenuItem>
         </div>
@@ -16,6 +17,11 @@ import UiMenuItem from '@/components/UiMenuItem.vue'
 
 export default {
   name: 'UiLeftBar',
+  data(){
+    return{
+        user:JSON.parse(sessionStorage.getItem('user')),
+    }
+  },
   components: {
     UiMenuItem,
   },

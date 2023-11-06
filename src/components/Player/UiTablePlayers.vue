@@ -1,6 +1,6 @@
 <template>
     <div class="title">Устройства</div>
-    <div v-if="true" class="servis-button" @click="runScript('updatePlayersDislikes.php')">updatePlayersDislikes.php</div>
+    <div v-if="false" class="servis-button" @click="runScript('updatePlayersDislikes.php')">updatePlayersDislikes.php</div>
     <UiLoader v-if="lading"/>
     <UiNotFound v-if="notFound"/>    
     <div v-if="!lading&&!notFound" class="table-players">
