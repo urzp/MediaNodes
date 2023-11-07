@@ -108,7 +108,8 @@ const routes = [
       requireAuth: true,
     },
     component: PageEditPlayer,
-  }
+  },
+  
 
   
   
