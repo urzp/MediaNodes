@@ -2,7 +2,9 @@
     <div class="menu-item"  :class="{'selected':selected}">
         <div class="icon"><slot/></div>
         <div class="name-menu-item">{{ text }}</div>
-        <div v-if="selected" class="seleted-indicator-wrap"><div class="seleted-indicator"></div></div>
+        <div v-if="selected" class="seleted-indicator-wrap">
+            <div class="seleted-indicator"></div>
+        </div>
     </div>
 </template>
 
@@ -31,6 +33,7 @@ export default {
     cursor: pointer;
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 .name-menu-item{
     margin-left: 10px;
@@ -42,13 +45,13 @@ export default {
 
 .seleted-indicator-wrap{
     height: 100%;
-    width: 100%;
-    display: flex;
-    flex-direction: row-reverse;
+    
 }
 .seleted-indicator{
     width: 6px;
-    height: 100%;
+    position: absolute;
+    height: 45px;
+    right: 0;
     background-color: #F93492;
     border-top-left-radius: 3px;
     border-bottom-left-radius: 3px;

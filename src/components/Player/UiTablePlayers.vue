@@ -14,8 +14,8 @@
         <div :style="{'width': header[0].width}" @click="goToPlayer(item.id)">{{ item.name }}</div>
         <div :style="{'width': header[1].width}" @click="goToPlayer(item.id)">{{ item.city }}</div>
         <div :style="{'width': header[2].width}" @click="goToPlayer(item.id)">{{ item.address }}</div>
-        <div :style="{'width': header[3].width}" @click="goToPlayer(item.id)">{{ item.current_trak_title/*  */ }}</div>
-        <div :style="{'width': header[4].width}" @click="goToPlayer(item.id)">{{ item.ip }}</div>
+        <div :style="{'width': header[3].width}" @click="goToPlayer(item.id)" >{{ item.current_trak_title/*  */ }}</div>
+        <div :style="{'width': header[4].width}" @click="goToPlayer(item.id)" >{{ item.ip }}</div>
         <div :style="{'width': header[5].width}" @click="goToPlayer(item.id)" :class="{'online':Number(item.online)}">{{ Number(item.online)?'ONLINE':item.last_online.toLocaleString() }}</div>
         <div :style="{'width': header[6].width}" @click="goToPlayer(item.id)" >{{ item.device_updated.toLocaleString() }}</div>
         <div :style="{'width': header[7].width}" :class="{'unavailable':!Number(item.online)}" >
@@ -44,6 +44,8 @@ export default {
   async mounted(){
     this.updateList()
     EventBus.on('player:update', this.updateList)
+    this.onResize();
+    window.addEventListener('resize', this.onResize);
   },
   data(){
     return{
@@ -52,15 +54,16 @@ export default {
       header:[
         {key:1,name:'Плеер', width: '8.9%'},
         {key:2,name:'Город', width: '10%'},
-        {key:3,name:'Адрес локации', width: '16.6%'},
-        {key:4,name:'Проигрываемый трек', width: '20%'},
+        {key:3,name:'Адрес локации', width: '12%'},
+        {key:4,name:'Проигрываемый трек', width: '24.6%'},
         {key:5,name:'IP Адрес', width: '8.9%'},
         {key:6,name:'Был в сети', width: '7.3%'},
         {key:7,name:'Обновлен', width: '7.3%'},
         {key:8,name:'Элементы управления', width: '13.6%'},
         {key:9,name:'Дизлайки', width: '5.5%'},
       ],
-      players:''
+      players:'',
+      width: 0,
     }
   },
   components: {
@@ -87,7 +90,10 @@ export default {
             this.notFound = true
             return false
     },
-  }
+    onResize(){
+      this.width = window.innerWidth;
+    }
+  },
 }
 </script>
 
@@ -183,5 +189,56 @@ export default {
   .unavailable{
     opacity: 0.3;
     cursor: wait;
+  }
+
+  @media (max-width: 1839.98px) { 
+    .header :nth-child(5){
+      display: none;
+    }
+    .row :nth-child(5){
+      display: none;
+    }
+  }
+
+  @media (max-width: 1699.98px) { 
+    .header :nth-child(4){
+      display: none;
+    }
+    .row :nth-child(4){
+      display: none;
+    }
+
+    .header > :nth-child(1), .row > :nth-child(1){
+      min-width: 130px!important;
+    }
+
+    .header :nth-child(2), .row > :nth-child(2){
+      width: 20%!important;
+    }
+
+    .header :nth-child(3), .row > :nth-child(3){
+      width: 25%!important;
+    }
+    .header :nth-child(6), .row > :nth-child(6){
+      min-width: 90px!important;
+    }
+    .header :nth-child(7), .row > :nth-child(7){
+      min-width: 90px!important;
+    }
+    .header :nth-child(8), .row > :nth-child(8){
+      min-width: 180px!important;
+    }
+  }
+
+  @media (max-width: 1499.98px) { 
+    .header :nth-child(3){
+      display: none;
+    }
+    .row > :nth-child(3){
+      display: none;
+    }  
+    .header :nth-child(2), .row > :nth-child(2){
+      width: 50%!important;
+    }
   }
 </style>

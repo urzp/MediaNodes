@@ -45,26 +45,30 @@ name: 'UiHeader',
 
 <style scoped>
     header{
+        margin-left: 305px;
         position: fixed;
-        width: 100%;
+        width: calc(100% - 305px);
         height: 80px;
         display: flex;
+        flex-wrap: wrap;
         justify-content: space-between;
         align-items: center;
         background-color: #1F1F1F;
         z-index: 5;
     }
     .search{
-        margin-left: 300px;
+        width: 65%;
+        max-width: 750px;
+        display: flex;
+        align-items: center;   
     }
-
     .search img{
         position: relative;
         left: 45px;
-        top: 8px;
+        top: 2px;
     }
     input{
-        width: 625px;
+        width: 100%;
         height: 45px;
         border-radius: 25px;
         background-color: transparent;
@@ -87,6 +91,7 @@ name: 'UiHeader',
         align-items: center;
         justify-content: flex-end;
         margin-right: 40px;
+        margin-left: 40px;
     }
 
     .avatar img{

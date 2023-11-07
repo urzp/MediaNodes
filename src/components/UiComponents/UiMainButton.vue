@@ -19,6 +19,7 @@ export default {
         width: 350px;
         height: 210px;
         margin-right: 20px;
+        margin-bottom: 20px;
         display: flex;
         flex-direction: column;
         align-items: center;
