@@ -6,6 +6,7 @@
     <div class="buttons">
       <UiMainButton @click="$router.push('/players')"><img src="@/assets/icons/bigButtons/player.svg" alt=""><div class="name">Плееры</div></UiMainButton>
       <UiMainButton @click="$router.push('/user')"><img src="@/assets/icons/bigButtons/user.svg" alt=""><div class="name">Профиль</div></UiMainButton>
+      <UiMainButton @click="$router.push('/users')"  v-if="user.level=='admin'" ><img src="@/assets/icons/bigButtons/users.svg" alt=""><div class="name">Пользователи</div></UiMainButton>
       <UiMainButton @click="$router.push('/support-user')"><img src="@/assets/icons/bigButtons/support.svg" alt=""><div class="name">Техподдержка</div></UiMainButton>
     </div>
   </div>
@@ -19,6 +20,11 @@ import UiMainButton from '@/components/UiComponents/UiMainButton.vue'
 
 export default {
   name: 'HomeView',
+  data(){
+    return{
+        user:JSON.parse(sessionStorage.getItem('user')),
+    }
+  },
   components: {
     UiLeftBar,
     UiHeader,

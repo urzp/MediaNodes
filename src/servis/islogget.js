@@ -23,6 +23,11 @@ export  async function isLogget(){
     return result
 }
 
+export  async function isAdmin(){
+    let user = JSON.parse(sessionStorage.getItem('user'))
+    if(!user) return false
+    return user.level == 'admin'
+}
 
 function notValid(value){
     return !value||value == 'undefined'

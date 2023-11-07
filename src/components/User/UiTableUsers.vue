@@ -10,11 +10,11 @@
       </div>
       
       <div v-for="item in users" :key="item.id" class="row" >
-        <div :style="{'width': header[0].width}" @click="goToPlayer(item.id)"><div class="text">{{ item.name }}</div></div>
-        <div :style="{'width': header[1].width}" @click="goToPlayer(item.id)"><div class="text">{{ item.email }}</div></div>
-        <div :style="{'width': header[2].width}" @click="goToPlayer(item.id)"><div class="text">{{ item.tel}}</div></div>
-        <div :style="{'width': header[3].width}" @click="goToPlayer(item.id)"><div class="text">{{ item.level }}</div></div>
-        <div :style="{'width': header[4].width}" @click="goToPlayer(item.id)"><div class="text">{{ 0 }}</div></div>
+        <div :style="{'width': header[0].width}" @click="goToUser(item.id)"><div class="text">{{ item.name }}</div></div>
+        <div :style="{'width': header[1].width}" @click="goToUser(item.id)"><div class="text">{{ item.email }}</div></div>
+        <div :style="{'width': header[2].width}" @click="goToUser(item.id)"><div class="text">{{ item.tel}}</div></div>
+        <div :style="{'width': header[3].width}" @click="goToUser(item.id)"><div class="text">{{ item.level }}</div></div>
+        <div :style="{'width': header[4].width}" @click="goToUser(item.id)"><div class="text">{{ 0 }}</div></div>
       </div>
       
     </div>
@@ -52,8 +52,8 @@ export default {
     UiNotFound
   },
   methods:{
-    goToPlayer(id){
-      this.$router.push(`/user/${id}`)
+    goToUser(id){
+      this.$router.push(`/users/${id}`)
     },
     runScript(name){
       getData(name)
@@ -135,6 +135,10 @@ export default {
   .row :nth-child(1), .row :nth-child(2), .row {
     justify-content: flex-start;
     text-align: left;
+  }
+
+  .row :nth-child(2){
+    text-transform: lowercase;
   }
 
   .row :nth-child(1) .text, .row :nth-child(2) .text{

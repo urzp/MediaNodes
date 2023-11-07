@@ -1,5 +1,5 @@
 <template>
-    <div class="title">Устройства</div>
+    <div class="title">Устройства пользователя</div>
     <div v-if="false" class="servis-button" @click="runScript('sendEmail.php')">sendEmail.php</div>
     <UiLoader v-if="lading"/>
     <UiNotFound v-if="notFound"/>    
@@ -14,7 +14,7 @@
         <div :style="{'width': header[0].width}" @click="goToPlayer(item.id)">{{ item.name }}</div>
         <div :style="{'width': header[1].width}" @click="goToPlayer(item.id)">{{ item.city }}</div>
         <div :style="{'width': header[2].width}" @click="goToPlayer(item.id)">{{ item.address }}</div>
-        <div :style="{'width': header[3].width}" @click="goToPlayer(item.id)">{{ item.current_trak_title/*  */ }}</div>
+        <div :style="{'width': header[3].width}" @click="goToPlayer(item.id)">{{ item.current_trak_title }}</div>
         <div :style="{'width': header[4].width}" @click="goToPlayer(item.id)">{{ item.ip }}</div>
         <div :style="{'width': header[5].width}" @click="goToPlayer(item.id)" :class="{'online':Number(item.online)}">{{ Number(item.online)?'ONLINE':item.last_online.toLocaleString() }}</div>
         <div :style="{'width': header[6].width}" @click="goToPlayer(item.id)" >{{ item.device_updated.toLocaleString() }}</div>
@@ -40,7 +40,7 @@ import UiLoader from '@/components/UiLoader.vue'
 import UiNotFound from '@/components/UiNotFound.vue'
 
 export default {
-  name: 'UiTablePlayers',
+  name: 'UiUserPlayersList',
   async mounted(){
     this.updateList()
     EventBus.on('player:update', this.updateList)
@@ -63,6 +63,9 @@ export default {
       players:''
     }
   },
+  props:{
+    user: Object,
+  },
   components: {
     UiPlayPuseButton,
     UiVolume,
@@ -77,7 +80,7 @@ export default {
       getData(name)
     },
     async updateList(){
-      let result = await getData('readPlayers.php')
+      let result = await getData('readUserPlayers.php', {user_id:this.user.id, user_level:this.user.level })
       if(!this.checkResult(result)) return false
       this.players = await result.players 
     },

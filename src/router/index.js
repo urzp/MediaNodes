@@ -11,7 +11,8 @@ import PageEditPlayer from '../views/PageEditPlayer'
 import PageNewPlayer from '../views/PageNewPlayer.vue'
 import PageUser from '../views/PageUser'
 import PageUsers from '../views/PageUsers'
-import { isLogget } from '../servis/islogget.js';
+import PageUserPlayers from '../views/PageUserPlayers.vue'
+import { isLogget, isAdmin } from '../servis/islogget.js';
 
 const routes = [
   {
@@ -84,6 +85,14 @@ const routes = [
     component: PagePlayer,
   },
   {
+    path: '/users/:userId([0-9]+)',
+    name: 'userPlayers',
+    meta: {
+      requireAuth: true,
+    },
+    component: PageUserPlayers,
+  },
+  {
     path: '/players/new',
     name: 'addPlayer',
     meta: {
@@ -112,8 +121,10 @@ const router = createRouter({
 
 router.beforeEach(async (to, from) => {
   let logget = await isLogget();
+  let admin = await isAdmin();
   if(!to.meta.requireAuth&&logget) return "/"
   if(to.meta.requireAuth&&!logget) return {path: '/login'}
+  if(to.meta.requireAdmin&&!admin) return "/"
   return true
 })
 
