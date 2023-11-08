@@ -89,6 +89,12 @@ export default{
 
     .row .name{
         justify-content: space-between;
+        text-align: left;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .header .name{
         padding-left: 20px;
         padding-right: 20px;
     }

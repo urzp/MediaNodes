@@ -92,6 +92,8 @@ export default {
     font-family: 'Intro-Bold-Alt';
     font-size: 20px;      
     color: #fff;
+    margin-left: 20px;
+    margin-right: 160px;
 }
 
 .inf{
@@ -114,18 +116,17 @@ export default {
     font-size: 12px;  
     color: #fff;
 }
-
 .inf > .online{
     background-color: #449C4A;
-    }
-    .inf  .active-track{
+}
+.inf  .active-track{
     display: flex;
     justify-content: flex-start;
     font-size: 14px; 
     color: #D2D2D2;
-    }
-
-    .playstatus{
+    
+}
+.playstatus{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -134,28 +135,34 @@ export default {
     background-color: #F09EC8;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
-    }
+}
 
-    .playstatus img{
+.playstatus img{
     width: 32px;
     height: 32px;
-    }
+}
 
-    .inf .label{
+.inf .label{
     margin-left: 30px;
-    }
+}
 
-    .inf .playPanel{
+.inf .playPanel{
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-around;
     padding: 0 10px;
+    min-width: 160px;
 }
-
+.ip{
+    min-width: 130px;
+}
+.updated{
+    min-width: 130px;
+}
 .unavailable{
     opacity: 0.3;
     cursor: wait!important;
-  }
+}
 
 </style>

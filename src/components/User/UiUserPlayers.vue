@@ -4,7 +4,8 @@
     <UiNotFound v-if="notFound"/>
     <template v-if='!lading&&!notFound'>
         <UiUserInf :user="user"/>
-        <UiUserPlayersList :user="user"/>
+        <div class="title">Устройства пользователя</div>
+        <UiTablePlayers users :user="user"/>
     </template>
 </template>
 
@@ -15,7 +16,7 @@ import UiButtonBack from '@/components/UiComponents/UiButtonBack.vue';
 import UiLoader from '@/components/UiLoader.vue'
 import UiNotFound from '@/components/UiNotFound.vue'
 import UiUserInf from '@/components/User/UiPUserInformation.vue'
-import UiUserPlayersList from '@/components/User/UiUserPlayersList.vue'
+import UiTablePlayers from '@/components/Player/UiTablePlayers.vue'
 
 
 export default {
@@ -68,9 +69,21 @@ export default {
         UiLoader,
         UiNotFound,
         UiUserInf,
-        UiUserPlayersList,
+        UiTablePlayers,
         UiButtonBack,
     }
 }
 </script>
+
+<style>
+
+
+.title{
+    font-family: 'Intro-Bold-Alt';
+    font-size: 20px;
+    color: #fff;
+    margin-top: 20px;
+  }
+
+</style>
 

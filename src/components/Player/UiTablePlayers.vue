@@ -1,32 +1,30 @@
 <template>
-    <div class="title">Устройства</div>
-    <div v-if="false" class="servis-button" @click="runScript('sendEmail.php')">sendEmail.php</div>
     <UiLoader v-if="lading"/>
     <UiNotFound v-if="notFound"/>    
     <div v-if="!lading&&!notFound" class="table-players">
       <div class="header">
-          <div v-for="item, i in header" :key="item.key" :style="{'width': item.width}">
+          <div v-for="item, i in header" :key="item.key" :class="header[i].class">
             {{ item.name }}
-            <div v-if="i==0" class="add_player" @click="$router.push({ name: 'addPlayer' })"><img src="@/assets/icons/plus.svg" alt=""></div>
+            <div v-if="i==0&&!users" class="add_player" @click="$router.push({ name: 'addPlayer' })"><img src="@/assets/icons/plus.svg" alt=""></div>
           </div>
       </div>
       <div v-for="item in players" :key="item.id" class="row" >
-        <div :style="{'width': header[0].width}" @click="goToPlayer(item.id)">{{ item.name }}</div>
-        <div :style="{'width': header[1].width}" @click="goToPlayer(item.id)">{{ item.city }}</div>
-        <div :style="{'width': header[2].width}" @click="goToPlayer(item.id)">{{ item.address }}</div>
-        <div :style="{'width': header[3].width}" @click="goToPlayer(item.id)" >{{ item.current_trak_title/*  */ }}</div>
-        <div :style="{'width': header[4].width}" @click="goToPlayer(item.id)" >{{ item.ip }}</div>
-        <div :style="{'width': header[5].width}" @click="goToPlayer(item.id)" :class="{'online':Number(item.online)}">{{ Number(item.online)?'ONLINE':item.last_online.toLocaleString() }}</div>
-        <div :style="{'width': header[6].width}" @click="goToPlayer(item.id)" >{{ item.device_updated.toLocaleString() }}</div>
-        <div :style="{'width': header[7].width}" :class="{'unavailable':!Number(item.online)}" >
+        <div :class="header[0].class" @click="goToPlayer(item.id)"><div class="wrap">{{ item.name }}</div></div>
+        <div :class="header[1].class" @click="goToPlayer(item.id)"><div class="wrap">{{ item.city }}</div></div>
+        <div :class="header[2].class" @click="goToPlayer(item.id)"><div class="wrap">{{ item.address }}</div></div>
+        <div :class="header[3].class" @click="goToPlayer(item.id)"><div class="wrap">{{ item.current_trak_title }}</div></div>
+        <div :class="header[4].class" @click="goToPlayer(item.id)"><div class="wrap">{{ item.ip }}</div></div>
+        <div :class="[header[5].class, {'online':Number(item.online)}]" @click="goToPlayer(item.id)"><div class="wrap">{{ Number(item.online)?'ONLINE':item.last_online.toLocaleString() }}</div></div>
+        <div :class="header[6].class" @click="goToPlayer(item.id)" ><div class="wrap">{{ item.device_updated.toLocaleString() }}</div></div>
+        <div :class="[header[7].class, {'unavailable':!Number(item.online)}]">
           <div class="panel" >
             <UiPlayPuseButton :unavailable="!Number(item.online)" :play="!!Number(item.play_stop)" :id_player="item.id"/>
             <UiVolume :unavailable="!Number(item.online)" :value="item.volume" :id_player="item.id"/>
           </div>
         </div>
-        <div :style="{'width': header[8].width}" >
+        <div :class="header[8].class" ><div class="wrap">
             <div v-if="Number(item.dislike)" class="dislike"><img src="@/assets/icons/disLike.svg" alt="dislike"></div>
-        </div>
+        </div></div>
       </div>
     </div>
 </template>
@@ -44,43 +42,45 @@ export default {
   async mounted(){
     this.updateList()
     EventBus.on('player:update', this.updateList)
-    this.onResize();
-    window.addEventListener('resize', this.onResize);
   },
   data(){
     return{
       lading:true,
       notFound:false,
       header:[
-        {key:1,name:'Плеер', width: '8.9%'},
-        {key:2,name:'Город', width: '10%'},
-        {key:3,name:'Адрес локации', width: '12%'},
-        {key:4,name:'Проигрываемый трек', width: '24.6%'},
-        {key:5,name:'IP Адрес', width: '8.9%'},
-        {key:6,name:'Был в сети', width: '7.3%'},
-        {key:7,name:'Обновлен', width: '7.3%'},
-        {key:8,name:'Элементы управления', width: '13.6%'},
-        {key:9,name:'Дизлайки', width: '5.5%'},
+        {key:1, class:'table-col-1', name:'Плеер', width: '8.9%'},
+        {key:2, class:'table-col-2', name:'Город', width: '10%'},
+        {key:3, class:'table-col-3', name:'Адрес локации', width: '12%'},
+        {key:4, class:'table-col-4', name:'Проигрываемый трек', width: '24.6%'},
+        {key:5, class:'table-col-5', name:'IP Адрес', width: '8.9%'},
+        {key:6, class:'table-col-6', name:'Был в сети', width: '7.3%'},
+        {key:7, class:'table-col-7', name:'Обновлен', width: '7.3%'},
+        {key:8, class:'table-col-8', name:'Элементы управления', width: '13.6%'},
+        {key:9, class:'table-col-9', name:'Дизлайки', width: '5.5%'},
       ],
       players:'',
       width: 0,
     }
   },
+  props:{
+    user: Object,
+    users: Boolean,
+  },
   components: {
     UiPlayPuseButton,
     UiVolume,
     UiLoader,
-    UiNotFound
+    UiNotFound,
   },
   methods:{
     goToPlayer(id){
       this.$router.push(`/players/${id}`)
     },
-    runScript(name){
-      getData(name)
-    },
     async updateList(){
-      let result = await getData('readPlayers.php')
+      let user_id = this.user?this.user.id:'';
+      let user_level = this.user?this.user.level:'';
+      let adress_php = this.users?'readUserPlayers.php':'readPlayers.php'
+      let result = await getData(adress_php, {user_id, user_level})
       if(!this.checkResult(result)) return false
       this.players = await result.players 
     },
@@ -89,21 +89,12 @@ export default {
             if (result.success) return true
             this.notFound = true
             return false
-    },
-    onResize(){
-      this.width = window.innerWidth;
     }
   },
 }
 </script>
 
 <style scoped>
-  .title{
-    font-family: 'Intro-Bold-Alt';
-    font-size: 20px;
-    color: #fff;
-    margin-top: 20px;
-  }
 
   .add_player{
     margin: 12px;
@@ -116,9 +107,7 @@ export default {
     border-radius: 15px;
     background-color: #383838;
     cursor: pointer;
-    
   }
-
   .table-players{
     margin-top: 25px ;
     width: 100%;
@@ -142,8 +131,6 @@ export default {
     border-radius:5px ;
     height: 60px;
     margin-right: 3px;
-    padding-left: 10px;
-    padding-right: 10px;
   }
 
   .row>div{
@@ -152,13 +139,49 @@ export default {
     color: #fff;
     background-color: #2F2F2F;
     margin-top: 5px;
-    padding-left: 10px;
-    padding-right: 10px;
     line-height: 1.6;
   }
-  .row :nth-child(2), .row :nth-child(3), .row  :nth-child(4){
+
+  .table-col-1{
+    width: 8.9%;
+    min-width: 130px;
+  }
+  .table-col-2{
+    width: 10%;
+  }
+  .table-col-3{
+    width: 12%;
+  }
+  .table-col-4{
+    width: 24.6%;
+  }
+  .table-col-5{
+    width: 8.9%;
+  }
+  .table-col-6{
+    width: 7.3%;
+    min-width: 90px;
+  }
+  .table-col-7{
+    width: 7.3%;
+    min-width: 90px;
+  }
+  .table-col-8{
+    width: 13.6%;
+    min-width: 180px;
+  }
+  .table-col-9{
+    width: 5.5%;
+    min-width: 70px;
+  }
+  .row .table-col-2, .row .table-col-3, .row  .table-col-4{
     justify-content: flex-start;
     text-align: left;
+  }
+
+  .row .wrap{
+    margin-left: 10px;
+    margin-right: 10px;
   }
   .row .online{
     background-color: #449C4A;
@@ -192,52 +215,33 @@ export default {
   }
 
   @media (max-width: 1839.98px) { 
-    .header :nth-child(5){
-      display: none;
+    .table-col-5{
+      display: none!important;
     }
-    .row :nth-child(5){
-      display: none;
+    .table-col-4{
+      width: 33.3%!important;
     }
   }
 
   @media (max-width: 1699.98px) { 
-    .header :nth-child(4){
-      display: none;
+    .table-col-4{
+      display: none!important;
     }
-    .row :nth-child(4){
-      display: none;
-    }
-
-    .header > :nth-child(1), .row > :nth-child(1){
-      min-width: 130px!important;
-    }
-
-    .header :nth-child(2), .row > :nth-child(2){
+    .table-col-2{
       width: 20%!important;
     }
 
-    .header :nth-child(3), .row > :nth-child(3){
-      width: 25%!important;
+    .table-col-3{
+      width: 40%!important;
     }
-    .header :nth-child(6), .row > :nth-child(6){
-      min-width: 90px!important;
-    }
-    .header :nth-child(7), .row > :nth-child(7){
-      min-width: 90px!important;
-    }
-    .header :nth-child(8), .row > :nth-child(8){
-      min-width: 180px!important;
-    }
+
   }
 
   @media (max-width: 1499.98px) { 
-    .header :nth-child(3){
-      display: none;
+    .table-col-3{
+      display: none!important;
     }
-    .row > :nth-child(3){
-      display: none;
-    }  
-    .header :nth-child(2), .row > :nth-child(2){
+    .table-col-2{
       width: 50%!important;
     }
   }

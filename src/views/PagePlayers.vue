@@ -2,6 +2,8 @@
   <UiHeader/>
   <UiLeftBar selcted="players"/>
   <div class="content">
+    <div class="title">Устройства</div>
+    <div v-if="false" class="servis-button" @click="runScript('sendEmail.php')">sendEmail.php</div>
     <UiTablePlayers/>
   </div>
 </template>
@@ -18,6 +20,11 @@ export default {
     UiLeftBar,
     UiHeader,
     UiTablePlayers
+  },
+  methods:{
+    runScript(name){
+      getData(name)
+    },
   }
 }
 </script>
@@ -33,6 +40,14 @@ export default {
     flex-direction: column;
     padding-left: 330px;
     width: calc(100% - 300px - 70px);
+  }
+
+  
+  .title{
+    font-family: 'Intro-Bold-Alt';
+    font-size: 20px;
+    color: #fff;
+    margin-top: 20px;
   }
 
 </style>
