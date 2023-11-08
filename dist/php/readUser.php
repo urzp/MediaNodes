@@ -24,7 +24,7 @@ if(!$checkSession){
 	exit(); 
 }
 
-$sql = "SELECT `id`, `name`, `email`, `tel`, `img` FROM `users` WHERE `id` = '$user_id' ";
+$sql = "SELECT `id`, `name`, `email`, `tel`, `img`, `level` FROM `users` WHERE `id` = '$user_id' ";
 $checkUser = $mysql -> query($sql);
 $checkUser = $checkUser -> fetch_assoc();
 

@@ -20,9 +20,6 @@ name: 'UiHeader',
     mounted(){
         EventBus.on('user:update', this.setUser)
     },
-    // created(){
-    //     this.user = JSON.parse(sessionStorage.getItem('user'))
-    // },
     data(){
         return {
             user: JSON.parse(sessionStorage.getItem('user'))
@@ -95,7 +92,6 @@ name: 'UiHeader',
     }
 
     .avatar img{
-        width: 45px;
         height: 45px;
     }
 </style>

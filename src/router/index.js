@@ -97,7 +97,6 @@ const routes = [
     name: 'addPlayer',
     meta: {
       requireAuth: true,
-      requireAdmin: true,
     },
     component: PageNewPlayer,
   },

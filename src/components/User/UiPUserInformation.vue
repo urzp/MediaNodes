@@ -128,6 +128,7 @@ export default {
 
 .icon img{
     max-width: 70px;
+    height: 40px;
 }
 
 </style>
