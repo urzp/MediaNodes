@@ -16,6 +16,7 @@
 </template>
 
 <script>
+import  sendResetPassword  from '@/servis/sendRequrstResetPassword.js'
 import useVuelidate from '@vuelidate/core'
 import { required, email, minLength } from '@vuelidate/validators'
 import UiInput from '@/components/UiComponents/UiInput.vue'
@@ -40,12 +41,13 @@ export default {
     }
   },
   methods:{
-    submit(){
+    async submit(){
         this.v$.$validate()
         if(!this.v$.$error){
             this.v$.$touch()
+            let result = await sendResetPassword({email: this.email})
         }else{
-
+            
         }
     }
   }
