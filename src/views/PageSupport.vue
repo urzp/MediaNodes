@@ -4,6 +4,7 @@
     <UiSupportForm />
   </div>
   <UiFooter/>
+  <UiToaster/>
 </template>
 
 <script>
@@ -11,6 +12,7 @@
 import UiFooter from '@/components/Login/UiFooter.vue'
 import UiHeader from '@/components/Login/UiHeader.vue'
 import UiSupportForm from '@/components/Login/UiSupportForm.vue'
+import UiToaster from '@/components/UiToaster.vue'
 
 export default {
   name: 'HomeView',
@@ -18,7 +20,7 @@ export default {
     UiHeader,
     UiFooter,
     UiSupportForm,
-   
+    UiToaster,
   }
 }
 </script>

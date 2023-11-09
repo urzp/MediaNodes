@@ -65,8 +65,6 @@ export default {
                 email: this.email,
                 password: this.password
             })
-
-            
         }  
     },
     async register(user){

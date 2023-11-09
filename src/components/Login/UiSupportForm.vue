@@ -3,9 +3,11 @@
         <div class="title">Техподдержка</div>
         <p>У Вас появились проблемы? Или есть вопросы по управлению устройствами? Пожалуйста, заполните форму, и наш специалист свяжется с Вами в течение 24 часов.</p>
         <form>
-            <UiInput modelTape='text' v-model="email" placeholder="Введите ваш email"/>
-            <UiInput tag="textarea" class="textarea" modelTape='text' v-model="message"  placeholder="Введите ваше сообщение" />
-            <UiButton class="submit-button" text="Отправить" bg_color="#F93492" text_color="#fff"/>
+            <UiInput modelTape='text' v-model="email" placeholder="Введите ваш email" :class="{'error':v$.email.$error}"/>
+            <div v-if="v$.email.$error">Введите корректный email</div>
+            <UiInput tag="textarea" class="textarea" modelTape='text' v-model="message"  placeholder="Введите ваше сообщение"  :class="{'error':v$.message.$error}"/>
+            <div v-if="v$.message.$error">Введите сообщение</div>
+            <UiButton class="submit-button" text="Отправить" bg_color="#F93492" text_color="#fff" @click="submit"/>
         </form>
     </div>
     <div class="registration">
@@ -15,18 +17,48 @@
 </template>
 
 <script>
+import sendData from '@/servis/sendData.js'
+import useVuelidate from '@vuelidate/core'
+import { required, email, minLength } from '@vuelidate/validators'
 import UiInput from '@/components/UiComponents/UiInput.vue'
 import UiButton from '@/components/Login/UiButton.vue'
+import { EventBus } from '@/servis/EventBus'
 export default {
   name: 'UiSupportForm',
+  setup () {
+    return { v$: useVuelidate() }
+  },
   components:{
     UiInput,
-    UiButton
+    UiButton,
   },
   data(){
     return{
         email: '',
         message: '',
+    }
+  },
+  validations(){
+    return{
+        email:{ required, email },
+        message: { required },
+    }
+  },
+  methods:{
+    submit(){
+        this.v$.$validate()
+        if(!this.v$.$error){ 
+            this.sendMessage({
+                message: this.message,
+                email: this.email,
+            })
+        }
+    },
+    async sendMessage(data){
+        let result = await sendData('supportMessage.php', data)
+        if(result.success){
+            EventBus.emit('toaster',{status:'success', message:'Ваше сообщение принято'});
+        }
     }
   }
 }
@@ -34,7 +66,7 @@ export default {
 
 <style scoped>
     .login-form{
-        height: 580px;
+        min-height: 580px;
         width: 560px;
         position: relative;
         top: -20px;

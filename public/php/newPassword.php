@@ -10,6 +10,15 @@ $code = $post-> code;
 $email = $post-> email;
 $password = $post -> password;
 
+if($code==''||$email==''||$password==''){
+    sleep(2);
+    $result = (object) [
+        'success' => false,
+    ];
+    echo json_encode($result);   
+    exit();
+}
+
 include 'db_mysql.php';
 
 $sql = "SELECT `id` FROM `users` WHERE `resetpassword`='$code'";
