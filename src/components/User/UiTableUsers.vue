@@ -10,7 +10,11 @@
       </div>
       
       <div v-for="item in users" :key="item.id" class="row" >
-        <div :style="{'width': header[0].width}" @click="goToUser(item.id)"><div class="text">{{ item.name }}</div></div>
+        
+        <div class="name-icon" :style="{'width': header[0].width}" @click="goToUser(item.id)">
+          <div class="icon"><img :src="url_avatars(item)" alt=""></div>
+          <div class="text">{{ item.name }}</div>
+        </div>
         <div :style="{'width': header[1].width}" @click="goToUser(item.id)"><div class="text">{{ item.email }}</div></div>
         <div :style="{'width': header[2].width}" @click="goToUser(item.id)"><div class="text">{{ item.tel}}</div></div>
         <div :style="{'width': header[3].width}" @click="goToUser(item.id)"><div class="text">{{ item.level }}</div></div>
@@ -68,6 +72,11 @@ export default {
             if (result.success) return true
             this.notFound = true
             return false
+    },
+    url_avatars(user){
+            let url = window.baseUrl + 'img/default/avatar.svg'
+            if(user.img) url = window.baseUrl + `img/user_${user.id}/${user.img}`
+            return url
     },
   }
 }
@@ -173,5 +182,17 @@ export default {
   .unavailable{
     opacity: 0.3;
     cursor: wait;
+  }
+
+  .name-icon{
+    justify-content: flex-start!important;
+    display: flex!important;
+    text-align: left!important;
+  }
+  .icon img{
+    height: 26px;
+  }
+  .name-icon .text{
+    text-transform: uppercase;
   }
 </style>
