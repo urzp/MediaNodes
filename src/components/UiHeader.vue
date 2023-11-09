@@ -2,7 +2,7 @@
     <header>
         <div class="search">
             <img src="@/assets/icons/search.svg" alt="search">
-            <input type="text" placeholder="Поиск плеера">
+            <input type="text" placeholder="Поиск плеера" v-model="find" @focus="gotoPlayers()">
         </div>
         <div class="avatar">
             <div class="userName">{{ user.name }}</div>
@@ -22,12 +22,21 @@ name: 'UiHeader',
     },
     data(){
         return {
-            user: JSON.parse(sessionStorage.getItem('user'))
+            user: JSON.parse(sessionStorage.getItem('user')),
+            find:''
         }
     },
     methods:{
         setUser(){
             this.user = { ...JSON.parse(sessionStorage.getItem('user')) }
+        },
+        gotoPlayers(){
+            this.$router.push('/players')
+        }
+    },
+    watch:{
+        find(){
+            EventBus.emit('find',{find:this.find});
         }
     },
     computed:{

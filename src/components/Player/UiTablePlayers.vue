@@ -8,7 +8,7 @@
             <div v-if="i==0&&!users" class="add_player" @click="$router.push({ name: 'addPlayer' })"><img src="@/assets/icons/plus.svg" alt=""></div>
           </div>
       </div>
-      <div v-for="item in players" :key="item.id" class="row" >
+      <div v-for="item in filteredPlayers" :key="item.id" class="row" >
         <div :class="header[0].class" @click="goToPlayer(item.id)"><div class="wrap">{{ item.name }}</div></div>
         <div :class="header[1].class" @click="goToPlayer(item.id)"><div class="wrap">{{ item.city }}</div></div>
         <div :class="header[2].class" @click="goToPlayer(item.id)"><div class="wrap">{{ item.address }}</div></div>
@@ -42,6 +42,7 @@ export default {
   async mounted(){
     this.updateList()
     EventBus.on('player:update', this.updateList)
+    EventBus.on('find', data=>this.getFind(data))
   },
   data(){
     return{
@@ -59,7 +60,7 @@ export default {
         {key:9, class:'table-col-9', name:'Дизлайки', width: '5.5%'},
       ],
       players:'',
-      width: 0,
+      find:'',
     }
   },
   props:{
@@ -71,6 +72,17 @@ export default {
     UiVolume,
     UiLoader,
     UiNotFound,
+  },
+  computed:{
+    filteredPlayers(){
+      let find = this.find
+      if(!this.players) return false
+      let result = this.players.filter((item)=>{
+        return !item.city.indexOf(find)
+      })
+      return result
+    }
+
   },
   methods:{
     goToPlayer(id){
@@ -89,6 +101,9 @@ export default {
             if (result.success) return true
             this.notFound = true
             return false
+    },  
+    getFind(data){
+      this.find = data.find
     }
   },
 }
