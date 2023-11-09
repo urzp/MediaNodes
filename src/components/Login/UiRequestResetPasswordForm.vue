@@ -40,12 +40,17 @@ export default {
         email: '',
     }
   },
+  emits: ['ready'],
   methods:{
     async submit(){
         this.v$.$validate()
         if(!this.v$.$error){
             this.v$.$touch()
             let result = await sendResetPassword({email: this.email})
+            if(result.success){
+                sessionStorage.setItem('email_reset', this.email);
+                this.$emit('ready', true)
+            }
         }else{
             
         }

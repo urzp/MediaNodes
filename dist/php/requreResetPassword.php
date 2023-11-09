@@ -19,7 +19,7 @@ $check = isset($check);
 
 if(!$check){
     $result = (object) [
-        'success' => true,//save cover process
+        'success' => true,//???????? ???????? ????????????? ??? ??????? ?????????
     ];
     echo json_encode($result);   
     exit();
@@ -31,16 +31,21 @@ $sql = "UPDATE`users` SET `resetpassword`='$reset_password ' WHERE `email`='$ema
 $checkSession = $mysql -> query($sql);
 
 $to  = "$email" ; 
+//$to .= "mail2@example.com>"; 
 
-$subject = "Сброс пароля"; 
-$message = " <p>Код для сброса пароля</p> </br> <b>$reset_password</b>";
+$subject = "????? ??????"; 
+
+$message = " <p>??? ??? ??????</p> </br> <b>$reset_password</b>";
+
 $headers  = "Content-type: text/html; charset=windows-1251 \r\n"; 
-$headers .= "From:<support@media-nodes.ru>\r\n"; 
+$headers .= "From: ?? ???? ?????? <from@example.com>\r\n"; 
 $headers .= "Reply-To: reply-to@example.com\r\n"; 
+
 mail($to, $subject, $message, $headers); 
 
 $result = (object) [
 	'success' => true,
+    'reset_password' => $reset_password
 ];
 echo json_encode($result);
 

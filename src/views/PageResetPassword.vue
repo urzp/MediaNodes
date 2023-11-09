@@ -1,7 +1,8 @@
 <template>
   <UiHeader support/>
   <div class="main">
-    <UiRequestResetPasswordForm/>
+    <UiRequestResetPasswordForm v-if="!setNewPassword" @ready="setNewPassword = $event"/>
+    <UiNewPassword v-if="setNewPassword"/>
   </div>
   <UiFooter/>
 </template>
@@ -11,13 +12,20 @@
 import UiFooter from '@/components/Login/UiFooter.vue'
 import UiHeader from '@/components/Login/UiHeader.vue'
 import UiRequestResetPasswordForm from '@/components/Login/UiRequestResetPasswordForm.vue'
+import UiNewPassword from '@/components/Login/UiNewPassword.vue'
 
 export default {
-  name: 'HomeView',
+  name: 'PageUserPlayers',
+  data(){
+    return{
+      setNewPassword: false
+    }
+  },
   components: {
     UiHeader,
     UiFooter,
     UiRequestResetPasswordForm,
+    UiNewPassword,
   }
 }
 </script>
