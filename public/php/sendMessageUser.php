@@ -11,10 +11,14 @@ $post_message = $_POST['message'];
 
 include 'checkAccess.php';
 
-$sql = "SELECT `id`, `name`, `email`, `level` FROM `users` WHERE `id` = '$user_id'";
+$sql = "SELECT `id`, `name`, `email`, `messages`, `level` FROM `users` WHERE `id` = '$user_id'";
 $user = $mysql -> query($sql);
 $user = $user -> fetch_assoc();
 
+$user['messages'] = (int)$user['messages'] + 1;
+
+$sql = "UPDATE `users` SET `messages`='$user[messages]' WHERE `id` = '$user_id'";
+$mysql -> query($sql);
 
 $from = "$user[email]";
 $to = "support@media-nodes.ru";

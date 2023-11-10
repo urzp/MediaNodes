@@ -18,7 +18,7 @@
         <div :style="{'width': header[1].width}" @click="goToUser(item.id)"><div class="text">{{ item.email }}</div></div>
         <div :style="{'width': header[2].width}" @click="goToUser(item.id)"><div class="text">{{ item.tel}}</div></div>
         <div :style="{'width': header[3].width}" @click="goToUser(item.id)"><div class="text">{{ item.level }}</div></div>
-        <div :style="{'width': header[4].width}" @click="goToUser(item.id)"><div class="text">{{ 0 }}</div></div>
+        <div :style="{'width': header[4].width}" @click="goToUser(item.id)"><div class="text">{{ item.messages }}</div></div>
       </div>
       
     </div>

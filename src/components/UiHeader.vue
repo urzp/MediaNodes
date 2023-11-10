@@ -4,7 +4,7 @@
             <img src="@/assets/icons/search.svg" alt="search">
             <input type="text" placeholder="Поиск плеера" v-model="find" @focus="gotoPlayers()">
         </div>
-        <div class="avatar">
+        <div class="avatar" @click="$router.push('/user')">
             <div class="userName">{{ user.name }}</div>
             <div class="avatar_img"><img :src="url_avatar" alt="avatar"></div>
         </div>
@@ -98,6 +98,7 @@ name: 'UiHeader',
         justify-content: flex-end;
         margin-right: 40px;
         margin-left: 40px;
+        cursor: pointer;
     }
 
     .avatar img{
