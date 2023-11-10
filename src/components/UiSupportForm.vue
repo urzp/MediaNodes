@@ -4,21 +4,53 @@
         У Вас появились проблемы? Или есть вопросы по управлению устройствами? Пожалуйста, заполните форму, 
         и наш специалист свяжется с Вами в течение 24 часов.
     </p>
-    <form action="">
+    <form method="post" ref="submit">
+
+        <input name="id" type="hidden" :value="user.id">
+        <input name="session" type="hidden" :value="session">
+
         <div class="title">Ваше сообщение</div>
-        <textarea name="" id="" cols="30" rows="10" placeholder="Введите комментарий"></textarea>
+        <textarea name="message" id="" cols="30" rows="10" placeholder="Введите комментарий" v-model="message"></textarea>
+        <div v-if="v$.message.$error" class="error-message" >поле недолжно быть пустым</div>
+
         <div class="title">Изображение</div>
         <label for="files" class="btnGetFile" onclick="document.getElementById('getFile').click()">Загрузить изображение</label>
         <input type="file" id="getFile" style="display:none" name="img" accept="image/png, image/jpeg" />
-        <input type="submit" class="submitButton" value="Отправить" />
+        <input type="button" @click="submit()" class="submitButton" value="Отправить" />
     </form>
 </template>
 
 <script>
-
+import { sendForm } from '@/servis/sendForm'
+import useVuelidate from '@vuelidate/core'
+import { required } from '@vuelidate/validators'
+import { EventBus } from '@/servis/EventBus'
 export default{
     name: 'UiSupportFormUser',
-
+    setup () {
+        return { v$: useVuelidate() }
+    },
+    data(){
+        return{
+            user:JSON.parse(sessionStorage.getItem('user')),
+            session: sessionStorage.getItem('session'),
+            message:''
+        }
+    },
+    validations(){
+        return{
+            message: { required },
+        }
+    },
+    methods:{
+        async submit(){
+            this.v$.$validate()
+            if(!!this.v$.message.$error) return false
+            await sendForm('sendMessageUser.php', this.$refs.submit)
+            EventBus.emit('toaster',{status:'success', message:'Сообщение отправлено'});
+            this.$refs.submit.reset()
+        }
+    }
 }
 
 </script>
@@ -93,6 +125,11 @@ form textarea{
     border-radius: 30px;
     border:none;
     cursor: pointer;
+}
+
+.error-message {
+    margin-top: 5px;
+    color: #e7e7e7;
 }
 
 </style>

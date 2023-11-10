@@ -41,7 +41,7 @@
         <div class="buttons">
             <div class="cancelButton" @click="cancel()">Отмена</div>
             <div class="submitButton" @click="submit()">Отправить</div>
-            <input type="submit"  value="" style="display: none;" />
+            <input type="button"  value="" style="display: none;" />
         </div>
     </form>
 </template>

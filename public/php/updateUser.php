@@ -72,8 +72,7 @@ if($editPassword){
 
 $result = (object) [
 	'success' => true,
-	'img' => $_FILES['img']
 ];
-echo json_encode($target_dir_);
+echo json_encode($result);
 
 ?>

@@ -191,6 +191,8 @@ export default {
   }
   .icon img{
     height: 26px;
+    margin-left: 20px;
+    margin-right: 10px;
   }
   .name-icon .text{
     text-transform: uppercase;
