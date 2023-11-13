@@ -44,5 +44,22 @@ export default {
        font-size: 18px; 
     }
     
+    @media (max-width: 1485.00px) { 
+        .button{
+            width: calc(33% - 18px);
+        }
+    }
+
+    @media (max-width: 1140.00px) { 
+        .button{
+            width: calc(50% - 20px);
+        }
+    }
+
+    @media (max-width: 900.00px) { 
+        .button{
+            width: calc(100% - 10px);
+        }
+    }
 
 </style>
