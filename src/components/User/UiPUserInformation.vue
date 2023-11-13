@@ -1,7 +1,7 @@
 <template>
 <div class="title">
     <div class="text">Пользователь</div>
-    <div class="edit">
+    <div v-if="false"  class="edit">
         <RouterLink :to="`/players/edit/${user.id}`" class="editButton"><img src="@/assets/icons/pen.svg" alt="pen"></RouterLink>
         <RouterLink :to="`/players/edit/${user.id}`" class="label">Редактировать пользователя</RouterLink>
     </div>
@@ -11,22 +11,28 @@
     <div class="name" style="width: 100%;"><div class="text">{{ user.name }}</div></div>
     <div class="email" style="min-width: 300px;"><div class="text">{{ user.email }}</div></div>
     <div class="tel" style="min-width: 200px;"><div class="text">{{ user.tel }}</div></div>
-    <div class="level" style="min-width: 150px;"><div class="text">{{ user.level}}</div></div>
+    <div class="level" @click="showUserLevel=true" style="min-width: 150px;"><div class="text">{{ user.level}}</div></div>
 </div>
+<UiUserLevelSelect v-if="showUserLevel" :user="user" @close="showUserLevel = !$event"/>
 </template>
 
 
 <script>
-import { computed } from 'vue'
+import UiUserLevelSelect from '@/components/UiComponents/UiUserLevelSelect.vue'
 
 
 export default {
     name: 'UiPUserInf',
+    data(){
+        return{
+            showUserLevel: false,
+        }
+    },
     props: {
         user: [Object, String],
     },
     components: { 
-
+        UiUserLevelSelect
     },
     computed:{
         url_avatars(){
@@ -129,6 +135,10 @@ export default {
 .icon img{
     max-width: 70px;
     height: 40px;
+}
+
+.level{
+    cursor: pointer;
 }
 
 </style>

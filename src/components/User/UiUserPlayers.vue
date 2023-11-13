@@ -24,6 +24,7 @@ export default {
     async mounted(){
        //this.loopUpdate = setInterval( this.udatePlayer, this.$settings.updateTime)
        this.udatePlayer()
+       EventBus.on('user:update', this.udatePlayer)
        //EventBus.on('player:update', this.udatePlayer)
     },
     beforeUnmount(){

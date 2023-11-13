@@ -17,11 +17,12 @@
         </div>
         <div :style="{'width': header[1].width}" @click="goToUser(item.id)"><div class="text">{{ item.email }}</div></div>
         <div :style="{'width': header[2].width}" @click="goToUser(item.id)"><div class="text">{{ item.tel}}</div></div>
-        <div :style="{'width': header[3].width}" @click="goToUser(item.id)"><div class="text">{{ item.level }}</div></div>
+        <div :style="{'width': header[3].width}" @click="editLevel(item)"><div class="text">{{ item.level }}</div></div>
         <div :style="{'width': header[4].width}" @click="goToUser(item.id)"><div class="text">{{ item.messages }}</div></div>
       </div>
       
     </div>
+    <UiUserLevelSelect v-if="showUserLevel" :user="selctetedUser" @close="showUserLevel = !$event"/>
 </template>
 
 <script>
@@ -29,15 +30,19 @@ import { getData } from '@/servis/getData.js'
 import { EventBus } from '@/servis/EventBus'
 import UiLoader from '@/components/UiLoader.vue'
 import UiNotFound from '@/components/UiNotFound.vue'
+import UiUserLevelSelect from '@/components/UiComponents/UiUserLevelSelect.vue'
 
 export default {
   name: 'UiTableUsers',
   async mounted(){
     this.updateList()
     EventBus.on('player:update', this.updateList)
+    EventBus.on('user:update', this.updateList)
   },
   data(){
     return{
+      showUserLevel:false,
+      selctetedUser:'',
       lading:true,
       notFound:false,
       header:[
@@ -53,7 +58,8 @@ export default {
   components: {
 
     UiLoader,
-    UiNotFound
+    UiNotFound,
+    UiUserLevelSelect
   },
   methods:{
     goToUser(id){
@@ -78,6 +84,10 @@ export default {
             if(user.img) url = window.baseUrl + `img/user_${user.id}/${user.img}`
             return url
     },
+    editLevel(user){
+      this.selctetedUser = user;
+      this.showUserLevel = true;
+    }
   }
 }
 </script>
