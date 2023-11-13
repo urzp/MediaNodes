@@ -40,6 +40,7 @@ import { required, email, minLength } from '@vuelidate/validators'
 import UiInput from '@/components/UiComponents/UiInput.vue'
 import UiButton from '@/components/Login/UiButton.vue'
 import VueRecaptcha from 'vue3-recaptcha2'
+import { EventBus } from '@/servis/EventBus'
 export default {
   name: 'UiRegForm',
   components:{
@@ -56,7 +57,7 @@ export default {
         email: '',
         password: '',
         emailBusy: false,
-        sitekey: '6LfXHQ0pAAAAALfX_rS71uK1PrUL7lNVLhZL0mAk',
+        sitekey: this.$settings.recaptcha_key,
     }
   },
   validations(){
@@ -72,7 +73,6 @@ export default {
         if(!this.v$.$error) this.$refs.recaptcha.execute()
     },
     async register(recaptchaToken){
-        console.log(recaptchaToken)
         let user = {
                 name: this.firstName,
                 email: this.email,
@@ -86,6 +86,8 @@ export default {
         }else if(result.error == 'email'){
             this.emailBusy = true 
             setTimeout(()=>{this.emailBusy = false }, 15000)
+        }else if(result.error == 'recaptcha'){
+            EventBus.emit('toaster',{status:'error', message:'Онаружены подозрительные действия', time: 15000});
         }
     },
     onCaptchaExpired () {

@@ -21,6 +21,13 @@
         Необходимо создать учетную запись? 
         <RouterLink to="register">Зарегистрироваться</RouterLink>
     </div>
+    <VueRecaptcha
+        ref="recaptcha"
+        size="invisible" 
+        :sitekey="sitekey"
+        @verify="login"
+        @expired="onCaptchaExpired"
+    />
 </template>
 
 <script>
@@ -29,11 +36,13 @@ import useVuelidate from '@vuelidate/core'
 import { required, email, minLength } from '@vuelidate/validators'
 import UiInput from '@/components/UiComponents/UiInput.vue'
 import UiButton from '@/components/Login/UiButton.vue'
+import VueRecaptcha from 'vue3-recaptcha2'
 export default {
   name: 'UiLoginForm',
   components:{
     UiInput,
-    UiButton
+    UiButton,
+    VueRecaptcha
   },
   setup () {
     return { v$: useVuelidate() }
@@ -43,6 +52,7 @@ export default {
         email: '',
         password: '',
         wrongLogin:false,
+        sitekey: this.$settings.recaptcha_key,
     }
   }, 
   validations(){
@@ -54,15 +64,14 @@ export default {
   methods:{
     submit(){
         this.v$.$validate()
-        if(!this.v$.$error){
-            let data = {
-                'email':this.email,
-                'password':this.password
-            }
-            this.login(data)  
-        }
+        if(!this.v$.$error) this.$refs.recaptcha.execute()
     },
-    async login(data){
+    async login(recaptchaToken){
+        let data = {
+            email: this.email,
+            password: this.password,
+            recaptchaToken: recaptchaToken,
+        }
         let result = await loginRequest(data)
         if(result.success){
             sessionStorage.setItem('user', JSON.stringify(result.user));
@@ -72,6 +81,9 @@ export default {
             this.wrongLogin = true 
             setTimeout(()=>{this.wrongLogin = false }, 3000)
         }
+    },
+    onCaptchaExpired () {
+      this.$refs.recaptcha.reset()
     }
   }
 }

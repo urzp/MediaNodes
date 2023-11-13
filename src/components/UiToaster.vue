@@ -33,7 +33,7 @@ export default {
     methods:{
         showToster(data){
             this.show = true
-            let time = 3000
+            let time = data.time?data.time:3000
             this.color_marker = colors[data.status]
             this.message = data.message
             setTimeout( () =>{

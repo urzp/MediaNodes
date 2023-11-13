@@ -3,6 +3,7 @@
   <div class="main">
     <UiRegForm/>
   </div>
+  <UiToaster/>
   <UiFooter/>
 </template>
 
@@ -11,6 +12,7 @@
 import UiFooter from '@/components/Login/UiFooter.vue'
 import UiRegForm from '@/components/Login/UiRegForm.vue'
 import UiHeader from '@/components/Login/UiHeader.vue'
+import UiToaster from '@/components/UiToaster.vue'
 
 export default {
   name: 'PageRegiste',
@@ -18,6 +20,7 @@ export default {
     UiHeader,
     UiRegForm,
     UiFooter,
+    UiToaster,
   }
 }
 </script>

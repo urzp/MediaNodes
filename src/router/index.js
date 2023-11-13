@@ -108,6 +108,14 @@ const routes = [
     },
     component: PageEditPlayer,
   },
+  {
+    name: '404',
+    path:'/:patMatch(.*)*',
+    component: HomeView,
+    meta: {
+      requireAuth: true,
+    },
+  },
   
 
   
