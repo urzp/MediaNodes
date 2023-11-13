@@ -7,7 +7,7 @@
             </UiInput>
             <UiInput modelTape='text' v-model="email" placeholder="Введите ваш email" :class="{'error':v$.email.$error}">
                 <div v-if="v$.email.$error">Введите корректный email</div>
-                <div v-if="emailBusy">Email уже занят</div>
+                <div v-if="emailBusy">{{email}} уже занят</div>
             </UiInput>
             <UiInput modelTape='password' v-model="password" placeholder="Придумайте пароль" :class="{'error':v$.password.$error}">
                 <div v-if="v$.password.$error">пароль должен быть минимум 6 символов</div>
@@ -18,6 +18,13 @@
                     Уже есть аккаунт? <RouterLink to="login">Войти</RouterLink>
                 </div>
             </div>
+            <VueRecaptcha
+                ref="recaptcha"
+                size="invisible" 
+                :sitekey="sitekey"
+                @verify="register"
+                @expired="onCaptchaExpired"
+              />
         </form>
     </div>
     <div class="terms-of-use">
@@ -32,11 +39,13 @@ import useVuelidate from '@vuelidate/core'
 import { required, email, minLength } from '@vuelidate/validators'
 import UiInput from '@/components/UiComponents/UiInput.vue'
 import UiButton from '@/components/Login/UiButton.vue'
+import VueRecaptcha from 'vue3-recaptcha2'
 export default {
   name: 'UiRegForm',
   components:{
     UiInput,
-    UiButton
+    UiButton,
+    VueRecaptcha
   },
   setup () {
     return { v$: useVuelidate() }
@@ -47,6 +56,7 @@ export default {
         email: '',
         password: '',
         emailBusy: false,
+        sitekey: '6LfXHQ0pAAAAALfX_rS71uK1PrUL7lNVLhZL0mAk',
     }
   },
   validations(){
@@ -59,22 +69,27 @@ export default {
   methods:{
     submit(){
         this.v$.$validate()
-        if(!this.v$.$error){ 
-            this.register({
+        if(!this.v$.$error) this.$refs.recaptcha.execute()
+    },
+    async register(recaptchaToken){
+        console.log(recaptchaToken)
+        let user = {
                 name: this.firstName,
                 email: this.email,
-                password: this.password
-            })
-        }  
-    },
-    async register(user){
+                password: this.password,
+                recaptchaToken: recaptchaToken,
+            }
+
         let result = await regUser(user)
         if(result.success){
             this.$router.push('/login')
         }else if(result.error == 'email'){
             this.emailBusy = true 
-            setTimeout(()=>{this.emailBusy = false }, 2000)
+            setTimeout(()=>{this.emailBusy = false }, 15000)
         }
+    },
+    onCaptchaExpired () {
+      this.$refs.recaptcha.reset()
     }
   }
 }
