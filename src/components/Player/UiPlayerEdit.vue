@@ -11,6 +11,12 @@
         <InputMask class="input" name="name" placeholder="P00000000" mask="P999999999" v-model="name"/>
         <div v-if="v$.name.$error" class="error-message" >поле недолжно быть пустым</div>
 
+        <!-- <div class="title">Владелец плеера</div>
+        <select class="input">
+            <option атрибуты>User 1</option>
+            <option атрибуты>User 2</option> 
+        </select> -->
+
         <div class="title">Город</div>
         <input name="city" placeholder="Москва" v-model="city"/>
         <div v-if="v$.city.$error" class="error-message" >поле недолжно быть пустым</div>
