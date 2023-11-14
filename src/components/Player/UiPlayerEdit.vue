@@ -6,16 +6,16 @@
         <input name="user_id" type="hidden" :value="user_id">
         <input name="session" type="hidden" :value="session">
         <input name="player_id" type="hidden" :value="player.id">
+        <input name="owner_id" type="hidden" :value="id_user_owner">
 
         <div class="title">Имя устройтсва</div>
         <InputMask class="input" name="name" placeholder="P00000000" mask="P999999999" v-model="name"/>
         <div v-if="v$.name.$error" class="error-message" >поле недолжно быть пустым</div>
 
-        <!-- <div class="title">Владелец плеера</div>
-        <select class="input">
-            <option атрибуты>User 1</option>
-            <option атрибуты>User 2</option> 
-        </select> -->
+        <template v-if="showOwner">
+            <div class="title">Владелец плеера</div>
+            <div class="owner" @click="showUsers=!showUsers"><div class="text" >{{ owner }}</div></div>
+        </template>
 
         <div class="title">Город</div>
         <input name="city" placeholder="Москва" v-model="city"/>
@@ -35,9 +35,11 @@
             <input type="submit"  value="" style="display: none;" />
         </div>
     </form>
+    <UiUsersList :id_user_owner="id_user_owner" :open="showUsers" @close="showUsers = !$event" @select_user="id_user_owner=$event"/>
 </template>
 
 <script>
+import  UiUsersList from '@/components/UiComponents/UiUsersList'
 import { getData } from '@/servis/getData.js'
 import { sendForm } from '@/servis/sendForm'
 import UiButtonBack from '@/components/UiComponents/UiButtonBack.vue'
@@ -46,7 +48,7 @@ import useVuelidate from '@vuelidate/core'
 import { required} from '@vuelidate/validators'
 import { EventBus } from '@/servis/EventBus'
 
-const php_script = "updatePlayer.php"
+
 export default{
     name: 'UiPlayerEdit',
     setup () {
@@ -60,10 +62,14 @@ export default{
             player:{},
             user_id:JSON.parse(sessionStorage.getItem('user')).id,
             session: sessionStorage.getItem('session'),
+            id_user_owner:'',
+            showOwner:false,
+            owner:'',
             name: '',
             city: '',
             address: '',
-            ip:''
+            ip:'',
+            showUsers: false
         }
     },
     props:{
@@ -78,6 +84,11 @@ export default{
         }
         
     },
+    watch:{
+        id_user_owner(){
+            this.updateOwner()
+        }
+    },
     methods:{
         async submit(){
             this.v$.$validate()
@@ -86,7 +97,7 @@ export default{
             let addressCheck =!this.v$.address.$error
             let ipCheck =!this.v$.ip.$error
             let allCheck = nameCheck&&cityCheck&&addressCheck&&ipCheck
-            if(allCheck) { await sendForm(php_script, this.$refs.submit) } else return false
+            if(allCheck) { await sendForm('updatePlayer.php', this.$refs.submit) } else return false
             EventBus.emit('toaster',{status:'success', message:'Данные обновлены'})
             setTimeout( ()=>{this.$router.push(`/players/${this.player.id}`)}, 3500)  ;
         },
@@ -96,15 +107,23 @@ export default{
         async update(){
             let result = await getData('readPlayer.php',{'player_id':this.playerId})
             this.player = await result.player
+            this.id_user_owner = this.player.id_user
             this.name = this.player.name
             this.city = this.player.city
             this.address = this.player.address
             this.ip = this.player.ip    
+        },
+        async updateOwner(){
+            let result = await getData('readUserById.php',{user_id: this.id_user_owner})
+            if(!result.success) return false
+            this.owner = result.user.name;
+            this.showOwner = true;
         }
     },
     components:{
         UiButtonBack,
-        InputMask
+        InputMask,
+        UiUsersList
     }
 }
 
@@ -182,4 +201,23 @@ form input{
     color: #e7e7e7;
 }
 
+.owner{
+    width: 100%;
+    height: 60px;
+    border: 1px solid #858585;
+    border-radius: 5px;
+    margin-top: 10px;
+    color: #858585;
+    font-family: 'Intro-Book';
+    font-size: 16px;
+    display: flex;
+    align-content: center;
+    flex-wrap: wrap;
+    cursor: pointer;
+}
+
+.owner .text{
+    text-align: left;
+    margin-left: 20px;
+}
 </style>

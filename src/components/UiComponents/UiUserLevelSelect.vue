@@ -17,8 +17,8 @@
                 <label>guest</label>
             </div>
         </div>
-        <div class="cancel_button">
-            <div class="text" @click="$emit('close', true)">Отмена</div>
+        <div class="cancel_button" @click="$emit('close', true)">
+            <div class="text">Отмена</div>
         </div>  
     </div>
 </template>
@@ -70,7 +70,7 @@ export default{
         min-height: 230px;
         padding: 15px;
         border-radius: 10px;
-        background-color: #010101;
+        background-color: #1F1F1F;
         color: #fff;
         font-family: 'Intro-Bold-Alt';
         font-size: 18px;

@@ -11,7 +11,10 @@
     <div class="name" style="width: 100%;"><div class="text">{{ user.name }}</div></div>
     <div class="email" style="min-width: 300px;"><div class="text">{{ user.email }}</div></div>
     <div class="tel" style="min-width: 200px;"><div class="text">{{ user.tel }}</div></div>
-    <div class="level" @click="showUserLevel=true" style="min-width: 150px;"><div class="text">{{ user.level}}</div></div>
+    <div class="level" @click="showUserLevel=true" style="min-width: 150px;">
+        <div class="text">{{ user.level}}</div>
+        <div class="icon_edit"><img src="@/assets/icons/pen.svg" alt=""></div>
+    </div>
 </div>
 <UiUserLevelSelect v-if="showUserLevel" :user="user" @close="showUserLevel = !$event"/>
 </template>
@@ -139,6 +142,22 @@ export default {
 
 .level{
     cursor: pointer;
+    position: relative;
 }
+
+.icon_edit{
+    position:  absolute;
+    right: 5px;
+    top: 5px;
+    width: 30px;
+    height: 30px;
+    border-radius: 20px;
+    background-color: #434343;
+  }
+
+  .icon_edit img{
+    display: block;
+    margin: 9px;
+  }
 
 </style>

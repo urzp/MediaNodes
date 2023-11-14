@@ -17,7 +17,10 @@
         </div>
         <div :style="{'width': header[1].width}" @click="goToUser(item.id)"><div class="text">{{ item.email }}</div></div>
         <div :style="{'width': header[2].width}" @click="goToUser(item.id)"><div class="text">{{ item.tel}}</div></div>
-        <div :style="{'width': header[3].width}" @click="editLevel(item)"><div class="text">{{ item.level }}</div></div>
+        <div :style="{'width': header[3].width}" @click="editLevel(item)" class="user_level">
+          <div class="text">{{ item.level }}</div>
+          <div class="icon_edit"><img src="@/assets/icons/pen.svg" alt=""></div>
+        </div>
         <div :style="{'width': header[4].width}" @click="goToUser(item.id)"><div class="text">{{ item.messages }}</div></div>
       </div>
       
@@ -206,5 +209,23 @@ export default {
   }
   .name-icon .text{
     text-transform: uppercase;
+  }
+
+  .user_level{
+    position: relative;
+  }
+  .icon_edit{
+    position:  absolute;
+    right: 5px;
+    top: 5px;
+    width: 30px;
+    height: 30px;
+    border-radius: 20px;
+    background-color: #434343;
+  }
+
+  .icon_edit img{
+    display: block;
+    margin: 9px;
   }
 </style>
