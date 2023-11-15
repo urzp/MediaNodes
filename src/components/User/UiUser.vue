@@ -160,6 +160,10 @@ form .title{
 }
 
 form input{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-wrap: nowrap;
     margin-top: 10px;
     background-color: transparent ;
     width: 440px;
@@ -231,6 +235,21 @@ form input{
 .error-message {
     margin-top: 5px;
     color: #e7e7e7;
+}
+
+@media (max-width: 550px) {
+    form {
+        width: calc(100% - 80px);
+    }
+
+    input{
+        width: 100%!important;
+    }
+}
+@media (max-width: 500px){
+    .buttons{
+        flex-direction: column!important;
+    }
 }
 
 </style>

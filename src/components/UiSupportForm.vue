@@ -88,7 +88,7 @@ form .title{
 form textarea{
     margin-top: 10px;
     background-color: transparent ;
-    width: 480px;
+    width: 430px;
     border-radius: 5px;
     resize: none;
     color: #858585;
@@ -130,6 +130,16 @@ form textarea{
 .error-message {
     margin-top: 5px;
     color: #e7e7e7;
+}
+
+@media (max-width: 540px){
+    p{
+        width: calc(100% - 20px);
+    }
+
+    textarea{
+        width: calc(100% - 20px)!important;
+    }
 }
 
 </style>
