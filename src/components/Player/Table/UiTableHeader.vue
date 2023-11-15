@@ -2,7 +2,7 @@
     <header>
         <div v-for="item, i in header" :key="item.key" :class="header[i].class">
             {{ item.name }}
-            <div v-if="i==0&&!users" class="add_player" @click="$router.push({ name: 'addPlayer' })">
+            <div v-if="i==0&&addPlayer" class="add_player" @click="$router.push({ name: 'addPlayer' })">
                 <img src="@/assets/icons/plus.svg" alt="">
             </div>
         </div>
@@ -26,7 +26,10 @@ export default {
             {key:9, class:'table-col-9', name:'Дизлайки'},
         ],
         }
-    }
+    },
+    props:{
+        addPlayer:Boolean
+    },
 }
 </script>
 
@@ -63,6 +66,6 @@ export default {
     margin-right: 3px;
   }
 
-  @import "./widthColloms.css";
-
 </style>
+
+<style scoped src="./widthColloms.css"></style>

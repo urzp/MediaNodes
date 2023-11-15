@@ -1,28 +1,31 @@
 <template>
-    <colum class="table-col-1" @click="goToPlayer(item.id)"><div class="wrap">{{ item.name }}</div></colum>
-    <colum class="table-col-2" @click="goToPlayer(item.id)"><div class="wrap">{{ item.city }}</div></colum>
-    <colum class="table-col-3" @click="goToPlayer(item.id)"><div class="wrap">{{ item.address }}</div></colum>
-    <colum class="table-col-4" @click="goToPlayer(item.id)"><div class="wrap">{{ item.current_trak_title }}</div></colum>
-    <colum class="table-col-5" @click="goToPlayer(item.id)"><div class="wrap">{{ item.ip }}</div></colum>
-    <colum class="table-col-6" :class="{'online':Number(item.online)}" @click="goToPlayer(item.id)">
+    
+    <div class="colum table-col-1" @click="goToPlayer(item.id)"><div class="wrap">{{ item.name }}</div></div >
+    <div class="colum table-col-2" @click="goToPlayer(item.id)"><div class="wrap">{{ item.city }}</div></div >
+    <div class="colum table-col-3" @click="goToPlayer(item.id)"><div class="wrap">{{ item.address }}</div></div >
+    <div class="colum table-col-4" @click="goToPlayer(item.id)"><div class="wrap">{{ item.current_trak_title }}</div></div >
+  
+    <div class="colum table-col-5" @click="goToPlayer(item.id)"><div class="wrap">{{ item.ip }}</div></div >
+    <div class="colum table-col-6" :class="{'online':Number(item.online)}" @click="goToPlayer(item.id)">
         <div class="wrap">{{ Number(item.online)?'ONLINE':item.last_online.toLocaleString() }}</div>
-    </colum>
-    <colum class="table-col-7" @click="goToPlayer(item.id)" ><div class="wrap">{{ item.device_updated.toLocaleString() }}</div></colum>
+    </div >
+    <div class="colum table-col-7" @click="goToPlayer(item.id)" ><div class="wrap">{{ item.device_updated.toLocaleString() }}</div></div >
 
-    <colum class="table-col-8" :class= "{'unavailable':!Number(item.online)}">
+    <div class="colum table-col-8" :class= "{'unavailable':!Number(item.online)}">
         <div class="panel" >
             <UiPlayPuseButton :unavailable="!Number(item.online)" :play="!!Number(item.play_stop)" :id_player="item.id"/>
             <UiVolume :unavailable="!Number(item.online)" :value="item.volume" :id_player="item.id"/>
         </div>
-    </colum>
+    </div >
 
-    <colum class="table-col-9" >
+    <div class="colum table-col-9" >
         <div class="wrap">
             <div v-if="Number(item.dislike)" class="dislike">
                 <img src="@/assets/icons/disLike.svg" alt="dislike">
             </div>
         </div>
-    </colum>
+    </div >
+    
 </template>
 
 
@@ -47,7 +50,7 @@ export default {
 </script>
 
 <style scoped>
-  colum{
+  .colum{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -64,8 +67,8 @@ export default {
     cursor: pointer;
   }
 
-  @import "./widthColloms.css";
   
+
   .table-col-2, .table-col-3, .table-col-4{
     justify-content: flex-start;
     text-align: left;
@@ -105,3 +108,6 @@ export default {
 
 
 </style>
+
+<style scoped src="./widthColloms.css"></style>
+

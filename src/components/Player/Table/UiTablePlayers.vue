@@ -2,9 +2,10 @@
     <UiLoader v-if="lading"/>
     <UiNotFound v-if="notFound"/>    
     <div v-if="!lading&&!notFound" class="table-players">
-    <UiTableHeader/> 
+    <UiTableHeader v-if="false" :addPlayer="!users"/> 
     <div v-for="item in filteredPlayers" :key="item.id" class="row" >
-        <UiTableRow :item="item"/>
+        <UiTableRow_v1 v-if="false" :item="item"/>
+        <UiTableRow_v2 v-if="true" :item="item"/>
     </div>
     </div>
 </template>
@@ -15,7 +16,8 @@ import { EventBus } from '@/servis/EventBus'
 import UiLoader from '@/components/UiLoader.vue'
 import UiNotFound from '@/components/UiNotFound.vue'
 import UiTableHeader from '@/components/Player/Table/UiTableHeader.vue'
-import UiTableRow from '@/components/Player/Table/UiTableRow.vue'
+import UiTableRow_v1 from '@/components/Player/Table/UiTableRow_v1.vue'
+import UiTableRow_v2 from '@/components/Player/Table/UiTableRow_v2.vue'
 
 export default {
   name: 'UiTablePlayers',
@@ -40,7 +42,8 @@ export default {
     UiLoader,
     UiNotFound,
     UiTableHeader,
-    UiTableRow
+    UiTableRow_v1,
+    UiTableRow_v2
   },
   computed:{
     filteredPlayers(){
