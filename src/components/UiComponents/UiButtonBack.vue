@@ -1,6 +1,9 @@
 <template>
     <div class="back">
-        <RouterLink :to="to" class="backButton" ><img src="@/assets/icons/leftarrow.svg" alt="back"></RouterLink>
+        <RouterLink :to="to" class="backButton" >
+            <img v-if="icon=='left'" src="@/assets/icons/leftarrow.svg" alt="back">
+            <img v-if="icon=='right'" src="@/assets/icons/rightarrow.svg" alt="back">
+        </RouterLink>
         <RouterLink :to="to" class="label">{{ label }}</RouterLink>
     </div>
 </template>
@@ -9,8 +12,22 @@
 export default {
     name: 'UiButtonBack',
     props:{
-        label:String,
-        to:String
+        label:{
+            type: String,
+            default: ''
+        },
+        to:{
+            type: String,
+            default: ''
+        },
+        icon:{
+            type: String,
+            default: 'left'
+        },
+        backgroundColor:{
+            type: String,
+            default: '#2F2F2F'
+        }
     }
 }
 </script>
@@ -36,7 +53,7 @@ export default {
         justify-content: center;
         width: 30px;
         height: 30px;
-        background-color: #2F2F2F;
+        background-color: v-bind(backgroundColor);
         border-radius: 20px;
     }
 

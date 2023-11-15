@@ -1,6 +1,7 @@
 <template>
-    <div class="left-bar">
+    <div class="left-bar" :class="{'open':open}">
         <RouterLink to="/" class="logo"><img src="../assets/icons/Logo.png" alt="logo"></RouterLink>
+        <UiButtonBack  backgroundColor="#474747" class="buton_close" @click="open=false"/>
         <div class="menu-list">
             <UiMenuItem text="Главная" @click="$router.push('/')" :selected="selectedItem.home"><img src="../assets/icons/home.svg" alt="home"></UiMenuItem>
             <UiMenuItem text="Профиль" :selected="selectedItem.user" @click="$router.push('/user')"><img src="../assets/icons/user.svg" alt="user"></UiMenuItem>
@@ -14,16 +15,23 @@
 
 <script>
 import UiMenuItem from '@/components/UiMenuItem.vue'
+import UiButtonBack from '@/components/UiComponents/UiButtonBack.vue'
+import { EventBus } from '@/servis/EventBus'
 
 export default {
   name: 'UiLeftBar',
+  mounted(){
+        EventBus.on('menu:openclose', ()=>{this.open = !this.open})
+    },
   data(){
     return{
         user:JSON.parse(sessionStorage.getItem('user')),
+        open: false,
     }
   },
   components: {
     UiMenuItem,
+    UiButtonBack,
   },
   props:{
         selcted: String,
@@ -68,7 +76,28 @@ export default {
         margin-left: 40px;
         text-align: left;
     }
+    .buton_close{
+        display: none;
+        position: absolute;
+        right: 20px;
+        top: 30px;
+    }
     .menu-list{
         margin-top: 40px;
     }
+    @media (max-width: 900px) {
+        .buton_close{
+            display: block;
+        }
+
+        .left-bar{
+            transform: translate(-270px,0);
+            transition: all 0.5s ease-in-out;
+        }
+        .left-bar.open{
+            transform: translate(0px,0);
+            transition: all 0.5s ease-in-out;
+        }
+    }
+
 </style>

@@ -58,7 +58,19 @@ export default {
 
     @media (max-width: 900.00px) { 
         .button{
-            width: calc(100% - 10px);
+            width: calc(33% - 20px);
+        }
+    }
+
+    @media (max-width: 700.00px) { 
+        .button{
+            width: calc(50% - 20px);
+        }
+    }
+
+    @media (max-width: 500.00px) { 
+        .button{
+            width: calc(100% - 20px);
         }
     }
 

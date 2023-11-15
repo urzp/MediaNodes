@@ -1,5 +1,6 @@
 <template>
     <div class="wrap" :class="{'open':open}">
+        <UiButtonBack icon="right" backgroundColor="#474747" class="buton_close" @click="$emit('close', true)"/>
         <div class="title">
             <div class="icon"><img src="@/assets/icons/bigButtons/users.svg" alt=""></div>
             <div class="text">Выбрать</div>
@@ -10,7 +11,7 @@
                 <div class="name_user">{{ item.name }}</div>
             </div>
         </div>
-        <div class="cancel_button" @click="$emit('close', true)">
+        <div v-if="false" class="cancel_button" @click="$emit('close', true)">
             <div class="text" >Закрыть</div>
         </div>  
     </div>
@@ -18,6 +19,7 @@
 
 <script>
 import { getData } from '@/servis/getData.js'
+import UiButtonBack from '@/components/UiComponents/UiButtonBack.vue'
 export default{
     name: 'UiUsersList',
     async mounted(){
@@ -42,7 +44,10 @@ export default{
             this.$emit('select_user',id)
         }
     },
-    emits:['close', 'select_user']
+    emits:['close', 'select_user'],
+    components:{
+        UiButtonBack,
+    }
 
 }
 </script>
@@ -64,11 +69,16 @@ export default{
         transform: translate(0px,0);
         transition: all 0.5s ease-in-out;     
     }
-
+    .buton_close{
+        position: absolute;
+        right: 5px;
+        top: 10px;
+    }
     .title{
         display: flex;
         align-items: center;
         justify-content: flex-start;
+        margin-top: 50px;
     }
     .icon{
         height: 45px;

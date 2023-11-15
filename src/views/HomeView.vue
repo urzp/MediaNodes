@@ -8,6 +8,7 @@
       <UiMainButton @click="$router.push('/user')"><img src="@/assets/icons/bigButtons/user.svg" alt=""><div class="name">Профиль</div></UiMainButton>
       <UiMainButton @click="$router.push('/users')"  v-if="user.level=='admin'" ><img src="@/assets/icons/bigButtons/users.svg" alt=""><div class="name">Пользователи</div></UiMainButton>
       <UiMainButton @click="$router.push('/support-user')"><img src="@/assets/icons/bigButtons/support.svg" alt=""><div class="name">Техподдержка</div></UiMainButton>
+      <div class="contentgap"></div>
     </div>
   </div>
 </template>
@@ -42,7 +43,7 @@ export default {
     align-items: flex-start;
     justify-content: flex-start;
     flex-direction: column;
-    padding-left: 330px;
+    margin-left: 330px;
     width: calc(100% - 300px - 70px);
 
     background-image: url('@/assets/icons/backimg.svg');
@@ -67,6 +68,11 @@ export default {
     margin-top: 30px;
     width: 100%;
     height: 100%;
+  }
+
+  .contentgap{
+    height: 200px;
+    width: 100%;
   }
 
 </style>

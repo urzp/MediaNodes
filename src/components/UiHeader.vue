@@ -1,9 +1,11 @@
 <template>
     <header>
+        <RouterLink to="/" class="logo"><img src="../assets/icons/Logo.png" alt="logo"></RouterLink>
         <div class="search">
             <img src="@/assets/icons/search.svg" alt="search">
             <input type="text" placeholder="Поиск плеера" v-model="find" @focus="gotoPlayers()">
         </div>
+        <div class="menu" @click="open_closeMenu"><img src="@/assets/icons/gamburger.svg" alt=""></div>
         <div class="avatar" @click="$router.push('/user')">
             <div class="userName">{{ user.name }}</div>
             <div class="avatar_img"><img :src="url_avatar" alt="avatar"></div>
@@ -32,6 +34,9 @@ name: 'UiHeader',
         },
         gotoPlayers(){
             this.$router.push('/players')
+        },
+        open_closeMenu(){
+            EventBus.emit('menu:openclose');
         }
     },
     watch:{
@@ -62,6 +67,9 @@ name: 'UiHeader',
         background-color: #1F1F1F;
         z-index: 5;
     }
+    .logo{
+        display: none;
+    }
     .search{
         width: 65%;
         max-width: 750px;
@@ -91,6 +99,9 @@ name: 'UiHeader',
         color:#fff;
         margin-right: 15px;
     }
+    .menu{
+        display: none;
+    }
     .avatar{
         display: flex;
         flex-direction: row;
@@ -103,5 +114,40 @@ name: 'UiHeader',
 
     .avatar img{
         height: 45px;
+    }
+
+    @media (max-width: 900px) { 
+        header{
+            width: calc(100% - 20px);
+            margin-left: 20px;          
+        }
+
+        .logo{
+            display: block;
+            margin-top: 20px;
+            margin-left: 40px;
+            text-align: left;
+        }
+
+        .search{
+            width: 48%;
+        }
+        .menu{
+            display: block;
+        }
+        .avatar{
+            margin-left: 10px;
+        }
+    } 
+    @media (max-width: 700px) {
+        .search{
+            display: none;
+        }
+    }
+
+    @media (max-width: 650px) {
+        .userName{
+            display: none;
+        }
     }
 </style>
