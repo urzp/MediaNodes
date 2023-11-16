@@ -118,8 +118,8 @@ name: 'UiHeader',
 
     @media (max-width: 900px) { 
         header{
-            width: calc(100% - 20px);
-            margin-left: 20px;          
+            width: 100% ;
+            margin-left: 0px;          
         }
 
         .logo{

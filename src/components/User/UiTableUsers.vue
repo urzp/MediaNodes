@@ -34,8 +34,30 @@
             </div>
           </div>
           <div class="s_row">
-            <div class="cell" :style="{'width': header[1].width}" @click="goToUser(item.id)"><div class="text">{{ item.email }}</div></div>
-            <div class="cell" :style="{'width': header[2].width}" @click="goToUser(item.id)"><div class="text">{{ item.tel}}</div></div>
+            <div class="cell email" :style="{'width': header[1].width}" @click="goToUser(item.id)"><div class="text">{{ item.email }}</div></div>
+            <div class="cell  tel" :style="{'width': header[2].width}" @click="goToUser(item.id)"><div class="text">{{ item.tel}}</div></div>
+            <div class="cell user_level" :style="{'width': header[3].width}" @click="editLevel(item)">
+              <div class="text">{{ item.level }}</div>
+              <div class="icon_edit"><img src="@/assets/icons/pen.svg" alt=""></div>
+            </div>
+            <div class="cell messages" :style="{'width': header[4].width}" @click="goToUser(item.id)"><div class="text">{{ item.messages }}</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="v3">
+        <div v-for="item in users" :key="item.id" class="row" >
+          <div class="s_row">
+            <div class="cell name-icon" :style="{'width': header[0].width}" @click="goToUser(item.id)">
+              <div class="icon"><img :src="url_avatars(item)" alt=""></div>
+              <div class="text">{{ item.name }}</div>
+            </div>
+          </div>
+          <div class="s_row">
+            <div class="cell email" :style="{'width': header[1].width}" @click="goToUser(item.id)"><div class="text">{{ item.email }}</div></div>
+          </div>
+          <div class="s_row">
+            <div class="cell  tel" :style="{'width': header[2].width}" @click="goToUser(item.id)"><div class="text">{{ item.tel}}</div></div>
             <div class="cell user_level" :style="{'width': header[3].width}" @click="editLevel(item)">
               <div class="text">{{ item.level }}</div>
               <div class="icon_edit"><img src="@/assets/icons/pen.svg" alt=""></div>
@@ -149,7 +171,7 @@ export default {
     flex-wrap: nowrap;
     align-items: center;
   }
-  .header>div, .row>div{
+  .header>div, .cell{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -165,7 +187,7 @@ export default {
     padding-right: 10px;
   }
 
-  .row>div{
+  .cell{
     font-family: 'Intro-Book';
     font-size: 12px;  
     color: #fff;
@@ -252,11 +274,11 @@ export default {
     display: block;
     margin: 9px;
   }
-  .v2{
+  .v2, .v3{
     display: none;
   }
 
-  /* @media(max-width: 1200px){
+  @media(max-width: 1200px){
     .v1{
       display: none;
     }
@@ -266,5 +288,68 @@ export default {
     .header{
       display: none;
     }
-  } */
+    .row{
+      display: flex;
+      flex-direction: column;
+    }
+    .s_row{
+      display: flex;
+      flex-direction: row;  
+      width: 100%;  
+    }
+    .name-icon{
+      width: 100%!important;
+    }
+    .email{
+      width: 40%!important;
+      justify-content: center!important;
+    }
+    .tel{
+      width: 20%!important;
+      min-width: 140px!important;
+      justify-content: center!important;
+    }
+    .user_level{
+      width: 20%!important;
+    }
+    .user_level .text{
+      margin-left: 0!important;
+      margin-right: 30px!important;
+    }
+    .messages{
+      width: 10%!important;
+      margin-bottom: 20px;
+      justify-content: center!important;
+    }
+    .text{
+      margin-left: 0px!important;
+    }
+  }
+  @media(max-width: 610px){
+    .v2{
+      display: none;
+    }
+
+    .v3{
+      display: block;
+    }
+    .email{
+      width: 100%!important;
+      justify-content: center!important;
+    }
+    .tel{
+      width: 50%!important;
+    }
+    .user_level{
+      width: 40%!important;
+    }
+    .messages{
+      width: 10%!important;
+    }
+
+    .user_level .text{
+      margin-left: 20px!important;
+      margin-right: 30px!important;
+    }
+  }
 </style>
