@@ -2,10 +2,10 @@
     <UiLoader v-if="lading"/>
     <UiNotFound v-if="notFound"/>    
     <div v-if="!lading&&!notFound" class="table-players">
-    <UiTableHeader v-if="false" :addPlayer="!users"/> 
+    <UiTableHeader v-if="!switch_var_2" :addPlayer="!users"/> 
     <div v-for="item in filteredPlayers" :key="item.id" class="row" >
-        <UiTableRow_v1 v-if="false" :item="item"/>
-        <UiTableRow_v2 v-if="true" :item="item"/>
+        <UiTableRow_v1 v-if="!switch_var_2" :item="item"/>
+        <UiTableRow_v2 v-if="switch_var_2" :item="item"/>
     </div>
     </div>
 </template>
@@ -25,6 +25,10 @@ export default {
     this.updateList()
     EventBus.on('player:update', this.updateList)
     EventBus.on('find', data=>this.getFind(data))
+    this.switch_variant_table()
+  },
+  created(){
+    window.addEventListener("resize", this.switch_variant_table);
   },
   data(){
     return{
@@ -32,6 +36,7 @@ export default {
       notFound:false,
       players:'',
       find:'',
+      switch_var_2:false,
     }
   },
   props:{
@@ -73,6 +78,10 @@ export default {
     },  
     getFind(data){
       this.find = data.find
+    },
+    switch_variant_table(){
+      if(window.innerWidth<1200) this.switch_var_2 = true
+      if(window.innerWidth>=1200) this.switch_var_2 = false
     }
   },
 }

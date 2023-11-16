@@ -53,9 +53,9 @@ nav {
 
 @media (max-width: 900px) {
   .content{
-    margin-left: 20px!important;
+    margin-left: 10px!important;
     padding-left: 0px!important;
-    width: calc(100% - 20px)!important;
+    width: calc(100% - 10px)!important;
   }
 }
 </style>
