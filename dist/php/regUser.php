@@ -16,6 +16,7 @@ $password = md5($password."wqrtvfd");
 
 
 include 'db_mysql.php';
+include 'recaptcha.php';
 
 $sql = "SELECT * FROM `users` WHERE `email` = '$email'";
 $checkUser = $mysql -> query($sql);

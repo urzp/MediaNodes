@@ -21,7 +21,7 @@ if($user['level']!='admin'){
     exit();
  }
 
-$sql = "SELECT `id`, `name`, `email`, `tel`, `level` FROM `users`";
+$sql = "SELECT `id`, `name`, `email`, `tel`, `level`, `img`, `messages` FROM `users`";
 $result_sql = $mysql -> query($sql);
 while ($user = $result_sql->fetch_assoc()) {  
     $users[] = $user;

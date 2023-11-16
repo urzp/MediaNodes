@@ -21,19 +21,7 @@ $oldPassword = md5($oldPassword."wqrtvfd");
 $newPassword = md5($newPassword."wqrtvfd");
 
 
-$sql = "SELECT `id`, `name`, `email` FROM `users` WHERE `id` = '$user_id' && `session`='$session'";
-$checkSession = $mysql -> query($sql);
-$checkSession = $checkSession -> fetch_assoc();
-$checkSession = isset($checkSession);
-
-if(!$checkSession){ 
-	$result = (object) [
-		'success' => false,
-		'error' => 'session',
-	];
-	echo json_encode($result);
-	exit(); 
-}
+include 'checkAccess.php';
 
 $sql = "UPDATE`users` SET `email`='$email', `name`='$name', `tel`='$tel' WHERE `id` = '$user_id'";
 $mysql -> query($sql);
@@ -72,8 +60,7 @@ if($editPassword){
 
 $result = (object) [
 	'success' => true,
-	'img' => $_FILES['img']
 ];
-echo json_encode($target_dir_);
+echo json_encode($result);
 
 ?>

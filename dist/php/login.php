@@ -17,6 +17,7 @@ $session = md5($email.rand(0,1000));
 
 
 include 'db_mysql.php';
+include 'recaptcha.php';
 
 $sql = "SELECT `id`, `name`, `email`, `tel`, `img`, `level` FROM `users` WHERE `email` = '$email' && `password`='$password'";
 $checkUser = $mysql -> query($sql);
