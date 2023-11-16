@@ -6,15 +6,46 @@
         <RouterLink :to="`/players/edit/${user.id}`" class="label">Редактировать пользователя</RouterLink>
     </div>
 </div>
-<div class="inf">
-    <div class="icon" style="min-width: 80px;"><img :src="url_avatars" alt=""></div>
-    <div class="name" style="width: 100%;"><div class="text">{{ user.name }}</div></div>
-    <div class="email" style="min-width: 300px;"><div class="text">{{ user.email }}</div></div>
-    <div class="tel" style="min-width: 200px;"><div class="text">{{ user.tel }}</div></div>
-    <div class="level" @click="showUserLevel=true" style="min-width: 150px;">
+<div class="inf v1">
+    <div class="cell icon"><img :src="url_avatars" alt=""></div>
+    <div class="cell name"><div class="text">{{ user.name }}</div></div>
+    <div class="cell email"><div class="text">{{ user.email }}</div></div>
+    <div class="cell tel"><div class="text">{{ user.tel }}</div></div>
+    <div class="cell level" @click="showUserLevel=true">
         <div class="text">{{ user.level}}</div>
         <div class="icon_edit"><img src="@/assets/icons/pen.svg" alt=""></div>
     </div>
+</div>
+<div class="inf v2">
+    <div class="inf_row">
+        <div class="cell icon"><img :src="url_avatars" alt=""></div>
+        <div class="cell name"><div class="text">{{ user.name }}</div></div>
+    </div>
+    <div class="inf_row">
+        <div class="cell email"><div class="text">{{ user.email }}</div></div>
+        <div class="cell tel"><div class="text">{{ user.tel }}</div></div>
+        <div class="cell level" @click="showUserLevel=true">
+            <div class="text">{{ user.level}}</div>
+            <div class="icon_edit"><img src="@/assets/icons/pen.svg" alt=""></div>
+        </div>
+    </div>
+</div>
+<div class="inf v3">
+    <div class="inf_row">
+        <div class="cell icon"><img :src="url_avatars" alt=""></div>
+        <div class="cell name"><div class="text">{{ user.name }}</div></div>
+    </div>
+    <div class="inf_row">
+        <div class="cell email"><div class="text">{{ user.email }}</div></div>
+    </div>
+    <div class="inf_row">
+        <div class="cell tel"><div class="text">{{ user.tel }}</div></div>
+        <div class="cell level" @click="showUserLevel=true">
+            <div class="text">{{ user.level}}</div>
+            <div class="icon_edit"><img src="@/assets/icons/pen.svg" alt=""></div>
+        </div>
+    </div>
+
 </div>
 <UiUserLevelSelect v-if="showUserLevel" :user="user" @close="showUserLevel = !$event"/>
 </template>
@@ -115,7 +146,7 @@ export default {
     height: 60px;
     margin-top: 25px;
 }
-.inf>div{
+.cell{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -159,5 +190,85 @@ export default {
     display: block;
     margin: 9px;
   }
+  .icon{
+    width: 10%!important;
+    min-width: 100px;
+  }
+  .name{
+    width: 50%!important;
+  }
+  .email{
+    width: 20%!important;
+    min-width: 180px;
+  }
+  .tel{
+    width: 15%!important;
+    min-width: 150px;
+  }
+  .level{
+    width: 10%!important;
+    min-width: 100px;
+  }
+
+  .v2, .v3{
+    display: none;
+  }
+@media(max-width:1200px){
+    .v1{
+        display: none;
+    }
+
+    .v2{
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 80px;
+    }
+
+    .inf_row{
+        display: flex;
+        margin-bottom: 4px;
+    }
+
+    .name{
+        width: 100%!important;
+        
+    }
+
+    .email{
+    width: 35%!important;
+    min-width: 180px;
+  }
+  .tel{
+    width: 35%!important;
+    min-width: 150px;
+  }
+  .level{
+    width: 30%!important;
+    min-width: 100px;
+  }
+}
+
+@media(max-width:460px){
+    .v2{
+        display: none;
+    }
+    .v3{
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 160px;
+    }
+    .email{
+        width: 100%!important;
+        min-width: 180px;
+    }
+    .tel{
+        width: 50%!important;
+        min-width: 150px;
+    }
+    .level{
+        width: 50%!important;
+        min-width: 100px;
+    }
+}
 
 </style>

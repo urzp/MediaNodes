@@ -55,7 +55,7 @@ nav {
   .content{
     margin-left: 10px!important;
     padding-left: 0px!important;
-    width: calc(100% - 10px)!important;
+    width: calc(100% - 20px)!important;
   }
 }
 </style>

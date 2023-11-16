@@ -112,4 +112,31 @@ export default{
         cursor: pointer;
     }
 
+@media(max-width:600px){
+        .header{
+            display: none;
+        }
+        .row > div{
+            font-size: 12px;
+        }
+        .number{
+            width: 10%!important;
+        }
+        .name{
+            width: 70%!important;
+        }
+        .length{
+            width: 10%!important;
+            min-width: 40px;
+        }
+        .dislike{
+            width: 10%!important;
+        }
+    }
+
+    @media(max-width:400px){
+        .number{
+            display: none!important;
+        }
+    }
 </style>

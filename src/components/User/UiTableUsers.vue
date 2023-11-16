@@ -9,19 +9,40 @@
           </div>
       </div>
       
-      <div v-for="item in users" :key="item.id" class="row" >
-        
-        <div class="name-icon" :style="{'width': header[0].width}" @click="goToUser(item.id)">
-          <div class="icon"><img :src="url_avatars(item)" alt=""></div>
-          <div class="text">{{ item.name }}</div>
+      <div  class="v1">
+        <div v-for="item in users" :key="item.id" class="row" >
+          <div class="cell name-icon" :style="{'width': header[0].width}" @click="goToUser(item.id)">
+            <div class="icon"><img :src="url_avatars(item)" alt=""></div>
+            <div class="text">{{ item.name }}</div>
+          </div>
+          <div class="cell" :style="{'width': header[1].width}" @click="goToUser(item.id)"><div class="text">{{ item.email }}</div></div>
+          <div class="cell tel"  :style="{'width': header[2].width}" @click="goToUser(item.id)"><div class="text">{{ item.tel}}</div></div>
+          <div class="cell user_level" :style="{'width': header[3].width}" @click="editLevel(item)">
+            <div class="text">{{ item.level }}</div>
+            <div class="icon_edit"><img src="@/assets/icons/pen.svg" alt=""></div>
+          </div>
+          <div class="cell messages" :style="{'width': header[4].width}" @click="goToUser(item.id)"><div class="text">{{ item.messages }}</div></div>
         </div>
-        <div :style="{'width': header[1].width}" @click="goToUser(item.id)"><div class="text">{{ item.email }}</div></div>
-        <div :style="{'width': header[2].width}" @click="goToUser(item.id)"><div class="text">{{ item.tel}}</div></div>
-        <div :style="{'width': header[3].width}" @click="editLevel(item)" class="user_level">
-          <div class="text">{{ item.level }}</div>
-          <div class="icon_edit"><img src="@/assets/icons/pen.svg" alt=""></div>
+      </div>
+
+      <div class="v2">
+        <div v-for="item in users" :key="item.id" class="row" >
+          <div class="s_row">
+            <div class="cell name-icon" :style="{'width': header[0].width}" @click="goToUser(item.id)">
+              <div class="icon"><img :src="url_avatars(item)" alt=""></div>
+              <div class="text">{{ item.name }}</div>
+            </div>
+          </div>
+          <div class="s_row">
+            <div class="cell" :style="{'width': header[1].width}" @click="goToUser(item.id)"><div class="text">{{ item.email }}</div></div>
+            <div class="cell" :style="{'width': header[2].width}" @click="goToUser(item.id)"><div class="text">{{ item.tel}}</div></div>
+            <div class="cell user_level" :style="{'width': header[3].width}" @click="editLevel(item)">
+              <div class="text">{{ item.level }}</div>
+              <div class="icon_edit"><img src="@/assets/icons/pen.svg" alt=""></div>
+            </div>
+            <div class="cell messages" :style="{'width': header[4].width}" @click="goToUser(item.id)"><div class="text">{{ item.messages }}</div></div>
+          </div>
         </div>
-        <div :style="{'width': header[4].width}" @click="goToUser(item.id)"><div class="text">{{ item.messages }}</div></div>
       </div>
       
     </div>
@@ -51,9 +72,9 @@ export default {
       header:[
         {key:1,name:'Имя / Компания', width: '30%'},
         {key:2,name:'Email', width: '30%'},
-        {key:3,name:'Телефон', width: '15%'},
+        {key:3,name:'Телефон', width: '17.5%'},
         {key:4,name:'Уровень', width: '12.5%'},
-        {key:6,name:'Сообщение', width: '12.5%'},
+        {key:6,name:'Сообщение', width: '10%'},
       ],
       users:''
     }
@@ -224,8 +245,26 @@ export default {
     background-color: #434343;
   }
 
+  .tel{
+    min-width: 120px;
+  }
   .icon_edit img{
     display: block;
     margin: 9px;
   }
+  .v2{
+    display: none;
+  }
+
+  /* @media(max-width: 1200px){
+    .v1{
+      display: none;
+    }
+    .v2{
+      display: block;
+    }
+    .header{
+      display: none;
+    }
+  } */
 </style>

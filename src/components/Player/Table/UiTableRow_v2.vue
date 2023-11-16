@@ -1,16 +1,16 @@
 <template>
     <div class="wrap_row">
 
-        <div class="s_row_1">
-          <div class="cell name" @click="goToPlayer(item.id)"><div class="wrap">Плеер: {{ item.name }}</div></div >
+        <div class="s_row_1" @click="goToPlayer(item.id)">
+          <div class="cell name" ><div class="wrap">Плеер: {{ item.name }}</div></div >
           <div class="city_address">
-            <div class="cell city" @click="goToPlayer(item.id)"><div class="wrap">{{ item.city }}</div></div >
-            <div class="cell address" @click="goToPlayer(item.id)"><div class="wrap">{{ item.address }}</div></div >
+            <div class="cell city" ><div class="wrap">{{ item.city }}</div></div >
+            <div class="cell address"><div class="wrap">{{ item.address }}</div></div >
           </div>
         </div>
-        <div class="line"></div>
-        <div class="s_row_2">
-        <div class="cell trak" @click="goToPlayer(item.id)"><div class="wrap">{{ item.current_trak_title }}</div></div >
+        <div class="line" @click="goToPlayer(item.id)"></div>
+        <div class="s_row_2" @click="goToPlayer(item.id)">
+        <div class="cell trak"><div class="wrap">{{ item.current_trak_title }}</div></div >
 
       </div>
 
@@ -21,7 +21,7 @@
                 <UiVolume :unavailable="!Number(item.online)" :value="item.volume" :id_player="item.id"/>
             </div>
         </div >
-        <div class="cell dislike_cell" >
+        <div class="cell dislike_cell" @click="goToPlayer(item.id)">
             <div class="wrap">
                 <div v-if="Number(item.dislike)" class="dislike">
                     <img src="@/assets/icons/disLike.svg" alt="dislike">
@@ -31,14 +31,14 @@
 
       </div>   
 
-      <div class="s_row_4">
-        <div class="cell ip" @click="goToPlayer(item.id)"><div class="wrap"><div class="ip_label">IP-адрес: </div>{{ item.ip }}</div></div > 
+      <div class="s_row_4" @click="goToPlayer(item.id)">
+        <div class="cell ip"><div class="wrap"><div class="ip_label">IP-адрес: </div>{{ item.ip }}</div></div > 
         <div class="update_online">
-          <div class="cell update" @click="goToPlayer(item.id)" >
+          <div class="cell update"  >
             <div class="icon"><img src="@/assets/icons/update.svg" alt=""></div>
             <div class="wrap">{{ item.device_updated.toLocaleString() }}</div>
           </div >
-          <div class="cell online_cell" :class="{'online':Number(item.online)}" @click="goToPlayer(item.id)">
+          <div class="cell online_cell" :class="{'online':Number(item.online)}" >
               <div class="wrap">{{ Number(item.online)?'ONLINE':item.last_online.toLocaleString() }}</div>
           </div >
         </div>
@@ -75,6 +75,7 @@ export default {
     border-radius: 5px;
     margin: 10px;
     margin-left: 0px;
+    margin-right: 0px;
   }
   .s_row_1, .s_row_2, .s_row_3, .s_row_4{
     margin-left:15px;

@@ -220,4 +220,27 @@ form input{
     text-align: left;
     margin-left: 20px;
 }
+
+@media (max-width: 550px) {
+    form {
+        width: calc(100% - 80px);
+    }
+
+    input{
+        width: 100%!important;
+    }
+
+    .owner{
+        width: 109%;
+    }
+}
+@media (max-width: 500px){
+    .buttons{
+        flex-direction: column!important;
+    }
+
+    .owner{
+        width: 113%;
+    }
+}
 </style>
