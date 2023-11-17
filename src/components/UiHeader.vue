@@ -1,6 +1,6 @@
 <template>
     <header>
-        <RouterLink to="/" class="logo"><img src="../assets/icons/Logo.png" alt="logo"></RouterLink>
+        <RouterLink to="/" class="logo"><img src="../assets/icons/Logo.svg" alt="logo"></RouterLink>
         <div class="search">
             <img src="@/assets/icons/search.svg" alt="search">
             <input type="text" placeholder="Поиск плеера" v-model="find" @focus="gotoPlayers()">
@@ -69,6 +69,10 @@ name: 'UiHeader',
     }
     .logo{
         display: none;
+        
+    }
+    .logo img{
+        width: 50px;
     }
     .search{
         width: 65%;

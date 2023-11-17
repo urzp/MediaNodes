@@ -53,8 +53,8 @@
         </div>
     </div>
     <div class="inf_row">
-        <div class="cell ip" style="width: 220px;">IP: <br> {{ player.ip }}</div>
-        <div class="cell updated" style="width: 220px;">Обновлен: <br> {{ player.updated }}</div>
+        <div class="cell ip" style="width: 220px;"><div class="label_type">IP:</div>{{ player.ip }}</div>
+        <div class="cell updated" style="width: 220px;"><div class="label_type"><img src="@/assets/icons/update.svg" alt=""></div> {{ player.updated }}</div>
     </div>
 </div>
 </template>
@@ -78,6 +78,15 @@ export default {
 
 
 <style scoped>
+.cell{
+    position: relative;
+}
+.label_type{
+    position: absolute;
+    left: 11px;
+    top: 5px;
+    color: #828282;
+}
 .back, .edit{
     display: flex;
     justify-content: flex-start;

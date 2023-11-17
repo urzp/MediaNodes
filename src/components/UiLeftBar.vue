@@ -1,6 +1,6 @@
 <template>
     <div class="left-bar" :class="{'open':open}">
-        <RouterLink to="/" class="logo"><img src="../assets/icons/Logo.png" alt="logo"></RouterLink>
+        <RouterLink to="/" class="logo"><img src="../assets/icons/Logo.svg" alt="logo"></RouterLink>
         <UiButtonBack  backgroundColor="#474747" class="buton_close" @click="open=false"/>
         <div class="menu-list">
             <UiMenuItem text="Главная" @click="$router.push('/')" :selected="selectedItem.home"><img src="../assets/icons/home.svg" alt="home"></UiMenuItem>
@@ -68,6 +68,10 @@ export default {
         top: 0;
         left: 0;
         z-index: 10;
+    }
+
+    .logo img{
+        width: 50px;
     }
 
     .left-bar .logo{

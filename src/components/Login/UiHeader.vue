@@ -1,6 +1,6 @@
 <template>
     <header>
-        <RouterLink to="/" class="logo"><img src="@/assets/icons/Logo.png" alt="logo"></RouterLink>
+        <RouterLink to="/" class="logo"><img src="@/assets/icons/Logo.svg" alt="logo"></RouterLink>
         <div class="buttons">
             <UiButton v-if="login" class="button" text="Войти" @click="$router.push('/login')"/>
             <UiButton v-if="reg" class="button" text="Регистрация" @click="$router.push('/login')"/>
@@ -45,7 +45,10 @@ export default {
 
     .logo, .buttons, .button{
         margin: auto 20px;
+    }
 
+    .logo img{
+        width: 50px;
     }
 
     @media(max-width:650px){

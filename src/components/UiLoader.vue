@@ -28,4 +28,9 @@ export default {
     .img img{
         height: 232px;
     }
+    @media(max-width:900px){
+        .img img{
+            height: 140px;
+        }
+    }
 </style>
