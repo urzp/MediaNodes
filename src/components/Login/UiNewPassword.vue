@@ -140,4 +140,46 @@ export default {
     a{
         color: #F93492
     }
+
+    @media(max-width:650px){
+        .login-form{
+            width: 90%;
+        }
+
+        .title, p{
+            width: 80%;
+            margin-left: 10%;
+        }
+
+        form{
+            width: 80%;
+            margin-left: 10%;
+            margin-right: 10%;  
+        }
+
+        .submit-row, .button{
+            width: 100%;
+            padding: 0;
+        }
+
+        .terms-of-use{
+            width: 80%;
+        }
+        
+    }
+
+    @media(max-width:530px){
+        .title{
+            font-size: 20px;
+        }
+
+        p{
+            font-size: 14px; 
+        }
+
+        .registration{
+            margin-top: 0px;
+            margin-bottom: 40px;
+        }
+    }
 </style>

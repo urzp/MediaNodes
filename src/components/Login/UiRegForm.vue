@@ -28,8 +28,8 @@
         </form>
     </div>
     <div class="terms-of-use">
-        Создавая учетную запись, я принимаю
-        <a href="#">Пользовательское соглашение</a>
+        Создавая учетную запись, я принимаю<pre> </pre>
+        <a href="#"> Пользовательское соглашение</a>
     </div>
 </template>
 
@@ -147,11 +147,70 @@ export default {
         font-family: 'Intro-Book';
         font-size: 15px;
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         margin-top: 10px;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-content: space-between;
+        height: 40px;
     }
 
     a{
         color: #F93492
+    }
+
+    @media(max-width:650px){
+        .login-form{
+            width: 90%;
+        }
+
+        .title{
+            width: 80%;
+            margin-left: 10%;
+        }
+
+        form{
+            width: 80%;
+            margin-left: 10%;
+            margin-right: 10%;  
+        }
+
+        .submit-row{
+            width: 100%;
+        }
+
+        .terms-of-use{
+            width: 80%;
+        }
+        
+    }
+
+    @media(max-width:530px){
+        .title{
+            font-size: 20px;
+        }
+
+        .login-button{
+            width: 80px;
+        }
+    }
+
+    @media(max-width:540px){
+        .title{
+            font-size: 18px;
+        }
+        .submit-row{
+            flex-direction: column;
+        }
+
+        .button{
+            width: 100%;
+            padding: 0;
+        }
+
+        .login-ref{
+            margin-top: 20px;
+        }
+
     }
 </style>

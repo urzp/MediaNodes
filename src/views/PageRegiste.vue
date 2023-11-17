@@ -27,7 +27,9 @@ export default {
 
 <style scoped>
   .main{
-    height: 100vh;
+    min-height: calc(100vh - 270px);
+    margin-top: 130px;
+    margin-bottom: 60px;
     background-color: #1F1F1F;
     display: flex;
     justify-content: center;

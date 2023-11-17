@@ -53,4 +53,10 @@ export default {
         font-family: 'Intro-Bold-Alt';
         font-size: 16px;
     }
+
+    @media(max-width:650px){
+      .input{
+        width: calc(100% - 20px);
+      }
+    }
 </style>

@@ -28,13 +28,15 @@ export default {
 <style  scoped>
 
     header {
-        background-color: #1F1F1F;
         position: fixed;
+        top:0;
         height: 90px;
         width: 100%;
         display: flex;
         align-items: center;
         justify-content: space-between;
+        background-color: #1F1F1F;
+        z-index: 10;
     }
     .buttons{
         display: flex;
@@ -46,5 +48,9 @@ export default {
 
     }
 
-
+    @media(max-width:650px){
+        .button{
+            margin-right: 0px;
+        }
+    }
 </style>

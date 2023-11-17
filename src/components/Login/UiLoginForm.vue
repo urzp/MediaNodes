@@ -143,6 +143,10 @@ export default {
         display: flex;
         flex-direction: row;
         margin-top: 10px;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-content: space-between;
+        height: 40px;
     }
 
     a{
@@ -152,5 +156,59 @@ export default {
     .wrongLogin{
         color: #F93492;
         margin-top: 10px;
+    }
+
+    @media(max-width:650px){
+        .login-form{
+            width: 90%;
+        }
+
+        .title{
+            width: 80%;
+            margin-left: 10%;
+        }
+
+        form{
+            width: 80%;
+            margin-left: 10%;
+            margin-right: 10%;  
+        }
+
+        .submit-row{
+            width: 100%;
+        }
+
+        .registration{
+            width: 80%;
+        }
+        
+    }
+
+    @media(max-width:530px){
+        .title{
+            font-size: 20px;
+        }
+
+        .login-button{
+            width: 80px;
+        }
+    }
+
+    @media(max-width:380px){
+        .title{
+            font-size: 18px;
+        }
+        .submit-row{
+            flex-direction: column;
+        }
+
+        .login-button{
+            width: 80%;
+        }
+
+        .reset{
+            margin-top: 20px;
+        }
+
     }
 </style>
