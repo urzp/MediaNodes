@@ -204,7 +204,6 @@ form input{
 }
 
 .buttons{
-    margin-bottom: 100px;
     display: flex;
     justify-content: flex-start;
 }
@@ -239,16 +238,26 @@ form input{
 
 @media (max-width: 550px) {
     form {
-        width: calc(100% - 80px);
+        width: calc(100% - 10px)!important;
     }
 
     input{
-        width: 100%!important;
+        width: calc(100% - 40px)!important;
     }
 }
 @media (max-width: 500px){
     .buttons{
         flex-direction: column!important;
+    }
+
+    .cancelButton, .submitButton {
+        margin-top: 20px;
+        height: 40px;   
+    }
+
+    .submitButton{
+        margin-top: 20px;
+        margin-bottom: 100px;
     }
 }
 

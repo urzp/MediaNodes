@@ -149,5 +149,12 @@ name: 'UiHeader',
         .userName{
             display: none;
         }
+
+        .logo{
+            margin-left: 20px;
+        }
+        .avatar{
+            margin-right: 20px;
+        }
     }
 </style>

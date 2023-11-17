@@ -335,7 +335,10 @@ export default {
     }
     .email{
       width: 100%!important;
-      justify-content: center!important;
+      justify-content: start!important;
+    }
+    .email .text{
+      margin-left: 20px!important;
     }
     .tel{
       width: 50%!important;

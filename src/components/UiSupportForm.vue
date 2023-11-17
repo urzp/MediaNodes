@@ -117,7 +117,7 @@ form textarea{
     display: block;
     margin-top: 30px;
     height: 55px;
-    width: 190px;
+    width: 220px;
     font-family: 'Intro-Bold-Alt';
     font-size: 16px;
     color: #fff;
@@ -125,6 +125,7 @@ form textarea{
     border-radius: 30px;
     border:none;
     cursor: pointer;
+    margin-bottom: 100px;
 }
 
 .error-message {
@@ -139,6 +140,14 @@ form textarea{
 
     textarea{
         width: calc(100% - 20px)!important;
+    }
+    .cancelButton, .submitButton {
+        height: 40px;   
+    }
+
+    .submitButton{
+        margin-top: 20px;
+        
     }
 }
 

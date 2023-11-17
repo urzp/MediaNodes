@@ -223,15 +223,15 @@ form input{
 
 @media (max-width: 550px) {
     form {
-        width: calc(100% - 80px);
+        width: calc(100% - 10px);
     }
 
     input{
-        width: 100%!important;
+        width: calc(100% - 40px)!important;
     }
 
     .owner{
-        width: 109%;
+        width: 100%;
     }
 }
 @media (max-width: 500px){
@@ -239,8 +239,13 @@ form input{
         flex-direction: column!important;
     }
 
-    .owner{
-        width: 113%;
+    .cancelButton, .submitButton {
+        height: 40px;   
+    }
+
+    .submitButton{
+        margin-top: 20px;
+        margin-bottom: 100px;
     }
 }
 </style>

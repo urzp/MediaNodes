@@ -33,7 +33,7 @@
             <UiPlayPuseButton :play="player.play_stop" :id_player="player.id" :unavailable="!player.online"/>
             <UiVolume :value="player.volume" :id_player="player.id" :unavailable="!player.online"/>            
         </div>
-        <div class="cell ip" style="width: 220px;">IP-адрес: <br> {{ player.ip }}</div>
+        <div class="cell ip" style="width: 220px;">IP: <br> {{ player.ip }}</div>
         <div class="cell updated" style="width: 220px;">Обновлен: <br> {{ player.updated }}</div>
     </div>
 </div>
@@ -53,7 +53,7 @@
         </div>
     </div>
     <div class="inf_row">
-        <div class="cell ip" style="width: 220px;">IP-адрес: <br> {{ player.ip }}</div>
+        <div class="cell ip" style="width: 220px;">IP: <br> {{ player.ip }}</div>
         <div class="cell updated" style="width: 220px;">Обновлен: <br> {{ player.updated }}</div>
     </div>
 </div>

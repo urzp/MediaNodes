@@ -70,7 +70,8 @@ export default {
 
     @media (max-width: 500.00px) { 
         .button{
-            width: calc(100% - 20px);
+            width: calc(100%);
+            margin-right: 0px;
         }
     }
 

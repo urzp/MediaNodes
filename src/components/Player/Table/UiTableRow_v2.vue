@@ -32,7 +32,7 @@
       </div>   
 
       <div class="s_row_4" @click="goToPlayer(item.id)">
-        <div class="cell ip"><div class="wrap"><div class="ip_label">IP-адрес: </div>{{ item.ip }}</div></div > 
+        <div class="cell ip"><div class="wrap"><div class="ip_label">IP: </div>{{ item.ip }}</div></div > 
         <div class="update_online">
           <div class="cell update"  >
             <div class="icon"><img src="@/assets/icons/update.svg" alt=""></div>

@@ -138,5 +138,11 @@ export default{
         .number{
             display: none!important;
         }
+        .length{
+            display: none!important;
+        }
+        .dislike{
+            width: 20%!important;
+        }
     }
 </style>

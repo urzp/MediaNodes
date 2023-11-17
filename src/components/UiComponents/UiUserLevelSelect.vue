@@ -77,6 +77,7 @@ export default{
         display: flex;
         flex-direction: column;
         align-items: flex-start;
+        z-index: 100;
     }
     .title{
         font-family: 'Intro-Bold-Alt';
@@ -141,5 +142,13 @@ export default{
         visibility: visible;
         border: 2px solid white;
         cursor: pointer;
+    }
+
+    @media(max-width: 540px){
+        .form{
+            width: 260px;
+            min-height: 200px;
+            left: calc(50% - 290px/2);
+        }
     }
 </style>
