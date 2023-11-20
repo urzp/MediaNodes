@@ -25,10 +25,6 @@
         <input name="address" placeholder="ул. Ленина д.2" v-model="address"/>
         <div v-if="v$.address.$error" class="error-message" >поле недолжно быть пустым</div>
 
-        <div class="title" >IP</div>
-        <InputMask class="input" name="ip" placeholder="178 . 178 . 035 . 035" mask="999 . 999 . 999 . 999" v-model="ip"/>
-        <div v-if="v$.ip.$error" class="error-message" >поле недолжно быть пустым</div>
-
         <div class="buttons">
             <div class="cancelButton" @click="cancel()">Отмена</div>
             <div class="submitButton" @click="submit()">Отправить</div>
@@ -68,7 +64,6 @@ export default{
             name: '',
             city: '',
             address: '',
-            ip:'',
             showUsers: false
         }
     },
@@ -80,7 +75,6 @@ export default{
             name: { required },
             city: { required },
             address: { required },
-            ip: { required }, 
         }
         
     },
@@ -95,8 +89,7 @@ export default{
             let nameCheck =!this.v$.name.$error
             let cityCheck =!this.v$.city.$error
             let addressCheck =!this.v$.address.$error
-            let ipCheck =!this.v$.ip.$error
-            let allCheck = nameCheck&&cityCheck&&addressCheck&&ipCheck
+            let allCheck = nameCheck&&cityCheck&&addressCheck
             if(allCheck) { await sendForm('updatePlayer.php', this.$refs.submit) } else return false
             EventBus.emit('toaster',{status:'success', message:'Данные обновлены'})
             setTimeout( ()=>{this.$router.push(`/players/${this.player.id}`)}, 3500)  ;
@@ -111,7 +104,6 @@ export default{
             this.name = this.player.name
             this.city = this.player.city
             this.address = this.player.address
-            this.ip = this.player.ip    
         },
         async updateOwner(){
             let result = await getData('readUserById.php',{user_id: this.id_user_owner})

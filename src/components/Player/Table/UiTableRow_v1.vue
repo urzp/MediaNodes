@@ -1,11 +1,12 @@
 <template>
     
     <div class="colum table-col-1" @click="goToPlayer(item.id)"><div class="wrap">{{ item.name }}</div></div >
-    <div class="colum table-col-2" @click="goToPlayer(item.id)"><div class="wrap">{{ item.city }}</div></div >
-    <div class="colum table-col-3" @click="goToPlayer(item.id)"><div class="wrap">{{ item.address }}</div></div >
-    <div class="colum table-col-4" @click="goToPlayer(item.id)"><div class="wrap">{{ item.current_trak_title }}</div></div >
+    <div class="colum table-col-2" @click="goToPlayer(item.id)"><div class="wrap">{{ item.user_name }}</div></div >
+    <div class="colum table-col-3" @click="goToPlayer(item.id)"><div class="wrap">{{ item.city }}</div></div >
+    <div class="colum table-col-4" @click="goToPlayer(item.id)"><div class="wrap">{{ item.address }}</div></div >
+    <div class="colum table-col-5" @click="goToPlayer(item.id)"><div class="wrap">{{ item.current_trak_title }}</div></div >
   
-    <div class="colum table-col-5" @click="goToPlayer(item.id)"><div class="wrap">{{ item.ip }}</div></div >
+    
     <div class="colum table-col-6" :class="{'online':Number(item.online)}" @click="goToPlayer(item.id)">
         <div class="wrap">{{ Number(item.online)?'ONLINE':item.last_online.toLocaleString() }}</div>
     </div >
@@ -69,7 +70,7 @@ export default {
 
   
 
-  .table-col-2, .table-col-3, .table-col-4{
+  .table-col-2, .table-col-3, .table-col-4, .table-col-5{
     justify-content: flex-start;
     text-align: left;
   }

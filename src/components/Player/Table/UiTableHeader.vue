@@ -16,10 +16,10 @@ export default {
         return{
         header:[
             {key:1, class:'table-col-1', name:'Плеер'},
-            {key:2, class:'table-col-2', name:'Город'},
-            {key:3, class:'table-col-3', name:'Адрес локации'},
-            {key:4, class:'table-col-4', name:'Проигрываемый трек'},
-            {key:5, class:'table-col-5', name:'IP Адрес'},
+            {key:2, class:'table-col-2', name:'Пользователь'},
+            {key:3, class:'table-col-3', name:'Город'},
+            {key:4, class:'table-col-4', name:'Адрес локации'},
+            {key:5, class:'table-col-5', name:'Проигрываемый трек'},
             {key:6, class:'table-col-6', name:'Был в сети'},
             {key:7, class:'table-col-7', name:'Обновлен'},
             {key:8, class:'table-col-8', name:'Элементы управления'},

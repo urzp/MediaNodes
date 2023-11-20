@@ -10,10 +10,10 @@
     width: 12%;
   }
   .table-col-4{
-    width: 24.6%;
+    width: 8.9%;
   }
   .table-col-5{
-    width: 8.9%;
+    width: 24.6%;
   }
   .table-col-6{
     width: 7.3%;
@@ -55,7 +55,7 @@
 
   }
 
-  @media (max-width: 1499.98px) { 
+  @media (max-width: 1250px) { 
     .table-col-3{
       display: none!important;
     }

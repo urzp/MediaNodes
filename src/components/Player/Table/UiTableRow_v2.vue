@@ -2,7 +2,7 @@
     <div class="wrap_row">
 
         <div class="s_row_1" @click="goToPlayer(item.id)">
-          <div class="cell name" ><div class="wrap">Плеер: {{ item.name }}</div></div >
+          <div class="cell name" ><div class="wrap">Плеер: {{ item.name }}<br>{{ item.user_name }}</div></div >
           <div class="city_address">
             <div class="cell city" ><div class="wrap">{{ item.city }}</div></div >
             <div class="cell address"><div class="wrap">{{ item.address }}</div></div >
@@ -69,6 +69,10 @@ export default {
 </script>
 
 <style scoped>
+  .name .wrap{
+    text-align: left;
+    line-height: 1.6;
+  }
   .wrap_row{
     width: 100%;
     background-color: #2F2F2F;
