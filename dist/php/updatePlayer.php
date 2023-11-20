@@ -11,14 +11,14 @@ $owner_id = $_POST['owner_id'];
 $name = $_POST['name'];
 $city = $_POST['city'];
 $address = $_POST['address'];
-
+$ip = $_POST['ip'];
 
 
 include 'checkAccess.php';
 
 
-if($user['level'] == 'admin'){ $sql = "UPDATE `players` SET `name` = '$name', `city` = '$city', `address` = '$address', `id_user`='$owner_id'  WHERE `id` = '$player_id'"; }
-if($user['level'] == 'user'){ $sql = "UPDATE `players` SET `name` = '$name', `city` = '$city', `address` = '$address'  WHERE `id` = '$player_id'  AND `id_user`='$user[id]' "; }
+if($user['level'] == 'admin'){ $sql = "UPDATE `players` SET `name` = '$name', `city` = '$city', `address` = '$address', `ip` = '$ip', `id_user`='$owner_id'  WHERE `id` = '$player_id'"; }
+if($user['level'] == 'user'){ $sql = "UPDATE `players` SET `name` = '$name', `city` = '$city', `address` = '$address', `ip` = '$ip'  WHERE `id` = '$player_id'  AND `id_user`='$user[id]' "; }
 
 $mysql -> query($sql);
 $mysql->close();

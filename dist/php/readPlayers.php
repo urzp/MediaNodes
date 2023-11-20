@@ -25,13 +25,6 @@ while ($player = $result_sql->fetch_assoc()) {
     $trak = $mysql -> query($sql);
     $trak = $trak -> fetch_assoc(); 
     $player['current_trak_title'] = $trak['title'];     
-    
-    $id_user = $player['id_user'];
-    $sql = "SELECT * FROM `users` WHERE `id` = '$id_user' ";
-    $user = $mysql -> query($sql);
-    $user = $user -> fetch_assoc();  
-    $player['user_name'] = $user['name'];
-
     $players[] = $player;
 }
 

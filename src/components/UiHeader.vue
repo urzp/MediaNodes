@@ -4,6 +4,7 @@
         <div class="search">
             <img src="@/assets/icons/search.svg" alt="search">
             <input type="text" placeholder="Поиск плеера" v-model="find" @focus="gotoPlayers()">
+            <UiFilter class="filter"/>
         </div>
         <div class="menu" @click="open_closeMenu"><img src="@/assets/icons/gamburger.svg" alt=""></div>
         <div class="avatar" @click="$router.push('/user')">
@@ -16,6 +17,7 @@
 <script>
 
 import { EventBus } from '@/servis/EventBus'
+import UiFilter from '@/components/UiFilter.vue'
 
 export default {
 name: 'UiHeader',
@@ -27,6 +29,9 @@ name: 'UiHeader',
             user: JSON.parse(sessionStorage.getItem('user')),
             find:''
         }
+    },
+    components:{
+        UiFilter,
     },
     methods:{
         setUser(){
@@ -75,15 +80,16 @@ name: 'UiHeader',
         width: 50px;
     }
     .search{
+        position: relative;
         width: 65%;
         max-width: 750px;
         display: flex;
         align-items: center;   
     }
     .search img{
-        position: relative;
-        left: 45px;
-        top: 2px;
+        position: absolute;
+        left: 22px;
+        top: 12px;
     }
     input{
         width: 100%;
@@ -96,6 +102,10 @@ name: 'UiHeader',
         font-size: 15px;
         padding-left: 65px;
 
+    }
+    .filter{
+        position: absolute;
+        right: 26px; 
     }
     .userName{
         font-family: 'Intro-Book';
