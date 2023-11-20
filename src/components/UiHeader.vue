@@ -105,7 +105,7 @@ name: 'UiHeader',
     }
     .filter{
         position: absolute;
-        right: 26px; 
+        right: 4px; 
     }
     .userName{
         font-family: 'Intro-Book';
