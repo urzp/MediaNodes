@@ -87,7 +87,7 @@ name: 'UiSearch',
 
     @media(max-width:450px){
         .search{
-            margin-bottom: 30px;
+            margin-bottom: 50px;
         }
     }
 </style>
