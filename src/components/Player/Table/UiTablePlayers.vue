@@ -19,6 +19,16 @@ import UiTableHeader from '@/components/Player/Table/UiTableHeader.vue'
 import UiTableRow_v1 from '@/components/Player/Table/UiTableRow_v1.vue'
 import UiTableRow_v2 from '@/components/Player/Table/UiTableRow_v2.vue'
 
+const selectAdpter = {
+  player: 'name',
+  user:'user_name',
+  place: 'city',
+  online:'online',
+  updated:'updated',
+  play:'play_stop',
+  dislike:'dislike'
+}
+
 export default {
   name: 'UiTablePlayers',
   async mounted(){
@@ -35,7 +45,7 @@ export default {
       lading:true,
       notFound:false,
       players:'',
-      find:'',
+      filterData:{},
       switch_var_2:false,
     }
   },
@@ -52,10 +62,23 @@ export default {
   },
   computed:{
     filteredPlayers(){
-      let find = this.find
       if(!this.players) return false
+      let find = this.filterData.find
+      if (!find) find = ''
+      let selected = selectAdpter[this.filterData.selected]
+      if(!selected) selected = 'name'
+      let selected_val = this.filterData.selected_val
+      selected_val = selected_val?'1':'0'
+      let find_use = this.filterData.find_use
+      if(find_use === undefined) find_use = true
       let result = this.players.filter((item)=>{
-        return !item.city.indexOf(find)
+        if(find_use){
+          return !item[selected].toLowerCase().indexOf(find.toLowerCase())
+        }else{
+          if(selected_val!='0'&&item[selected]!='0') return true
+          return item[selected] == selected_val
+        }
+        
       })
       return result
     }
@@ -77,7 +100,7 @@ export default {
             return false
     },  
     getFind(data){
-      this.find = data.find
+      this.filterData = data
     },
     switch_variant_table(){
       if(window.innerWidth<1200) this.switch_var_2 = true

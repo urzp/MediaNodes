@@ -4,7 +4,7 @@
         <div class="search">
             <img src="@/assets/icons/search.svg" alt="search">
             <input type="text" placeholder="Поиск плеера" v-model="find" @focus="gotoPlayers()">
-            <UiFilter class="filter"/>
+            <UiFilter class="filter" :find_val="find" @filter:selected="(value)=>{find = value}"/>
         </div>
         <div class="menu" @click="open_closeMenu"><img src="@/assets/icons/gamburger.svg" alt=""></div>
         <div class="avatar" @click="$router.push('/user')">
@@ -42,11 +42,6 @@ name: 'UiHeader',
         },
         open_closeMenu(){
             EventBus.emit('menu:openclose');
-        }
-    },
-    watch:{
-        find(){
-            EventBus.emit('find',{find:this.find});
         }
     },
     computed:{

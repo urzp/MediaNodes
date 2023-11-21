@@ -4,13 +4,14 @@
         <div class="element user" :class="{active:selected == 'user'}" @click="select('user')"></div>
         <div class="element place" :class="{active:selected == 'place'}" @click="select('place')"></div>
         <div class="element online" :class="{active:selected == 'online', no: no_online}" @click="select('online')"></div>
-        <div class="element updated" :class="{active:selected == 'updated'}" @click="select('updated')"></div>
+        <!-- <div class="element updated" :class="{active:selected == 'updated'}" @click="select('updated')"></div> -->
         <div class="element play" :class="{active:selected == 'play', no: no_play}" @click="select('play')"></div>
         <div class="element dislike" :class="{active:selected == 'dislike', no: no_dislike}" @click="select('dislike')"></div>
     </div>
 </template>
 
 <script>
+import { EventBus } from '@/servis/EventBus'
 export default {
     name: 'UiFilter',
     data(){
@@ -19,19 +20,42 @@ export default {
             no_online: false,
             no_play:false,
             no_dislike:false,
+            result: false,
+            find_use: true,
+            mem_find:{},
         }
     },
+    props:{
+        find_val: String,
+    },
+    emits: ['filter:selected'],
     methods:{
         select(val){
+            this.find_use = true
             if(val==this.selected){
                 if(this.selected == 'online') this.no_online = !this.no_online;
                 if(this.selected == 'play') this.no_play = !this.no_play;
-                if(this.selected == 'dislike') this.no_dislike = !this.no_dislike;
+                if(this.selected == 'dislike') this.no_dislike = !this.no_dislike; 
+            }
+            if(val == 'online') this.result = !this.no_online;
+            if(val == 'play') this.result = this.no_play;
+            if(val == 'dislike') this.result = !this.no_dislike;
+
+            if(val == 'online' || val == 'play' || val == 'dislike' ){
+                this.find_use = false
             }
             this.selected = val
+            this.$emit('filter:selected', this.mem_find[this.selected])
+            EventBus.emit('find',{find:this.find_val, find_use: this.find_use, selected: this.selected, selected_val: this.result});
         }
         
-    }
+    },
+    watch:{
+        find_val(){
+            this.mem_find[this.selected] = this.find_val
+            EventBus.emit('find',{find:this.find_val, find_use: this.find_use, selected: this.selected, selected_val: this.result});
+        }
+    },
 
 }
 </script>
@@ -76,7 +100,7 @@ export default {
         background-image: url('@/assets/icons/search/activeOnline.svg');
     }
     .no.online.active{
-        background-image: url('@/assets/icons/search/noOnline.svg');
+        background-image: url('@/assets/icons/search/NoOnline.svg');
     }
     .updated{
         background-image: url('@/assets/icons/search/update.svg');
