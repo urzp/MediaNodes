@@ -1,11 +1,7 @@
 <template>
     <header>
         <RouterLink to="/" class="logo"><img src="../assets/icons/Logo.svg" alt="logo"></RouterLink>
-        <div class="search">
-            <img src="@/assets/icons/search.svg" alt="search">
-            <input type="text" placeholder="Поиск плеера" v-model="find" @focus="gotoPlayers()">
-            <UiFilter class="filter" :find_val="find" @filter:selected="(value)=>{find = value}"/>
-        </div>
+        <UiSearch  :show="{w_size: 800, more:true}"/>
         <div class="menu" @click="open_closeMenu"><img src="@/assets/icons/gamburger.svg" alt=""></div>
         <div class="avatar" @click="$router.push('/user')">
             <div class="userName">{{ user.name }}</div>
@@ -17,7 +13,7 @@
 <script>
 
 import { EventBus } from '@/servis/EventBus'
-import UiFilter from '@/components/UiFilter.vue'
+import UiSearch from '@/components/UiSearch.vue'
 
 export default {
 name: 'UiHeader',
@@ -27,11 +23,11 @@ name: 'UiHeader',
     data(){
         return {
             user: JSON.parse(sessionStorage.getItem('user')),
-            find:''
+            showSeach: false,
         }
     },
     components:{
-        UiFilter,
+        UiSearch,
     },
     methods:{
         setUser(){
@@ -42,7 +38,7 @@ name: 'UiHeader',
         },
         open_closeMenu(){
             EventBus.emit('menu:openclose');
-        }
+        },
     },
     computed:{
         url_avatar(){
@@ -74,34 +70,7 @@ name: 'UiHeader',
     .logo img{
         width: 50px;
     }
-    .search{
-        position: relative;
-        width: 65%;
-        max-width: 750px;
-        display: flex;
-        align-items: center;   
-    }
-    .search img{
-        position: absolute;
-        left: 22px;
-        top: 12px;
-    }
-    input{
-        width: 100%;
-        height: 45px;
-        border-radius: 25px;
-        background-color: transparent;
-        border: 1px solid #B8B8B8;
-        color: #B8B8B8;
-        font-family: 'Intro-Book';
-        font-size: 15px;
-        padding-left: 65px;
-
-    }
-    .filter{
-        position: absolute;
-        right: 4px; 
-    }
+    
     .userName{
         font-family: 'Intro-Book';
         font-size: 15px;
@@ -116,7 +85,7 @@ name: 'UiHeader',
         flex-direction: row;
         align-items: center;
         justify-content: flex-end;
-        margin-right: 40px;
+        margin-right: 20px;
         margin-left: 40px;
         cursor: pointer;
     }
@@ -138,9 +107,6 @@ name: 'UiHeader',
             text-align: left;
         }
 
-        .search{
-            width: 48%;
-        }
         .menu{
             display: block;
         }
@@ -148,11 +114,7 @@ name: 'UiHeader',
             margin-left: 10px;
         }
     } 
-    @media (max-width: 700px) {
-        .search{
-            display: none;
-        }
-    }
+
 
     @media (max-width: 650px) {
         .userName{

@@ -2,7 +2,10 @@
   <UiHeader/>
   <UiLeftBar selcted="players"/>
   <div class="content">
-    <div class="title">Устройства</div>
+    <div class="title_row">
+      <div class="title">Устройства</div>
+      <UiSearch :show="{w_size: 800, more:false}"/>
+    </div>
     <div v-if="false" class="servis-button" @click="runScript('sendEmail.php')">sendEmail.php</div>
     <UiTablePlayers/>
   </div>
@@ -13,13 +16,15 @@
 import UiLeftBar from '@/components/UiLeftBar.vue'
 import UiHeader from '@/components/UiHeader.vue'
 import UiTablePlayers from '@/components/Player/Table/UiTablePlayers.vue'
+import UiSearch from '@/components/UiSearch.vue'
 
 export default {
   name: 'PagePlayers',
   components: {
     UiLeftBar,
     UiHeader,
-    UiTablePlayers
+    UiTablePlayers,
+    UiSearch
   },
   methods:{
     runScript(name){
@@ -43,11 +48,23 @@ export default {
   }
 
   
+  .title_row{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;  
+  }
+  
   .title{
     font-family: 'Intro-Bold-Alt';
     font-size: 20px;
     color: #fff;
-    margin-top: 20px;
+    margin-top: 0px;
+    margin-bottom: 20px;
+    margin-right: 20px;
   }
+
 
 </style>

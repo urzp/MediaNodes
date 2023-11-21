@@ -131,4 +131,16 @@ export default {
     .no.dislike.active{
         background-image: url('@/assets/icons/search/NoDislike.svg');
     }
+
+    @media (max-width:450px){
+        .wrap{
+            width: 230px;
+            top: 56px;
+            left: 0px;
+            padding-left: 22px;
+            height: 45px;
+            border-radius: 25px;
+            background-color: #2f2f2f;
+        }
+    }
 </style>
