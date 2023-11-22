@@ -34,7 +34,12 @@ export default {
 </script>
 
 <style scoped>
+    .table-col-1{
+        position: relative;
+    }
   .add_player{
+    position: absolute;
+    right: 0px;
     margin: 12px;
     display: flex;
     flex-direction: column;

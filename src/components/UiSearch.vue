@@ -30,7 +30,9 @@ name: 'UiSearch',
     },
     methods:{
         gotoPlayers(){
-            this.$router.push('/players')
+            if(this.$route.name!='userPlayers'){
+                this.$router.push('/players')
+            }
         },
         show_hide(){
             let show = this.show
